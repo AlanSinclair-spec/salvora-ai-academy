@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GraduationCap } from "lucide-react";
+import salvoraLogo from "@/assets/salvora-logo.png";
 
 export function Footer() {
   return (
@@ -9,9 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground">
-                <GraduationCap className="w-6 h-6" />
-              </div>
+              <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain" />
               <span className="text-xl font-bold text-foreground">Salvora</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-md">

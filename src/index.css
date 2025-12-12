@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,44 +6,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 210 11% 15%;
+    --background: 220 20% 97%;
+    --foreground: 220 30% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 15%;
+    --card-foreground: 220 30% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 15%;
+    --popover-foreground: 220 30% 10%;
 
-    --primary: 217 91% 52%;
+    --primary: 199 89% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 210 11% 15%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 30% 10%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
 
-    --accent: 168 76% 42%;
+    --accent: 168 84% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 52%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 199 89% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Custom Salvora tokens */
+    /* Salvora Futuristic tokens */
+    --salvora-navy: 222 47% 8%;
+    --salvora-navy-light: 222 40% 12%;
+    --salvora-electric: 199 89% 48%;
+    --salvora-cyan: 185 96% 55%;
     --salvora-blue: 217 91% 52%;
     --salvora-blue-light: 217 91% 96%;
-    --salvora-green: 168 76% 42%;
+    --salvora-green: 168 84% 42%;
     --salvora-orange: 28 87% 55%;
     --salvora-purple: 259 63% 59%;
-    --salvora-navy: 217 33% 17%;
-    --salvora-gray: 210 11% 96%;
+    --salvora-gray: 220 14% 96%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 8%) 0%, hsl(222, 40%, 15%) 50%, hsl(210, 40%, 20%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(199, 89%, 48%, 0.15) 0%, transparent 70%);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -52,46 +59,46 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 199 89% 48%;
   }
 
   .dark {
-    --background: 217 33% 10%;
+    --background: 222 47% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 217 33% 12%;
+    --card: 222 40% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 217 33% 12%;
+    --popover: 222 40% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 199 89% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 17%;
+    --secondary: 222 40% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
+    --muted: 222 40% 15%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 168 76% 42%;
+    --accent: 168 84% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 217 91% 60%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 199 89% 48%;
 
-    --sidebar-background: 240 5.9% 10%;
+    --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 199 89% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent: 222 40% 15%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 199 89% 48%;
   }
 }
 
@@ -106,13 +113,20 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Lato', system-ui, -apple-system, sans-serif;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--salvora-electric))] to-[hsl(var(--salvora-cyan))];
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 40px hsl(var(--salvora-electric) / 0.3), 0 0 80px hsl(var(--salvora-cyan) / 0.1);
   }
 }
 
@@ -122,10 +136,30 @@
   }
 
   .salvora-card {
-    @apply bg-card rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow duration-200;
+    @apply bg-card rounded-xl border border-border shadow-sm hover:shadow-lg transition-all duration-300;
   }
 
   .salvora-link {
     @apply text-primary hover:text-primary/80 transition-colors duration-200;
+  }
+
+  .hero-dark {
+    background: linear-gradient(135deg, hsl(222, 47%, 6%) 0%, hsl(222, 40%, 11%) 50%, hsl(215, 35%, 14%) 100%);
+  }
+
+  .orb {
+    @apply absolute rounded-full blur-3xl opacity-30;
+  }
+
+  .orb-electric {
+    background: radial-gradient(circle, hsl(var(--salvora-electric)) 0%, transparent 70%);
+  }
+
+  .orb-cyan {
+    background: radial-gradient(circle, hsl(var(--salvora-cyan)) 0%, transparent 70%);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl;
   }
 }

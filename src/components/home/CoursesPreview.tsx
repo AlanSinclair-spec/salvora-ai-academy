@@ -17,11 +17,10 @@ const colorMap: Record<string, "blue" | "purple" | "green" | "orange"> = {
   blue: "blue",
   green: "green",
   purple: "purple",
-  teal: "green", // Map teal to green for CourseCard
+  teal: "green",
 };
 
 export function CoursesPreview() {
-  // Get first 4 courses from data
   const previewCourses = courses.slice(0, 4).map(course => {
     const totalLessons = course.units.reduce((acc, unit) => acc + unit.lessons.length, 0);
     const firstLesson = course.units[0]?.lessons[0];
@@ -39,30 +38,29 @@ export function CoursesPreview() {
   });
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-20 md:py-28 bg-muted/30">
       <div className="salvora-container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-            Explora Nuestros Cursos
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Cursos disenados para estudiantes y educadores salvadorenos, desde conceptos basicos hasta aplicaciones practicas con Grok.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">
+              Explora nuestros cursos
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-xl">
+              Desde los fundamentos hasta aplicaciones avanzadas de IA.
+            </p>
+          </div>
+          <Button variant="ghost" className="self-start md:self-auto group text-primary hover:text-primary" asChild>
+            <Link to="/cursos">
+              Ver todos los cursos
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {previewCourses.map((course) => (
             <CourseCard key={course.title} {...course} />
           ))}
-        </div>
-
-        <div className="text-center">
-          <Button variant="hero-outline" size="lg" asChild>
-            <Link to="/cursos">
-              Ver todos los cursos
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>

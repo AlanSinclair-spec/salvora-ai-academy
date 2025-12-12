@@ -25,7 +25,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain" />
+            <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain rounded-lg" />
             <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
               Salvora
             </span>

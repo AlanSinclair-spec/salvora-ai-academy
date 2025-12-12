@@ -1,69 +1,74 @@
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { 
-  School, 
-  Users, 
-  Award, 
+import {
+  School,
+  Users,
+  Award,
   Building2,
   ArrowRight,
   CheckCircle2,
-  Calendar
+  Calendar,
+  Bot,
+  Sparkles,
+  Globe,
+  BookOpen
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const programs = [
   {
     title: "Programa Escolar",
-    description: "Implementa educación en IA en tu centro educativo con nuestro programa completo.",
+    description: "Implementa educacion en IA en tu centro educativo con nuestro programa completo.",
     icon: School,
     color: "bg-primary",
     features: [
-      "Currículo adaptado al sistema educativo salvadoreño",
-      "Capacitación para docentes",
-      "Materiales didácticos incluidos",
-      "Certificación para estudiantes",
-      "Soporte técnico continuo",
+      "Curriculo adaptado al sistema educativo salvadoreno",
+      "Capacitacion para docentes en uso de Grok",
+      "Materiales didacticos incluidos",
+      "Herramientas de IA para el aula",
+      "Soporte tecnico continuo",
     ],
     cta: "Solicitar para mi escuela",
   },
   {
-    title: "Formación Docente",
-    description: "Programa de certificación para maestros que quieren enseñar IA.",
+    title: "Formacion Docente",
+    description: "Programa de certificacion para maestros que quieren ensenar con IA.",
     icon: Users,
     color: "bg-salvora-green",
     features: [
-      "40 horas de formación intensiva",
-      "Metodologías de enseñanza en IA",
-      "Recursos pedagógicos",
+      "40 horas de formacion intensiva",
+      "Metodologias de ensenanza con Grok",
+      "Recursos pedagogicos digitales",
       "Comunidad de educadores",
       "Certificado oficial",
     ],
     cta: "Inscribirse como docente",
   },
   {
-    title: "Certificación Profesional",
-    description: "Obtén una certificación reconocida en fundamentos de IA.",
-    icon: Award,
+    title: "IA para Estudiantes",
+    description: "Programa enfocado en uso responsable de IA para estudiar mejor.",
+    icon: BookOpen,
     color: "bg-salvora-purple",
     features: [
-      "Programa de 60 horas",
-      "Proyecto práctico final",
-      "Mentoría personalizada",
-      "Certificado verificable",
-      "Acceso a red de profesionales",
+      "Tecnicas de estudio con IA",
+      "Prevencion de plagio",
+      "Pensamiento critico digital",
+      "Proyectos practicos",
+      "Acceso a herramientas Salvora",
     ],
-    cta: "Ver requisitos",
+    cta: "Comenzar ahora",
+    link: "/estudiante",
   },
   {
     title: "Programa Empresarial",
-    description: "Capacita a tu equipo en las herramientas de IA más relevantes.",
+    description: "Capacita a tu equipo en las herramientas de IA mas relevantes.",
     icon: Building2,
     color: "bg-salvora-orange",
     features: [
       "Contenido personalizado",
       "Talleres presenciales o virtuales",
-      "Casos de uso específicos",
-      "Métricas de aprendizaje",
+      "Casos de uso especificos",
+      "Metricas de aprendizaje",
       "Soporte post-programa",
     ],
     cta: "Contactar ventas",
@@ -72,13 +77,13 @@ const programs = [
 
 const upcomingEvents = [
   {
-    title: "Taller: Primeros Pasos con ChatGPT",
+    title: "Taller: Primeros Pasos con Grok",
     date: "15 de Febrero, 2025",
     location: "Virtual",
     spots: 50,
   },
   {
-    title: "Seminario: IA en la Educación Salvadoreña",
+    title: "Seminario: IA en la Educacion Salvadorena",
     date: "22 de Febrero, 2025",
     location: "San Salvador",
     spots: 100,
@@ -101,11 +106,96 @@ const Programas = () => {
               Programas Educativos
             </h1>
             <p className="text-lg text-muted-foreground">
-              Iniciativas diseñadas para llevar la educación en IA a todos los rincones de El Salvador.
+              Iniciativas disenadas para llevar la educacion en IA a todos los rincones de El Salvador.
             </p>
           </div>
         </div>
       </div>
+
+      {/* xAI Partnership Section */}
+      <section className="salvora-container py-12">
+        <div className="bg-gradient-to-r from-primary/10 via-salvora-purple/10 to-salvora-green/10 rounded-2xl p-8 md:p-12">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium mb-4">
+                <Bot className="w-4 h-4" />
+                Alianza Estrategica
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Salvora + xAI para El Salvador
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Como parte de la alianza entre xAI y El Salvador, Salvora es la plataforma
+                educativa oficial que ensena a estudiantes y maestros a usar Grok de forma
+                efectiva y responsable.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <Sparkles className="w-5 h-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="font-medium text-foreground">Acceso a Grok</p>
+                    <p className="text-sm text-muted-foreground">
+                      Herramientas de IA de ultima generacion para educacion
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Globe className="w-5 h-5 text-salvora-green mt-0.5" />
+                  <div>
+                    <p className="font-medium text-foreground">Contenido Local</p>
+                    <p className="text-sm text-muted-foreground">
+                      Cursos disenados especificamente para El Salvador
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-salvora-purple mt-0.5" />
+                  <div>
+                    <p className="font-medium text-foreground">Certificacion</p>
+                    <p className="text-sm text-muted-foreground">
+                      Reconocimiento oficial para estudiantes y maestros
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-card rounded-xl border border-border p-6">
+              <h3 className="font-bold text-foreground mb-4">Que es Grok?</h3>
+              <p className="text-muted-foreground text-sm mb-4">
+                Grok es un asistente de IA desarrollado por xAI que puede ayudarte a:
+              </p>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-salvora-green" />
+                  Responder preguntas complejas
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-salvora-green" />
+                  Explicar conceptos dificiles
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-salvora-green" />
+                  Ayudar con tareas de investigacion
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-salvora-green" />
+                  Generar contenido educativo
+                </li>
+                <li className="flex items-center gap-2 text-muted-foreground">
+                  <CheckCircle2 className="w-4 h-4 text-salvora-green" />
+                  Resolver problemas matematicos
+                </li>
+              </ul>
+              <Button variant="hero" className="w-full mt-6" asChild>
+                <Link to="/cursos">
+                  Aprender a usar Grok
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className="salvora-container py-12">
         {/* Programs Grid */}
@@ -137,9 +227,22 @@ const Programas = () => {
                   ))}
                 </ul>
 
-                <Button variant="hero-outline" className="w-full">
-                  {program.cta}
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                <Button
+                  variant="hero-outline"
+                  className="w-full"
+                  asChild={!!program.link}
+                >
+                  {program.link ? (
+                    <Link to={program.link}>
+                      {program.cta}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  ) : (
+                    <>
+                      {program.cta}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
@@ -150,7 +253,7 @@ const Programas = () => {
         <section className="bg-muted/30 rounded-2xl p-8">
           <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
             <Calendar className="w-6 h-6 text-primary" />
-            Próximos Eventos
+            Proximos Eventos
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -165,8 +268,8 @@ const Programas = () => {
                     <Calendar className="w-4 h-4" />
                     {event.date}
                   </p>
-                  <p>📍 {event.location}</p>
-                  <p>👥 {event.spots} cupos disponibles</p>
+                  <p>Ubicacion: {event.location}</p>
+                  <p>Cupos: {event.spots} disponibles</p>
                 </div>
                 <Button variant="outline" size="sm" className="w-full">
                   Inscribirse
@@ -179,10 +282,10 @@ const Programas = () => {
         {/* CTA Section */}
         <section className="text-center mt-16 py-12 px-8 bg-primary rounded-2xl">
           <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
-            ¿Listo para empezar?
+            Listo para empezar?
           </h2>
           <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Únete a miles de salvadoreños que ya están aprendiendo sobre Inteligencia Artificial.
+            Unete a miles de salvadorenos que ya estan aprendiendo a usar la Inteligencia Artificial de forma efectiva.
           </p>
           <Button
             variant="secondary"

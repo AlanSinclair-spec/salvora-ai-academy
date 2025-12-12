@@ -1,173 +1,67 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
-import { 
-  ChevronDown, 
-  ChevronRight, 
-  Play, 
-  FileText, 
+import {
+  ChevronDown,
+  ChevronRight,
+  Play,
+  FileText,
   CheckCircle2,
-  Brain,
-  Sparkles,
-  Bot,
-  Code,
-  Lock
+  Lock,
+  Lightbulb,
+  HelpCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { courses } from "@/data/courses";
+import { getIconByName } from "@/lib/icons";
+import { useProgress } from "@/contexts/ProgressContext";
+import type { Course, Lesson } from "@/types/courses";
 
-interface Lesson {
-  id: string;
-  title: string;
-  type: "video" | "reading" | "quiz";
-  duration: string;
-  completed?: boolean;
-  locked?: boolean;
-}
-
-interface Unit {
-  id: string;
-  title: string;
-  lessons: Lesson[];
-}
-
-interface Course {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  color: "blue" | "green" | "orange" | "purple";
-  units: Unit[];
-}
-
-const courses: Course[] = [
-  {
-    id: "introduccion-ia",
-    title: "Introducción a la IA",
-    description: "Conceptos fundamentales de la Inteligencia Artificial",
-    icon: Brain,
-    color: "blue",
-    units: [
-      {
-        id: "unit-1",
-        title: "Unidad 1: ¿Qué es la IA?",
-        lessons: [
-          { id: "1-1", title: "Bienvenida al curso", type: "video", duration: "5 min", completed: true },
-          { id: "1-2", title: "Definición de Inteligencia Artificial", type: "video", duration: "12 min", completed: true },
-          { id: "1-3", title: "Historia de la IA", type: "reading", duration: "10 min" },
-          { id: "1-4", title: "Cuestionario: Fundamentos", type: "quiz", duration: "15 min" },
-        ],
-      },
-      {
-        id: "unit-2",
-        title: "Unidad 2: Tipos de IA",
-        lessons: [
-          { id: "2-1", title: "IA Estrecha vs IA General", type: "video", duration: "15 min" },
-          { id: "2-2", title: "Machine Learning explicado", type: "video", duration: "18 min" },
-          { id: "2-3", title: "Deep Learning básico", type: "reading", duration: "12 min" },
-          { id: "2-4", title: "Práctica: Identificar tipos de IA", type: "quiz", duration: "20 min" },
-        ],
-      },
-      {
-        id: "unit-3",
-        title: "Unidad 3: IA en la vida diaria",
-        lessons: [
-          { id: "3-1", title: "IA en tu celular", type: "video", duration: "10 min", locked: true },
-          { id: "3-2", title: "IA en redes sociales", type: "video", duration: "12 min", locked: true },
-          { id: "3-3", title: "IA en educación", type: "reading", duration: "15 min", locked: true },
-        ],
-      },
-    ],
-  },
-  {
-    id: "ia-generativa",
-    title: "IA Generativa",
-    description: "Domina herramientas como ChatGPT y más",
-    icon: Sparkles,
-    color: "purple",
-    units: [
-      {
-        id: "gen-1",
-        title: "Unidad 1: Fundamentos de IA Generativa",
-        lessons: [
-          { id: "g1-1", title: "¿Qué es la IA Generativa?", type: "video", duration: "10 min" },
-          { id: "g1-2", title: "Modelos de lenguaje", type: "video", duration: "15 min" },
-          { id: "g1-3", title: "Limitaciones y sesgos", type: "reading", duration: "12 min" },
-        ],
-      },
-      {
-        id: "gen-2",
-        title: "Unidad 2: Usando ChatGPT",
-        lessons: [
-          { id: "g2-1", title: "Primeros pasos con ChatGPT", type: "video", duration: "12 min" },
-          { id: "g2-2", title: "Casos de uso educativo", type: "video", duration: "18 min" },
-          { id: "g2-3", title: "Práctica guiada", type: "quiz", duration: "25 min" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "prompting",
-    title: "Prompting Efectivo",
-    description: "Aprende a comunicarte mejor con la IA",
-    icon: Bot,
-    color: "green",
-    units: [
-      {
-        id: "prompt-1",
-        title: "Unidad 1: Anatomía de un prompt",
-        lessons: [
-          { id: "p1-1", title: "Estructura básica de prompts", type: "video", duration: "8 min" },
-          { id: "p1-2", title: "Contexto y especificidad", type: "video", duration: "12 min" },
-          { id: "p1-3", title: "Ejercicios de práctica", type: "quiz", duration: "20 min" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "ia-programadores",
-    title: "IA para Programadores",
-    description: "Integra IA en tu desarrollo",
-    icon: Code,
-    color: "orange",
-    units: [
-      {
-        id: "dev-1",
-        title: "Unidad 1: Herramientas de IA para código",
-        lessons: [
-          { id: "d1-1", title: "GitHub Copilot y alternativas", type: "video", duration: "15 min" },
-          { id: "d1-2", title: "Depuración con IA", type: "video", duration: "12 min" },
-          { id: "d1-3", title: "Documentación automática", type: "reading", duration: "10 min" },
-        ],
-      },
-    ],
-  },
-];
-
-const colorStyles = {
+const colorStyles: Record<string, string> = {
   blue: "border-primary/20 bg-primary/5",
   green: "border-salvora-green/20 bg-salvora-green/5",
   orange: "border-salvora-orange/20 bg-salvora-orange/5",
   purple: "border-salvora-purple/20 bg-salvora-purple/5",
+  teal: "border-teal-500/20 bg-teal-500/5",
 };
 
-const iconStyles = {
+const iconStyles: Record<string, string> = {
   blue: "bg-primary text-primary-foreground",
   green: "bg-salvora-green text-primary-foreground",
   orange: "bg-salvora-orange text-primary-foreground",
   purple: "bg-salvora-purple text-primary-foreground",
+  teal: "bg-teal-500 text-primary-foreground",
 };
 
-function LessonIcon({ type, completed, locked }: { type: string; completed?: boolean; locked?: boolean }) {
+const progressBarColors: Record<string, string> = {
+  blue: "bg-primary",
+  green: "bg-salvora-green",
+  orange: "bg-salvora-orange",
+  purple: "bg-salvora-purple",
+  teal: "bg-teal-500",
+};
+
+function LessonIcon({
+  type,
+  completed,
+  locked
+}: {
+  type: Lesson["type"];
+  completed?: boolean;
+  locked?: boolean
+}) {
   if (locked) return <Lock className="w-4 h-4 text-muted-foreground" />;
   if (completed) return <CheckCircle2 className="w-4 h-4 text-salvora-green" />;
   if (type === "video") return <Play className="w-4 h-4 text-primary" />;
   if (type === "reading") return <FileText className="w-4 h-4 text-salvora-orange" />;
+  if (type === "quiz") return <HelpCircle className="w-4 h-4 text-salvora-purple" />;
+  if (type === "practice") return <Lightbulb className="w-4 h-4 text-salvora-green" />;
   return <FileText className="w-4 h-4 text-salvora-purple" />;
 }
 
 function CourseSection({ course }: { course: Course }) {
   const [expandedUnits, setExpandedUnits] = useState<string[]>([course.units[0]?.id || ""]);
+  const { isLessonComplete, getCourseProgress } = useProgress();
 
   const toggleUnit = (unitId: string) => {
     setExpandedUnits((prev) =>
@@ -175,7 +69,8 @@ function CourseSection({ course }: { course: Course }) {
     );
   };
 
-  const Icon = course.icon;
+  const Icon = getIconByName(course.icon);
+  const courseProgress = getCourseProgress(course.id);
 
   return (
     <div className={cn("rounded-xl border-2 overflow-hidden", colorStyles[course.color])}>
@@ -186,8 +81,34 @@ function CourseSection({ course }: { course: Course }) {
             <Icon className="w-6 h-6" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold text-foreground mb-1">{course.title}</h2>
-            <p className="text-sm text-muted-foreground">{course.description}</p>
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-foreground mb-1">{course.title}</h2>
+                <p className="text-sm text-muted-foreground">{course.description}</p>
+              </div>
+              {courseProgress.total > 0 && (
+                <div className="text-right ml-4">
+                  <div className="text-sm font-medium text-foreground">
+                    {courseProgress.percentage}%
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {courseProgress.completed}/{courseProgress.total}
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* Course Progress Bar */}
+            {courseProgress.total > 0 && (
+              <div className="mt-3 h-1.5 bg-muted rounded-full overflow-hidden">
+                <div
+                  className={cn(
+                    "h-full transition-all duration-500",
+                    progressBarColors[course.color]
+                  )}
+                  style={{ width: `${courseProgress.percentage}%` }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -196,7 +117,9 @@ function CourseSection({ course }: { course: Course }) {
       <div className="divide-y divide-border">
         {course.units.map((unit) => {
           const isExpanded = expandedUnits.includes(unit.id);
-          const completedCount = unit.lessons.filter((l) => l.completed).length;
+          const completedCount = unit.lessons.filter((l) =>
+            isLessonComplete(course.id, l.id)
+          ).length;
 
           return (
             <div key={unit.id}>
@@ -219,23 +142,26 @@ function CourseSection({ course }: { course: Course }) {
 
               {isExpanded && (
                 <div className="bg-background/30 animate-accordion-down">
-                  {unit.lessons.map((lesson, index) => (
-                    <Link
-                      key={lesson.id}
-                      to={lesson.locked ? "#" : `/leccion/${course.id}/${lesson.id}`}
-                      className={cn(
-                        "flex items-center gap-4 px-6 py-3 pl-14 hover:bg-muted/30 transition-colors border-t border-border/50",
-                        lesson.locked && "opacity-50 cursor-not-allowed"
-                      )}
-                      onClick={(e) => lesson.locked && e.preventDefault()}
-                    >
-                      <LessonIcon type={lesson.type} completed={lesson.completed} locked={lesson.locked} />
-                      <span className={cn("flex-1 text-sm", lesson.completed ? "text-muted-foreground" : "text-foreground")}>
-                        {lesson.title}
-                      </span>
-                      <span className="text-xs text-muted-foreground">{lesson.duration}</span>
-                    </Link>
-                  ))}
+                  {unit.lessons.map((lesson) => {
+                    const completed = isLessonComplete(course.id, lesson.id);
+
+                    return (
+                      <Link
+                        key={lesson.id}
+                        to={`/leccion/${course.id}/${lesson.id}`}
+                        className="flex items-center gap-4 px-6 py-3 pl-14 hover:bg-muted/30 transition-colors border-t border-border/50"
+                      >
+                        <LessonIcon type={lesson.type} completed={completed} />
+                        <span className={cn(
+                          "flex-1 text-sm",
+                          completed ? "text-muted-foreground" : "text-foreground"
+                        )}>
+                          {lesson.title}
+                        </span>
+                        <span className="text-xs text-muted-foreground">{lesson.duration}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -247,6 +173,9 @@ function CourseSection({ course }: { course: Course }) {
 }
 
 const Cursos = () => {
+  const { getOverallProgress } = useProgress();
+  const overallProgress = getOverallProgress();
+
   return (
     <Layout>
       <div className="bg-gradient-to-b from-salvora-blue-light to-background py-12">
@@ -255,9 +184,27 @@ const Cursos = () => {
             <h1 className="text-3xl md:text-4xl font-black text-foreground mb-4">
               Cursos de Inteligencia Artificial
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Aprende a tu ritmo con nuestros cursos estructurados. Cada curso incluye videos, lecturas y ejercicios prácticos.
+            <p className="text-lg text-muted-foreground mb-6">
+              Aprende a tu ritmo con nuestros cursos estructurados. Cada curso incluye videos, lecturas y ejercicios practicos alineados con la alianza xAI-El Salvador.
             </p>
+
+            {/* Overall Progress */}
+            {overallProgress.total > 0 && (
+              <div className="bg-card/50 rounded-xl p-4 border border-border">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium text-foreground">Tu progreso total</span>
+                  <span className="text-sm text-muted-foreground">
+                    {overallProgress.completed} de {overallProgress.total} lecciones completadas
+                  </span>
+                </div>
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-salvora-green transition-all duration-500"
+                    style={{ width: `${overallProgress.percentage}%` }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

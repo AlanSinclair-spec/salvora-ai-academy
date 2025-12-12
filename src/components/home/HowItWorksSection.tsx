@@ -23,8 +23,12 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="py-20 md:py-28 bg-muted/30">
-      <div className="salvora-container">
+    <section className="py-20 md:py-28 bg-card/20 relative overflow-hidden">
+      {/* Floating orbs */}
+      <div className="floating-orb bg-primary/15 w-72 h-72 top-20 -left-10 -z-10" style={{ animation: "float-reverse 9s ease-in-out infinite" }} />
+      <div className="floating-orb bg-salvora-green/10 w-56 h-56 -bottom-10 right-10 -z-10" style={{ animation: "float-slow 11s ease-in-out 1s infinite" }} />
+
+      <div className="salvora-container relative z-10">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Cómo funciona Salvora

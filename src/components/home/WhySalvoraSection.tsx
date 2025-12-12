@@ -41,8 +41,12 @@ const colorClasses: Record<string, { bg: string; text: string; border: string }>
 
 export function WhySalvoraSection() {
   return (
-    <section className="py-20 md:py-28 bg-background">
-      <div className="salvora-container">
+    <section className="py-20 md:py-28 relative overflow-hidden">
+      {/* Floating orbs */}
+      <div className="floating-orb bg-salvora-orange/15 w-80 h-80 -top-20 -right-20 -z-10" style={{ animation: "float-slow 10s ease-in-out infinite" }} />
+      <div className="floating-orb bg-salvora-purple/10 w-64 h-64 bottom-10 -left-20 -z-10" style={{ animation: "float 8s ease-in-out 2s infinite" }} />
+
+      <div className="salvora-container relative z-10">
         <div className="text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Por qué Salvora existe

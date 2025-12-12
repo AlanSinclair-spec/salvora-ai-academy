@@ -51,8 +51,12 @@ export function CoursesPreview() {
   });
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="salvora-container">
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* Floating orbs */}
+      <div className="floating-orb bg-salvora-green/15 w-64 h-64 top-10 right-0 -z-10" style={{ animation: "float 7s ease-in-out infinite" }} />
+      <div className="floating-orb bg-primary/10 w-48 h-48 bottom-20 left-10 -z-10" style={{ animation: "float-reverse 8s ease-in-out 0.5s infinite" }} />
+
+      <div className="salvora-container relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
             Explora Nuestros Cursos

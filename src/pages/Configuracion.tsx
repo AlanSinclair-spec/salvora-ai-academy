@@ -175,7 +175,7 @@ const Configuracion = () => {
 
             <SettingToggle
               title="Modo Ligero"
-              description="Reduce el uso de datos mostrando transcripciones en lugar de videos. Ideal para conexiones 3G o lentas."
+              description="Reduce el uso de datos mostrando transcripciones en lugar de videos. Ideal para conexiones lentas, limitadas o dispositivos de bajo rendimiento."
               enabled={settings.liteMode}
               onChange={(enabled) => updateSettings({ liteMode: enabled })}
               icon={<Wifi className="w-5 h-5" />}
@@ -209,7 +209,7 @@ const Configuracion = () => {
 
             <SettingToggle
               title="Modo Salón de Clases"
-              description="Activa filtros más estrictos en las herramientas de IA. Recomendado para uso en escuelas."
+              description="Activa filtros más estrictos en las herramientas de IA para evitar que los estudiantes copien respuestas directamente. Las herramientas guiarán el aprendizaje en lugar de dar soluciones. Recomendado para uso escolar."
               enabled={settings.classroomMode}
               onChange={(enabled) => updateSettings({ classroomMode: enabled })}
               icon={<School className="w-5 h-5" />}

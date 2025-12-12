@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getLessonContent } from "@/data/lesson-content";
+import { Confetti, useConfetti } from "@/components/ui/Confetti";
 import type { Lesson, QuizQuestion } from "@/types/courses";
 
 interface QuizLessonProps {
@@ -33,6 +34,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
 
   const [questionStates, setQuestionStates] = useState<Record<string, QuestionState>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const confetti = useConfetti();
 
   const getQuestionState = (questionId: string): QuestionState => {
     return questionStates[questionId] || {
@@ -88,6 +90,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
 
     // Mark as complete if score is 60% or higher
     if (score >= 60) {
+      confetti.trigger();
       onComplete(score);
     }
   };
@@ -122,8 +125,11 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
 
   return (
     <div className="space-y-6">
+      {/* Confetti celebration */}
+      <Confetti isActive={confetti.isActive} onComplete={confetti.reset} />
+
       {/* Quiz Header */}
-      <div className="bg-salvora-purple/10 rounded-xl p-6">
+      <div className="bg-salvora-purple/10 rounded-xl p-6 animate-fade-in">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold text-foreground">Cuestionario</h2>
@@ -133,7 +139,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
           </div>
           {quizSubmitted && (
             <div className={cn(
-              "text-2xl font-bold",
+              "text-2xl font-bold animate-scale-in",
               currentScore >= 60 ? "text-salvora-green" : "text-destructive"
             )}>
               {currentScore}%
@@ -151,11 +157,12 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
             <div
               key={question.id}
               className={cn(
-                "bg-card rounded-xl border p-6",
-                state.isCorrect === true && "border-salvora-green/50 bg-salvora-green/5",
-                state.isCorrect === false && "border-destructive/50 bg-destructive/5",
+                "bg-card rounded-xl border p-6 transition-all duration-300",
+                state.isCorrect === true && "border-salvora-green/50 bg-salvora-green/5 quiz-option-correct",
+                state.isCorrect === false && "border-destructive/50 bg-destructive/5 quiz-option-incorrect",
                 state.isCorrect === null && "border-border"
               )}
+              style={{ animationDelay: `${questionIndex * 100}ms` }}
             >
               {/* Question */}
               <div className="flex items-start gap-3 mb-4">
@@ -178,10 +185,10 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
                       onClick={() => handleAnswerSelect(question.id, optionIndex)}
                       disabled={quizSubmitted || state.isCorrect !== null}
                       className={cn(
-                        "w-full text-left p-3 rounded-lg border transition-colors",
-                        "hover:bg-muted/50",
-                        isSelected && !showResult && "border-primary bg-primary/5",
-                        showResult && isCorrectOption && "border-salvora-green bg-salvora-green/10",
+                        "w-full text-left p-3 rounded-lg border transition-all duration-200 quiz-option",
+                        "hover:bg-muted/50 hover:scale-[1.01]",
+                        isSelected && !showResult && "border-primary bg-primary/5 quiz-option-selected",
+                        showResult && isCorrectOption && "border-salvora-green bg-salvora-green/10 animate-pulse-subtle",
                         showResult && isSelected && !isCorrectOption && "border-destructive bg-destructive/10",
                         !isSelected && !showResult && "border-border",
                         (quizSubmitted || state.isCorrect !== null) && "cursor-default"
@@ -205,10 +212,10 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
                           {option}
                         </span>
                         {showResult && isCorrectOption && (
-                          <CheckCircle className="w-5 h-5 text-salvora-green" />
+                          <CheckCircle className="w-5 h-5 text-salvora-green animate-scale-in" />
                         )}
                         {showResult && isSelected && !isCorrectOption && (
-                          <XCircle className="w-5 h-5 text-destructive" />
+                          <XCircle className="w-5 h-5 text-destructive animate-shake" />
                         )}
                       </div>
                     </button>
@@ -231,7 +238,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
 
               {/* Explanation */}
               {state.showExplanation && question.explanation && (
-                <div className="ml-11 mt-4 p-4 bg-muted/50 rounded-lg">
+                <div className="ml-11 mt-4 p-4 bg-muted/50 rounded-lg animate-slide-up">
                   <p className="text-sm text-muted-foreground">
                     <span className="font-semibold text-foreground">Explicacion: </span>
                     {question.explanation}
@@ -263,7 +270,9 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
           <div className="text-center">
             {currentScore >= 60 ? (
               <>
-                <Trophy className="w-12 h-12 text-salvora-green mx-auto mb-4" />
+                <div className="checkmark-circle mx-auto mb-4">
+                  <Trophy className="w-8 h-8 text-salvora-green animate-bounce-small" />
+                </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
                   Felicidades! Aprobaste con {currentScore}%
                 </h3>
@@ -279,14 +288,14 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
               </>
             ) : (
               <>
-                <AlertCircle className="w-12 h-12 text-salvora-orange mx-auto mb-4" />
+                <AlertCircle className="w-12 h-12 text-salvora-orange mx-auto mb-4 animate-shake" />
                 <h3 className="text-xl font-bold text-foreground mb-2">
                   Obtuviste {currentScore}%
                 </h3>
                 <p className="text-muted-foreground mb-4">
                   Necesitas 60% para aprobar. Revisa las explicaciones e intentalo de nuevo.
                 </p>
-                <Button onClick={handleRetry} variant="outline">
+                <Button onClick={handleRetry} variant="outline" className="animate-bounce-small">
                   <RefreshCw className="w-4 h-4 mr-2" />
                   Intentar de nuevo
                 </Button>

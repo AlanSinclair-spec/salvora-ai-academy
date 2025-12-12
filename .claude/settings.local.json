@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Phase 2: Production-grade AI provider, demo mode, and enhanced UX\n\n- Add HTTP AI provider with environment-based switching (VITE_AI_MODE)\n- Create demo mode with pre-filled forms and progress (VITE_DEMO_MODE)\n- Enhance Programas page with xAI partnership story and 3-step journey\n- Add Classroom Mode badge to Navbar (alongside Lite Mode)\n- Improve Configuracion Spanish explanations\n- Add UI/UX animations: floating orbs, staggered cards, progress shimmer\n- Add AnimatedCounter, Confetti, and TypingIndicator components\n- Enhance quiz interactions with answer feedback animations\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
+    ]
+  }
+}

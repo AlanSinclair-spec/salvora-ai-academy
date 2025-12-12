@@ -4,6 +4,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import type { UserProgress, ProgressState } from "@/types/settings";
 import { courses, getTotalLessons } from "@/data/courses";
+import { isDemoMode, demoProgress } from "@/data/demo-presets";
 
 const STORAGE_KEY = "salvora-progress";
 
@@ -15,6 +16,7 @@ interface ProgressContextType {
   markLessonComplete: (courseId: string, lessonId: string, quizScore?: number) => void;
   markLessonIncomplete: (courseId: string, lessonId: string) => void;
   clearProgress: () => void;
+  loadDemoProgress: () => void;
 
   // Queries
   isLessonComplete: (courseId: string, lessonId: string) => boolean;
@@ -31,6 +33,19 @@ const initialState: ProgressState = {
 };
 
 function loadProgress(): ProgressState {
+  // In demo mode, load demo progress by default
+  if (isDemoMode()) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    // Only load demo if no existing progress
+    if (!stored || Object.keys(JSON.parse(stored).lessons || {}).length === 0) {
+      console.info("🎬 Demo Mode: Loading preset progress");
+      return {
+        lessons: demoProgress,
+        lastUpdated: Date.now(),
+      };
+    }
+  }
+
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -92,6 +107,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setProgress(initialState);
   };
 
+  const loadDemoProgress = () => {
+    console.info("🎬 Loading demo progress...");
+    setProgress({
+      lessons: demoProgress,
+      lastUpdated: Date.now(),
+    });
+  };
+
   const isLessonComplete = (courseId: string, lessonId: string): boolean => {
     const key = `${courseId}:${lessonId}`;
     return progress.lessons[key]?.completed ?? false;
@@ -146,6 +169,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     markLessonComplete,
     markLessonIncomplete,
     clearProgress,
+    loadDemoProgress,
     isLessonComplete,
     getLessonProgress,
     getCourseProgress,

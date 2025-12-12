@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -17,6 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useLessonPlanner, useQuizGenerator, useRubricGenerator } from "@/hooks/useAITools";
 import { useSettings } from "@/contexts/SettingsContext";
+import { isDemoMode, demoLessonPlanner, demoQuizGenerator, demoRubricGenerator } from "@/data/demo-presets";
 import type { LessonPlanResponse, QuizGeneratorResponse, RubricResponse } from "@/types/ai-tools";
 
 const tools = [
@@ -121,6 +122,16 @@ function LessonPlanner() {
   const [duration, setDuration] = useState("45");
 
   const { mutate, isPending, data, reset } = useLessonPlanner();
+
+  // Pre-fill form in demo mode
+  useEffect(() => {
+    if (isDemoMode()) {
+      setTopic(demoLessonPlanner.topic);
+      setSubject(demoLessonPlanner.subject);
+      setGrade(demoLessonPlanner.grade);
+      setDuration(String(demoLessonPlanner.duration));
+    }
+  }, []);
 
   const handleGenerate = () => {
     if (!topic || !grade) return;
@@ -295,6 +306,14 @@ function QuizGenerator() {
 
   const { mutate, isPending, data, reset } = useQuizGenerator();
 
+  // Pre-fill form in demo mode
+  useEffect(() => {
+    if (isDemoMode()) {
+      setText(demoQuizGenerator.text);
+      setQuestionCount(String(demoQuizGenerator.questionCount));
+    }
+  }, []);
+
   const handleGenerate = () => {
     if (!text) return;
     mutate({
@@ -410,6 +429,15 @@ function RubricBuilder() {
   const [levels, setLevels] = useState("4");
 
   const { mutate, isPending, data, reset } = useRubricGenerator();
+
+  // Pre-fill form in demo mode
+  useEffect(() => {
+    if (isDemoMode()) {
+      setSubject(demoRubricGenerator.subject);
+      setCriteria(demoRubricGenerator.criteria);
+      setLevels(String(demoRubricGenerator.levels));
+    }
+  }, []);
 
   const updateCriterion = (index: number, value: string) => {
     const newCriteria = [...criteria];

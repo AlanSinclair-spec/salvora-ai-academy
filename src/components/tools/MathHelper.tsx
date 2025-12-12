@@ -1,15 +1,23 @@
 // Math Helper Tool Component
 // Solves math problems with step-by-step explanations
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Calculator, Loader2, Lightbulb, ArrowRight } from "lucide-react";
 import { useMathHelper } from "@/hooks/useAITools";
+import { isDemoMode, demoMathHelper } from "@/data/demo-presets";
 
 export function MathHelper() {
   const [problem, setProblem] = useState("");
 
   const { mutate, isPending, data, reset } = useMathHelper();
+
+  // Pre-fill form in demo mode
+  useEffect(() => {
+    if (isDemoMode()) {
+      setProblem(demoMathHelper.problem);
+    }
+  }, []);
 
   const handleSolve = () => {
     if (!problem.trim()) return;

@@ -102,7 +102,7 @@ function CourseSection({ course }: { course: Course }) {
               <div className="mt-3 h-1.5 bg-muted rounded-full overflow-hidden">
                 <div
                   className={cn(
-                    "h-full transition-all duration-500",
+                    "h-full transition-all duration-700 ease-out shimmer",
                     progressBarColors[course.color]
                   )}
                   style={{ width: `${courseProgress.percentage}%` }}
@@ -199,7 +199,7 @@ const Cursos = () => {
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-salvora-green transition-all duration-500"
+                    className="h-full bg-salvora-green transition-all duration-700 ease-out shimmer"
                     style={{ width: `${overallProgress.percentage}%` }}
                   />
                 </div>
@@ -211,8 +211,14 @@ const Cursos = () => {
 
       <div className="salvora-container py-12">
         <div className="space-y-8">
-          {courses.map((course) => (
-            <CourseSection key={course.id} course={course} />
+          {courses.map((course, index) => (
+            <div
+              key={course.id}
+              className="opacity-0 animate-slide-up"
+              style={{ animationDelay: `${index * 150}ms`, animationFillMode: "forwards" }}
+            >
+              <CourseSection course={course} />
+            </div>
           ))}
         </div>
       </div>

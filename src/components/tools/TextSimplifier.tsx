@@ -1,11 +1,12 @@
 // Text Simplifier Tool Component
 // Simplifies text to different reading levels
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { FileText, Loader2, Copy, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTextSimplifier } from "@/hooks/useAITools";
+import { isDemoMode, demoTextSimplifier } from "@/data/demo-presets";
 
 export function TextSimplifier() {
   const [text, setText] = useState("");
@@ -13,6 +14,13 @@ export function TextSimplifier() {
   const [copied, setCopied] = useState(false);
 
   const { mutate, isPending, data, reset } = useTextSimplifier();
+
+  // Pre-fill form in demo mode
+  useEffect(() => {
+    if (isDemoMode()) {
+      setText(demoTextSimplifier.text);
+    }
+  }, []);
 
   const handleSimplify = () => {
     if (!text.trim()) return;

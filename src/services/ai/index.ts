@@ -2,6 +2,7 @@
 // Central point for accessing AI functionality
 
 import { PlaceholderProvider } from "./placeholder-provider";
+import { HttpProvider } from "./http-provider";
 import type { AIProvider } from "./types";
 
 // Export types
@@ -15,9 +16,29 @@ export {
   getLearningRedirect,
 } from "./safety";
 
+/**
+ * Get the AI provider based on environment configuration
+ * - VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (real AI backend)
+ * - Otherwise → PlaceholderProvider (mock responses for development)
+ */
+export function getAIProvider(): AIProvider {
+  const mode = import.meta.env.VITE_AI_MODE;
+  const apiUrl = import.meta.env.VITE_AI_API_URL;
+
+  // Use HTTP provider if explicitly configured with an API URL
+  if (mode === "http" && apiUrl) {
+    console.info("🤖 AI Provider: HTTP Backend at", apiUrl);
+    return new HttpProvider();
+  }
+
+  // Default to placeholder provider for development
+  console.info("🤖 AI Provider: Placeholder (mock responses)");
+  return new PlaceholderProvider();
+}
+
 // Create and export the default AI service instance
-// In production, this could be swapped for Claude, OpenAI, or Grok
-const aiProvider: AIProvider = new PlaceholderProvider();
+// Uses environment-based provider selection
+const aiProvider: AIProvider = getAIProvider();
 
 export const aiService = {
   /**

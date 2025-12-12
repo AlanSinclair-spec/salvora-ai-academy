@@ -64,11 +64,11 @@ function SettingToggle({ title, description, enabled, onChange, icon, iconEnable
 }
 
 function DangerZone() {
-  const { clearProgress, progress } = useProgress();
+  const { clearProgress, getOverallProgress } = useProgress();
   const [showConfirm, setShowConfirm] = useState(false);
   const [cleared, setCleared] = useState(false);
 
-  const completedCount = progress.filter(p => p.completed).length;
+  const completedCount = getOverallProgress().completed;
 
   const handleClear = () => {
     clearProgress();

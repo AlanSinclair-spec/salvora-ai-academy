@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap, Settings, WifiOff } from "lucide-react";
+import { Menu, X, Settings, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSettings } from "@/contexts/SettingsContext";
+import salvoraLogo from "@/assets/salvora-logo.png";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -24,9 +25,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground">
-              <GraduationCap className="w-6 h-6" />
-            </div>
+            <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain" />
             <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
               Salvora
             </span>

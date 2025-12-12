@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface CourseCardProps {
+export interface CourseCardProps {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ className?: string }>;
   color: "blue" | "green" | "orange" | "purple";
   href: string;
   lessons: number;

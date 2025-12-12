@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain" />
+              <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain rounded-lg" />
               <span className="text-xl font-bold text-foreground">Salvora</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-md">

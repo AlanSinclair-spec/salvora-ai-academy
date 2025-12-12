@@ -155,7 +155,7 @@ const Programas = () => {
   return (
     <Layout>
       {/* Enhanced Hero Section - xAI Partnership Story */}
-      <div className="bg-gradient-to-b from-primary/10 via-salvora-purple/5 to-background py-16 md:py-24">
+      <div className="py-16 md:py-24">
         <div className="salvora-container">
           <div className="max-w-4xl mx-auto text-center">
             {/* Partnership Badge */}
@@ -251,7 +251,7 @@ const Programas = () => {
       </section>
 
       {/* How Salvora Integrates */}
-      <section className="bg-muted/30 py-16">
+      <section className="bg-card/30 py-16">
         <div className="salvora-container">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
@@ -418,7 +418,7 @@ const Programas = () => {
         </div>
 
         {/* Upcoming Events */}
-        <section className="bg-muted/30 rounded-2xl p-8">
+        <section className="bg-card/50 rounded-2xl border border-white/10 p-8">
           <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
             <Calendar className="w-6 h-6 text-primary" />
             Proximos Eventos

@@ -175,7 +175,7 @@ const Estudiante = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-b from-salvora-purple/10 to-background py-12">
+      <div className="py-12">
         <div className="salvora-container">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-sm text-salvora-purple mb-2">

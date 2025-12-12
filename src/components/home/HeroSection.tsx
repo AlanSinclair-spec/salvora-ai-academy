@@ -14,7 +14,7 @@ export function HeroSection() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-salvora-blue-light to-background">
+    <section className="relative overflow-hidden">
       <div className="salvora-container py-16 md:py-24 lg:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Partnership Badge */}

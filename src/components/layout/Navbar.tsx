@@ -45,7 +45,7 @@ export function Navbar() {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-card/80 backdrop-blur-md">
       {/* Scroll Progress Bar */}
       <div
         className="scroll-progress"

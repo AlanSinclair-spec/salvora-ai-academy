@@ -3,7 +3,7 @@ import salvoraLogo from "@/assets/salvora-logo.png";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="border-t border-white/10 bg-card/50">
       <div className="salvora-container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}

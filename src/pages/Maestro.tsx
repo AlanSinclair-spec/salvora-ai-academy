@@ -588,7 +588,7 @@ const Maestro = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-b from-salvora-blue-light to-background py-12">
+      <div className="py-12">
         <div className="salvora-container">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
             <div className="max-w-2xl">

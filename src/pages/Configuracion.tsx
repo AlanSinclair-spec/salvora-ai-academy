@@ -146,7 +146,7 @@ const Configuracion = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-b from-muted to-background py-12">
+      <div className="py-12">
         <div className="salvora-container">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">

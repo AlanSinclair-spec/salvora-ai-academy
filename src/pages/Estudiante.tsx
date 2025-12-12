@@ -69,7 +69,7 @@ const courseColors: Record<string, string> = {
 };
 
 function StudyModules() {
-  const { progress, getCompletedLessonsCount } = useProgress();
+  const { getCourseProgress } = useProgress();
 
   return (
     <div className="space-y-6">
@@ -86,8 +86,7 @@ function StudyModules() {
         {studentCourses.map((course) => {
           const IconComponent = courseIcons[course.icon] || BookOpen;
           const totalLessons = course.units.reduce((acc, unit) => acc + unit.lessons.length, 0);
-          const completedLessons = getCompletedLessonsCount(course.id);
-          const progressPercent = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+          const { completed: completedLessons, percentage: progressPercent } = getCourseProgress(course.id);
           const firstLesson = course.units[0]?.lessons[0];
 
           return (

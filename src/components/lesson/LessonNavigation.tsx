@@ -50,7 +50,7 @@ export function LessonNavigation({
         {/* Previous */}
         <div className="flex-1">
           {prevLesson ? (
-            <Link to={`/leccion/${courseId}/${prevLesson.lesson.id}`}>
+            <Link to={`/leccion/${courseId}/${prevLesson.unitId}/${prevLesson.lesson.id}`}>
               <Button variant="outline" className="w-full justify-start">
                 <ChevronLeft className="w-4 h-4 mr-2" />
                 <div className="text-left truncate">
@@ -75,7 +75,7 @@ export function LessonNavigation({
         {/* Next */}
         <div className="flex-1">
           {nextLesson ? (
-            <Link to={`/leccion/${courseId}/${nextLesson.lesson.id}`}>
+            <Link to={`/leccion/${courseId}/${nextLesson.unitId}/${nextLesson.lesson.id}`}>
               <Button variant="hero" className="w-full justify-end">
                 <div className="text-right truncate">
                   <div className="text-xs opacity-80">Siguiente</div>

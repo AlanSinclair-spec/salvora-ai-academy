@@ -148,7 +148,7 @@ function CourseSection({ course }: { course: Course }) {
                     return (
                       <Link
                         key={lesson.id}
-                        to={`/leccion/${course.id}/${lesson.id}`}
+                        to={`/leccion/${course.id}/${unit.id}/${lesson.id}`}
                         className="flex items-center gap-4 px-6 py-3 pl-14 hover:bg-muted/30 transition-colors border-t border-border/50"
                       >
                         <LessonIcon type={lesson.type} completed={completed} />

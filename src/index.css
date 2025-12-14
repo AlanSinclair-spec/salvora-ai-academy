@@ -345,3 +345,75 @@
     opacity: 1;
   }
 }
+
+/* Print styles for Classroom Pack and other printable content */
+@media print {
+  /* Hide navigation and non-essential elements */
+  nav,
+  footer,
+  .no-print,
+  .scroll-progress,
+  .floating-orb,
+  .confetti-container {
+    display: none !important;
+  }
+
+  /* Reset background for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Clean up cards for print */
+  .bg-card,
+  .glass-card,
+  .salvora-card {
+    background: white !important;
+    border-color: #e5e5e5 !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure text is readable */
+  .text-foreground,
+  .text-muted-foreground {
+    color: black !important;
+  }
+
+  /* Print-specific styles */
+  .print-header {
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+}
+
+/* Lite Mode specific styles */
+.lite-mode .floating-orb,
+.lite-mode .confetti-container,
+.lite-mode .hover-glow:hover,
+.lite-mode .gradient-text {
+  animation: none !important;
+}
+
+.lite-mode .floating-orb {
+  opacity: 0.05;
+}
+
+.lite-mode .gradient-text {
+  background: none;
+  -webkit-text-fill-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}

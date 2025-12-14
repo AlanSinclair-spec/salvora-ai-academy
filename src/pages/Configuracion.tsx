@@ -16,12 +16,14 @@ import {
   Globe,
   School,
   Moon,
-  Sun
+  Sun,
+  GraduationCap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSettings } from "@/contexts/SettingsContext";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useState } from "react";
+import { ReadinessMeter } from "@/components/ui/ReadinessMeter";
 
 interface SettingToggleProps {
   title: string;
@@ -263,6 +265,23 @@ const Configuracion = () => {
                   Próximamente
                 </span>
               </div>
+            </div>
+          </div>
+
+          {/* AI Readiness Score */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-salvora-purple" />
+              Tu Preparación en IA
+            </h3>
+
+            <div className="p-4 bg-card rounded-xl border border-border">
+              <ReadinessMeter showDetails />
+              <p className="text-sm text-muted-foreground mt-4">
+                Tu puntuación de preparación se calcula basándose en tu progreso en los cursos,
+                precisión en las prácticas, y la completación de puntos clave de aprendizaje.
+                Mientras más lecciones completes y mejor te vaya en las prácticas, más alta será tu puntuación.
+              </p>
             </div>
           </div>
 

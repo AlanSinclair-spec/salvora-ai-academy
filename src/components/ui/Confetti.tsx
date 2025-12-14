@@ -1,6 +1,7 @@
 // Simple CSS-based confetti celebration effect
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useEnhancedLiteMode } from "@/hooks/useLiteMode";
 
 interface ConfettiPiece {
   id: number;
@@ -35,8 +36,16 @@ export function Confetti({
 }: ConfettiProps) {
   const [pieces, setPieces] = useState<ConfettiPiece[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const { disableAnimations } = useEnhancedLiteMode();
 
   useEffect(() => {
+    // Skip confetti in lite mode or when animations are disabled
+    if (disableAnimations && isActive) {
+      // Still trigger onComplete callback
+      onComplete?.();
+      return;
+    }
+
     if (isActive) {
       // Generate confetti pieces
       const newPieces: ConfettiPiece[] = Array.from({ length: pieceCount }, (_, i) => ({
@@ -60,8 +69,10 @@ export function Confetti({
 
       return () => clearTimeout(timer);
     }
-  }, [isActive, duration, pieceCount, onComplete]);
+  }, [isActive, duration, pieceCount, onComplete, disableAnimations]);
 
+  // Don't render if animations are disabled
+  if (disableAnimations) return null;
   if (!isVisible || pieces.length === 0) return null;
 
   return (

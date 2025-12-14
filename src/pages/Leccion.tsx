@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { ChevronLeft, AlertCircle } from "lucide-react";
 import { getLessonById, getAdjacentLessons } from "@/data/courses";
+import { getLessonContent } from "@/data/lesson-content";
 import { useProgress } from "@/contexts/ProgressContext";
 import { getIconByName } from "@/lib/icons";
 import {
@@ -11,14 +13,22 @@ import {
   PracticeLesson,
   LessonNavigation
 } from "@/components/lesson";
+import { LessonBlocks } from "@/components/lesson/blocks";
+import { ShareButton } from "@/components/ui/ShareButton";
+import { ClassroomPackButton } from "@/components/lesson/ClassroomPackButton";
+import { ClassroomPackModal } from "@/components/lesson/ClassroomPackModal";
 
 const Leccion = () => {
   const { cursoId, leccionId } = useParams<{ cursoId: string; leccionId: string }>();
   const { markLessonComplete, isLessonComplete, getCourseProgress } = useProgress();
+  const [classroomPackOpen, setClassroomPackOpen] = useState(false);
 
   // Get lesson data
   const lessonData = cursoId && leccionId ? getLessonById(cursoId, leccionId) : undefined;
   const adjacentLessons = cursoId && leccionId ? getAdjacentLessons(cursoId, leccionId) : {};
+
+  // Get enhanced lesson content
+  const lessonContent = leccionId ? getLessonContent(leccionId) : undefined;
 
   // Handle lesson not found
   if (!lessonData || !cursoId || !leccionId) {
@@ -121,17 +131,33 @@ const Leccion = () => {
 
         {/* Lesson Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-            <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium uppercase">
-              {lesson.type === "video" && "Video"}
-              {lesson.type === "reading" && "Lectura"}
-              {lesson.type === "quiz" && "Cuestionario"}
-              {lesson.type === "practice" && "Practica"}
-            </span>
-            <span>{lesson.duration}</span>
-            {isCompleted && (
-              <span className="text-salvora-green font-medium">Completado</span>
-            )}
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="px-2 py-0.5 rounded bg-muted text-xs font-medium uppercase">
+                {lesson.type === "video" && "Video"}
+                {lesson.type === "reading" && "Lectura"}
+                {lesson.type === "quiz" && "Cuestionario"}
+                {lesson.type === "practice" && "Practica"}
+              </span>
+              <span>{lesson.duration}</span>
+              {isCompleted && (
+                <span className="text-salvora-green font-medium">Completado</span>
+              )}
+            </div>
+            {/* Share and Classroom Pack buttons */}
+            <div className="flex items-center gap-2">
+              {lessonContent?.whatsAppPayload && (
+                <ShareButton
+                  lessonId={leccionId}
+                  lessonTitle={lesson.title}
+                  payload={lessonContent.whatsAppPayload}
+                  courseId={cursoId}
+                />
+              )}
+              {lessonContent?.classroomPack && (
+                <ClassroomPackButton onClick={() => setClassroomPackOpen(true)} />
+              )}
+            </div>
           </div>
           <h1 className="text-2xl md:text-3xl font-black text-foreground">
             {lesson.title}
@@ -141,6 +167,14 @@ const Leccion = () => {
         {/* Lesson Content */}
         {renderLessonContent()}
 
+        {/* Enhanced Lesson Blocks */}
+        <LessonBlocks
+          lessonId={leccionId}
+          lessonContent={lessonContent}
+          targetAudience={course.targetAudience}
+          lessonType={lesson.type}
+        />
+
         {/* Navigation */}
         <LessonNavigation
           courseId={cursoId}
@@ -148,6 +182,16 @@ const Leccion = () => {
           nextLesson={adjacentLessons.next}
           currentProgress={courseProgress}
         />
+
+        {/* Classroom Pack Modal */}
+        {lessonContent?.classroomPack && (
+          <ClassroomPackModal
+            open={classroomPackOpen}
+            onOpenChange={setClassroomPackOpen}
+            pack={lessonContent.classroomPack}
+            lessonTitle={lesson.title}
+          />
+        )}
       </div>
     </Layout>
   );

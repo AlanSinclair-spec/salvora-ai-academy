@@ -6,6 +6,9 @@ export interface AppSettings {
   offlineSaving: boolean;
   classroomMode: boolean;
   preferredLanguage: "es";
+  // Accessibility settings
+  reduceMotion: boolean;
+  defaultQuickView: boolean;
 }
 
 export interface UserProgress {
@@ -27,4 +30,6 @@ export const DEFAULT_SETTINGS: AppSettings = {
   offlineSaving: false,
   classroomMode: false,
   preferredLanguage: "es",
+  reduceMotion: false,
+  defaultQuickView: true,
 };

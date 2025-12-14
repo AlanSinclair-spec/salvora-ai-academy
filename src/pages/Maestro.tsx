@@ -19,6 +19,7 @@ import { useLessonPlanner, useQuizGenerator, useRubricGenerator } from "@/hooks/
 import { useSettings } from "@/contexts/SettingsContext";
 import { isDemoMode, demoLessonPlanner, demoQuizGenerator, demoRubricGenerator } from "@/data/demo-presets";
 import type { LessonPlanResponse, QuizGeneratorResponse, RubricResponse } from "@/types/ai-tools";
+import { QuickPromptPanel } from "@/components/maestro/QuickPromptPanel";
 
 const tools = [
   {
@@ -645,17 +646,23 @@ const Maestro = () => {
           {activeTab === "quiz" && <QuizGenerator />}
           {activeTab === "rubric" && <RubricBuilder />}
           {activeTab === "prompts" && (
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                Plantillas de Prompts
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Copia estos prompts y personalízalos reemplazando los valores entre corchetes [].
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {promptTemplates.map((template) => (
-                  <PromptCard key={template.title} template={template} />
-                ))}
+            <div className="space-y-8">
+              {/* Quick Prompt Panel - Modo Aula */}
+              <QuickPromptPanel />
+
+              {/* Additional Prompt Templates */}
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-6">
+                  Mas Plantillas de Prompts
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  Copia estos prompts y personalízalos reemplazando los valores entre corchetes [].
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {promptTemplates.map((template) => (
+                    <PromptCard key={template.title} template={template} />
+                  ))}
+                </div>
               </div>
             </div>
           )}

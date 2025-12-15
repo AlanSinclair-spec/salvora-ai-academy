@@ -49,7 +49,7 @@ export const courses: Course[] = [
             title: "Tipos de IA: Estrecha, General y Super",
             type: "video",
             duration: "10 min",
-            videoId: "SALVORA_INTRO_003",
+            videoId: "KytW151dpqU", // DotCSV: ¿Qué es el Machine Learning? ¿Y Deep Learning?
             order: 4,
           },
         ],
@@ -80,7 +80,7 @@ export const courses: Course[] = [
             title: "Conoce a Grok: El Asistente de xAI",
             type: "video",
             duration: "10 min",
-            videoId: "SALVORA_INTRO_005",
+            videoId: "c_PqM5lPvjY", // DotCSV: ¡Probando el CHATBOT más POTENTE DEL MUNDO!
             order: 3,
           },
         ],
@@ -96,7 +96,7 @@ export const courses: Course[] = [
             title: "Limites de la IA: Lo Que No Puede Hacer",
             type: "video",
             duration: "12 min",
-            videoId: "SALVORA_INTRO_006",
+            videoId: "Nh4fguuPvGI", // Dr. López de Mántaras: Qué puede y qué no puede hacer la IA
             order: 1,
           },
           {

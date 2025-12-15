@@ -16,6 +16,7 @@ interface LessonBlocksProps {
   targetAudience: TargetAudience;
   lessonType: "video" | "reading" | "quiz" | "practice";
   onPracticeComplete?: (score: number) => void;
+  onPracticeCompleted?: () => void;
 }
 
 export function LessonBlocks({
@@ -24,8 +25,15 @@ export function LessonBlocks({
   targetAudience,
   lessonType,
   onPracticeComplete,
+  onPracticeCompleted,
 }: LessonBlocksProps) {
   if (!lessonContent) return null;
+
+  // Handle practice completion - call both callbacks
+  const handlePracticeComplete = (score: number) => {
+    onPracticeComplete?.(score);
+    onPracticeCompleted?.();
+  };
 
   const {
     quickVersion,
@@ -70,7 +78,7 @@ export function LessonBlocks({
           <EnhancedPractice
             questions={enhancedPractice}
             lessonId={lessonId}
-            onComplete={onPracticeComplete}
+            onComplete={handlePracticeComplete}
           />
         </div>
       )}

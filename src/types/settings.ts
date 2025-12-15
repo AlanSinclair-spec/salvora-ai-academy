@@ -17,6 +17,9 @@ export interface UserProgress {
   completed: boolean;
   quizScore?: number;
   lastAccessed: number;
+  // Granular tracking for lesson gating
+  videoWatched?: boolean;      // True when video ends or content scrolled (Lite Mode)
+  practiceCompleted?: boolean; // True when practice section completed
 }
 
 export interface ProgressState {

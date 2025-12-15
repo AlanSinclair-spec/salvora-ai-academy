@@ -1,9 +1,9 @@
 // Video Lesson Component
 // Displays video content with optional transcript for Lite Mode
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, CheckCircle, FileText, Volume2 } from "lucide-react";
+import { Play, CheckCircle, FileText, Volume2, ExternalLink, Eye } from "lucide-react";
 import { useLiteMode } from "@/contexts/SettingsContext";
 import { getLessonContent } from "@/data/lesson-content";
 import type { Lesson } from "@/types/courses";
@@ -11,13 +11,39 @@ import type { Lesson } from "@/types/courses";
 interface VideoLessonProps {
   lesson: Lesson;
   onComplete: () => void;
+  onVideoWatched?: () => void;
   isCompleted: boolean;
 }
 
-export function VideoLesson({ lesson, onComplete, isCompleted }: VideoLessonProps) {
+export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }: VideoLessonProps) {
   const [showTranscript, setShowTranscript] = useState(false);
+  const [videoWatched, setVideoWatched] = useState(false);
   const isLiteMode = useLiteMode();
   const content = getLessonContent(lesson.id);
+  const contentEndRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for Lite Mode scroll tracking
+  useEffect(() => {
+    if (!isLiteMode || !contentEndRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !videoWatched) {
+          setVideoWatched(true);
+          onVideoWatched?.();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(contentEndRef.current);
+    return () => observer.disconnect();
+  }, [isLiteMode, videoWatched, onVideoWatched]);
+
+  const handleVideoWatched = () => {
+    setVideoWatched(true);
+    onVideoWatched?.();
+  };
 
   // In lite mode, show transcript instead of video
   if (isLiteMode) {
@@ -29,6 +55,17 @@ export function VideoLesson({ lesson, onComplete, isCompleted }: VideoLessonProp
           <p className="text-muted-foreground mb-4">
             El video no se muestra para ahorrar datos. Lee la transcripcion abajo.
           </p>
+          {lesson.videoId && !lesson.videoId.startsWith("placeholder") && (
+            <a
+              href={`https://www.youtube.com/watch?v=${lesson.videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-primary hover:underline"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Abrir en YouTube
+            </a>
+          )}
         </div>
 
         {content?.transcript && (
@@ -44,6 +81,15 @@ export function VideoLesson({ lesson, onComplete, isCompleted }: VideoLessonProp
                 </p>
               ))}
             </div>
+            {/* Sentinel for scroll tracking */}
+            <div ref={contentEndRef} className="h-1" />
+          </div>
+        )}
+
+        {videoWatched && (
+          <div className="flex items-center justify-center gap-2 text-salvora-green">
+            <Eye className="w-4 h-4" />
+            <span className="text-sm font-medium">Contenido leido</span>
           </div>
         )}
 
@@ -88,6 +134,26 @@ export function VideoLesson({ lesson, onComplete, isCompleted }: VideoLessonProp
             <p className="text-lg font-medium">Video en desarrollo</p>
             <p className="text-sm opacity-70">Proximamente disponible</p>
           </div>
+        )}
+      </div>
+
+      {/* Video Watch Confirmation */}
+      <div className="flex items-center justify-center">
+        {videoWatched ? (
+          <div className="flex items-center gap-2 text-salvora-green">
+            <Eye className="w-4 h-4" />
+            <span className="text-sm font-medium">Video visto</span>
+          </div>
+        ) : (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleVideoWatched}
+            className="text-primary"
+          >
+            <Eye className="w-4 h-4 mr-2" />
+            He visto el video
+          </Button>
         )}
       </div>
 

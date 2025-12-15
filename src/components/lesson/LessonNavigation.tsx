@@ -3,7 +3,7 @@
 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Lock, CheckCircle } from "lucide-react";
 import type { Lesson } from "@/types/courses";
 
 interface LessonNavigationProps {
@@ -11,6 +11,8 @@ interface LessonNavigationProps {
   prevLesson?: { lesson: Lesson; unitId: string };
   nextLesson?: { lesson: Lesson; unitId: string };
   currentProgress?: { completed: number; total: number };
+  canProceed?: boolean;
+  isCompleted?: boolean;
 }
 
 export function LessonNavigation({
@@ -18,9 +20,19 @@ export function LessonNavigation({
   prevLesson,
   nextLesson,
   currentProgress,
+  canProceed = true,
+  isCompleted = false,
 }: LessonNavigationProps) {
   return (
     <div className="border-t border-border pt-6 mt-8">
+      {/* Completion Indicator */}
+      {isCompleted && (
+        <div className="flex items-center justify-center gap-2 text-salvora-green mb-4">
+          <CheckCircle className="w-5 h-5" />
+          <span className="font-medium">Leccion completada</span>
+        </div>
+      )}
+
       {/* Progress Bar */}
       {currentProgress && (
         <div className="mb-6">
@@ -75,15 +87,30 @@ export function LessonNavigation({
         {/* Next */}
         <div className="flex-1">
           {nextLesson ? (
-            <Link to={`/leccion/${courseId}/${nextLesson.unitId}/${nextLesson.lesson.id}`}>
-              <Button variant="hero" className="w-full justify-end">
+            canProceed ? (
+              <Link to={`/leccion/${courseId}/${nextLesson.unitId}/${nextLesson.lesson.id}`}>
+                <Button variant="hero" className="w-full justify-end">
+                  <div className="text-right truncate">
+                    <div className="text-xs opacity-80">Siguiente</div>
+                    <div className="truncate">{nextLesson.lesson.title}</div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                variant="hero"
+                className="w-full justify-end opacity-50 cursor-not-allowed"
+                disabled
+                title="Completa el video y la practica para continuar"
+              >
                 <div className="text-right truncate">
                   <div className="text-xs opacity-80">Siguiente</div>
                   <div className="truncate">{nextLesson.lesson.title}</div>
                 </div>
-                <ChevronRight className="w-4 h-4 ml-2" />
+                <Lock className="w-4 h-4 ml-2" />
               </Button>
-            </Link>
+            )
           ) : (
             <Link to={`/cursos`}>
               <Button variant="hero" className="w-full justify-end">

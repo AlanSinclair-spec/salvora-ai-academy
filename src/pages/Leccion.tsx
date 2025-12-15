@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { ChevronLeft, AlertCircle } from "lucide-react";
+import { ChevronLeft, AlertCircle, Lock } from "lucide-react";
 import { getLessonById, getAdjacentLessons } from "@/data/courses";
 import { getLessonContent } from "@/data/lesson-content";
 import { useProgress } from "@/contexts/ProgressContext";
@@ -20,7 +20,15 @@ import { ClassroomPackModal } from "@/components/lesson/ClassroomPackModal";
 
 const Leccion = () => {
   const { cursoId, leccionId } = useParams<{ cursoId: string; leccionId: string }>();
-  const { markLessonComplete, isLessonComplete, getCourseProgress } = useProgress();
+  const {
+    markLessonComplete,
+    isLessonComplete,
+    getCourseProgress,
+    isLessonUnlocked,
+    canProceedToNext,
+    markVideoWatched,
+    markPracticeCompleted
+  } = useProgress();
   const [classroomPackOpen, setClassroomPackOpen] = useState(false);
 
   // Get lesson data
@@ -29,6 +37,35 @@ const Leccion = () => {
 
   // Get enhanced lesson content
   const lessonContent = leccionId ? getLessonContent(leccionId) : undefined;
+
+  // Check if lesson is unlocked (first check before not found)
+  const lessonUnlocked = cursoId && leccionId ? isLessonUnlocked(cursoId, leccionId) : false;
+
+  // Handle locked lesson
+  if (lessonData && cursoId && leccionId && !lessonUnlocked) {
+    return (
+      <Layout>
+        <div className="salvora-container py-12">
+          <div className="max-w-xl mx-auto text-center">
+            <Lock className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <h1 className="text-2xl font-bold text-foreground mb-2">
+              Leccion bloqueada
+            </h1>
+            <p className="text-muted-foreground mb-6">
+              Completa la leccion anterior para desbloquear esta.
+            </p>
+            <Link
+              to="/cursos"
+              className="inline-flex items-center text-primary hover:underline"
+            >
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Volver a cursos
+            </Link>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   // Handle lesson not found
   if (!lessonData || !cursoId || !leccionId) {
@@ -61,9 +98,22 @@ const Leccion = () => {
   const courseProgress = getCourseProgress(cursoId);
   const CourseIcon = getIconByName(course.icon);
 
+  // Calculate if user can proceed to next lesson
+  const canProceed = canProceedToNext(cursoId, leccionId);
+
   // Handle marking lesson complete
   const handleComplete = (quizScore?: number) => {
     markLessonComplete(cursoId, leccionId, quizScore);
+  };
+
+  // Handle video watched
+  const handleVideoWatched = () => {
+    markVideoWatched(cursoId, leccionId);
+  };
+
+  // Handle practice completed
+  const handlePracticeCompleted = () => {
+    markPracticeCompleted(cursoId, leccionId);
   };
 
   // Render the appropriate lesson component based on type
@@ -74,6 +124,7 @@ const Leccion = () => {
           <VideoLesson
             lesson={lesson}
             onComplete={handleComplete}
+            onVideoWatched={handleVideoWatched}
             isCompleted={isCompleted}
           />
         );
@@ -173,6 +224,7 @@ const Leccion = () => {
           lessonContent={lessonContent}
           targetAudience={course.targetAudience}
           lessonType={lesson.type}
+          onPracticeCompleted={handlePracticeCompleted}
         />
 
         {/* Navigation */}
@@ -181,6 +233,8 @@ const Leccion = () => {
           prevLesson={adjacentLessons.prev}
           nextLesson={adjacentLessons.next}
           currentProgress={courseProgress}
+          canProceed={canProceed}
+          isCompleted={isCompleted}
         />
 
         {/* Classroom Pack Modal */}

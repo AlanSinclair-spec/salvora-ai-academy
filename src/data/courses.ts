@@ -26,7 +26,7 @@ export const courses: Course[] = [
             title: "Bienvenida: Tu Viaje con la IA",
             type: "video",
             duration: "8 min",
-            videoId: "SALVORA_INTRO_001",
+            videoId: "W8AeOXa_FqU", // DotCSV: Programando Red Neuronal - intro to AI concepts
             order: 1,
           },
           {
@@ -34,7 +34,7 @@ export const courses: Course[] = [
             title: "Que es la Inteligencia Artificial?",
             type: "video",
             duration: "12 min",
-            videoId: "SALVORA_INTRO_002",
+            videoId: "90QDe6DQXF4", // DotCSV: IA crea ARTE - demonstrates AI capabilities
             order: 2,
           },
           {
@@ -65,7 +65,7 @@ export const courses: Course[] = [
             title: "Modelos de Lenguaje: Como Piensa la IA",
             type: "video",
             duration: "15 min",
-            videoId: "SALVORA_INTRO_004",
+            videoId: "xi94v_jl26U", // DotCSV: Transformers - foundation of modern AI models
             order: 1,
           },
           {

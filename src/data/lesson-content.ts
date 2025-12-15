@@ -32,298 +32,1648 @@ export interface LessonContent {
 
 export const lessonContent: Record<string, LessonContent> = {
   // ===== CURSO 1: INTRODUCCION A LA IA =====
+  // 11 lessons with full National-Scale Lesson Standard content
+  // Department rotation: Apopa → San Salvador → Santa Ana → La Libertad → Sonsonate → Usulután → Chalatenango → San Miguel → Ahuachapán → Apopa
 
-  // Unit 1: Que es la IA?
+  // =====================================================
+  // UNIT 1: FUNDAMENTOS DE IA (Lessons 1-4)
+  // =====================================================
+
   "intro-1-bienvenida": {
     transcript: `Bienvenido a Salvora, la plataforma nacional de alfabetizacion en Inteligencia Artificial de El Salvador.
 
-En este curso, aprenderas los conceptos fundamentales de la IA y como esta tecnologia esta transformando nuestro pais y el mundo.
+Hoy comienzas un viaje que te preparara para el futuro. La Inteligencia Artificial, o IA, ya esta en todas partes: en tu telefono, en los bancos, en las tiendas, en los hospitales. Y El Salvador ha decidido que todos sus ciudadanos, especialmente los jovenes, deben entender y dominar esta tecnologia.
 
-El Salvador se ha asociado con xAI para llevar el poder de la inteligencia artificial a cada escuela, cada maestro y cada estudiante. Salvora es tu guia para aprovechar esta oportunidad historica.
+En 2024, El Salvador se convirtio en el primer pais de America Latina en establecer una alianza nacional con xAI, la empresa de inteligencia artificial fundada por Elon Musk. Esta alianza tiene un objetivo claro: llevar el poder de la IA a cada escuela, cada maestro y cada estudiante del pais.
 
-No necesitas conocimientos previos de programacion o tecnologia avanzada. Solo necesitas curiosidad y ganas de aprender.
+Salvora nacio de esta alianza. Pero la tecnologia sola no basta. De nada sirve tener acceso a Grok, el asistente de IA de xAI, si no sabemos como usarlo de manera inteligente y responsable. Salvora existe para ensenarte exactamente eso.
+
+En este curso de introduccion, aprenderas:
+- Que es realmente la inteligencia artificial y como funciona
+- La diferencia entre la IA de las peliculas y la IA real
+- Como "piensa" una IA y por que puede equivocarse
+- Los limites de la IA y cuando confiar en ella
+- Como usar la IA para aprender mejor, no para hacer trampa
+- El papel especial de El Salvador en la revolucion de la IA
+
+No necesitas conocimientos previos de programacion o tecnologia avanzada. No necesitas una computadora costosa. Solo necesitas tres cosas: curiosidad, ganas de aprender, y la disposicion de cuestionar y pensar criticamente.
+
+Salvora comenzo como un programa piloto en escuelas de Apopa. Hoy, se esta expandiendo a todo el pais. Tu eres parte de esta primera generacion de salvadorenos que aprendera IA de manera formal en las escuelas. Eso es historico.
+
+Cuando termines este curso, no solo sabras que es la IA. Sabras como usarla para estudiar mejor, como detectar cuando te esta dando informacion incorrecta, y como explicarle a tu familia lo que aprendiste.
 
 Comencemos este viaje juntos.`,
 
-    // === Enhanced National-Scale Lesson Standard Content ===
     quickVersion: {
       bullets: [
-        "Salvora es la plataforma nacional de El Salvador para aprender sobre IA",
-        "La alianza con xAI trae herramientas de IA a todas las escuelas del pais",
-        "No necesitas conocimientos previos - solo curiosidad y ganas de aprender"
+        "Salvora es la plataforma nacional de El Salvador para aprender sobre IA de manera responsable",
+        "La alianza con xAI hace de El Salvador un lider en America Latina en educacion de IA",
+        "No necesitas conocimientos previos, solo curiosidad y ganas de aprender"
       ],
-      localExample: "En Apopa y todo El Salvador, maestros y estudiantes ya estan usando Salvora para mejorar el aprendizaje con IA.",
-      safePrompt: "Explicame que es la inteligencia artificial de manera simple, como si fuera un estudiante salvadoreno de secundaria."
+      localExample: "En escuelas de Apopa, estudiantes como tu ya usan Salvora para aprender con IA. Una estudiante de 8vo grado uso la IA para entender fracciones, y ahora ayuda a sus companeros.",
+      safePrompt: "Explicame que es la inteligencia artificial como si fuera un estudiante de secundaria en El Salvador. Usa ejemplos de mi vida diaria."
     },
     localContext: {
-      hook: "Sabias que El Salvador es pionero en America Latina en llevar IA a las escuelas publicas? La alianza con xAI busca que cada estudiante, desde Metapan hasta La Union, tenga acceso a estas herramientas del futuro.",
+      hook: "¿Sabias que El Salvador es el primer pais de America Latina en llevar IA a todas sus escuelas publicas? Mientras otros paises apenas discuten si deberian hacerlo, nosotros ya estamos aprendiendo.",
       department: "Apopa"
     },
     safePrompts: [{
       template: "Explicame [TEMA] como si fuera un estudiante de [GRADO] en El Salvador",
-      goodExample: "Explicame que es la inteligencia artificial como si fuera un estudiante de 8vo grado en El Salvador. Usa ejemplos de mi vida diaria.",
-      badExample: "Hazme un ensayo sobre IA para entregar en mi clase"
+      goodExample: "Explicame que es la inteligencia artificial como si fuera un estudiante de 8vo grado en El Salvador. Quiero entender lo basico antes de mi clase.",
+      badExample: "Hazme un ensayo completo sobre IA para entregar manana"
     }],
     enhancedPractice: [
-      { id: "ep-1", question: "Que es Salvora?", options: ["Una red social", "La plataforma nacional de alfabetizacion en IA de El Salvador", "Un juego educativo", "Una app de mensajeria"], correctAnswer: 1, explanation: "Salvora es la plataforma oficial de El Salvador para ensenar sobre inteligencia artificial.", feedback: "Correcto! Salvora es tu guia para aprender IA de manera segura y responsable.", hints: ["Piensa en el nombre: Salv-ora", "Es una plataforma educativa oficial"] },
-      { id: "ep-2", question: "Con que empresa se asocio El Salvador para llevar IA a las escuelas?", options: ["Google", "Microsoft", "xAI", "Apple"], correctAnswer: 2, explanation: "El Salvador se asocio con xAI, la empresa de Elon Musk.", feedback: "Exacto! xAI es la empresa que creo Grok.", hints: ["Es la empresa de Elon Musk", "Su asistente se llama Grok"] },
-      { id: "ep-3", question: "Que necesitas para empezar a aprender IA con Salvora?", options: ["Conocimientos de programacion", "Una computadora costosa", "Curiosidad y ganas de aprender", "Experiencia en tecnologia"], correctAnswer: 2, explanation: "Salvora esta disenada para todos, sin importar tu nivel tecnologico.", feedback: "Asi es! Lo mas importante es tu actitud de aprendizaje.", hints: ["Salvora es para todos", "No hay requisitos previos"] }
+      {
+        id: "bienvenida-1",
+        question: "¿Que es Salvora?",
+        options: [
+          "A) Una red social para jovenes",
+          "B) La plataforma nacional de alfabetizacion en IA de El Salvador",
+          "C) Un juego educativo de matematicas",
+          "D) Una aplicacion de mensajeria"
+        ],
+        correctAnswer: 1,
+        explanation: "Salvora es la plataforma oficial del gobierno de El Salvador, creada en alianza con xAI, para ensenar inteligencia artificial a maestros y estudiantes de todo el pais.",
+        feedback: "¡Correcto! Salvora es tu guia para aprender IA de manera segura y responsable.",
+        hints: ["Piensa en el nombre: Salv-ora (El Salvador + ahora)", "Es una iniciativa del gobierno en alianza con xAI"]
+      },
+      {
+        id: "bienvenida-2",
+        question: "¿Con que empresa se asocio El Salvador para la iniciativa de IA en escuelas?",
+        options: [
+          "A) Google",
+          "B) Microsoft",
+          "C) xAI",
+          "D) Apple"
+        ],
+        correctAnswer: 2,
+        explanation: "El Salvador establecio una alianza historica con xAI, la empresa de inteligencia artificial fundada por Elon Musk, creadora del asistente Grok.",
+        feedback: "¡Exacto! xAI es la empresa que creo Grok, el asistente de IA que usaras.",
+        hints: ["Es la empresa de Elon Musk", "Su asistente de IA se llama Grok"]
+      },
+      {
+        id: "bienvenida-3",
+        question: "¿Que necesitas para empezar a aprender IA con Salvora?",
+        options: [
+          "A) Conocimientos avanzados de programacion",
+          "B) Una computadora muy costosa",
+          "C) Curiosidad y ganas de aprender",
+          "D) Haber estudiado en el extranjero"
+        ],
+        correctAnswer: 2,
+        explanation: "Salvora esta disenada para todos los salvadorenos, sin importar su nivel tecnologico previo. Lo unico que necesitas es la actitud correcta.",
+        feedback: "¡Asi es! Lo mas importante es tu actitud de aprendizaje. Todo lo demas te lo ensenamos aqui.",
+        hints: ["Salvora es para todos, no solo para expertos", "No hay requisitos tecnicos previos"]
+      },
+      {
+        id: "bienvenida-4",
+        question: "¿Donde comenzo Salvora como programa piloto?",
+        options: [
+          "A) San Salvador Centro",
+          "B) Apopa",
+          "C) Santa Ana",
+          "D) San Miguel"
+        ],
+        correctAnswer: 1,
+        explanation: "Salvora comenzo en escuelas de Apopa antes de expandirse al resto del pais, permitiendo probar y mejorar el programa.",
+        feedback: "¡Correcto! Apopa fue la sede del programa piloto de Salvora.",
+        hints: ["Es un municipio del area metropolitana", "Empieza con 'A'"]
+      }
     ],
-    aiErrorTips: ["Si la IA da informacion sobre El Salvador que no reconoces, verifica con fuentes locales", "Las fechas y eventos recientes pueden no estar actualizados"],
-    responsibleAIReminder: { student: "La IA es tu herramienta de aprendizaje, no un atajo. Aprovechala para entender mejor.", teacher: "Modele el uso responsable de IA. Sus estudiantes aprenden de su ejemplo." },
-    whatsAppPayload: { summary: "Aprendi sobre Salvora, la plataforma de IA de El Salvador. Es gratis y para todos!", prompt: "Pregunta a la IA: Explicame que es la inteligencia artificial como si tuviera 12 anos", practiceQuestion: "Que es Salvora y por que es importante para El Salvador?" }
+    aiErrorTips: [
+      "Si la IA menciona datos sobre El Salvador que no reconoces, verifica con fuentes locales como periodicos salvadorenos",
+      "Las fechas de eventos recientes (2024-2025) pueden no estar actualizadas en la IA",
+      "La IA puede confundir El Salvador con otros paises centroamericanos - siempre verifica"
+    ],
+    responsibleAIReminder: {
+      student: "La IA es tu herramienta de aprendizaje, no un atajo para evitar pensar. Usala para entender mejor, no para copiar respuestas.",
+      teacher: "Modele el uso responsable de IA frente a sus estudiantes. Ellos aprenden mas de su ejemplo que de sus palabras."
+    },
+    whatsAppPayload: {
+      summary: "¡Empece el curso de IA en Salvora! Es la plataforma nacional de El Salvador para aprender inteligencia artificial. Es gratis y para todos.",
+      prompt: "Pregunta a la IA: Explicame que es la inteligencia artificial como si tuviera 14 anos y viviera en El Salvador",
+      practiceQuestion: "¿Por que crees que es importante que El Salvador este liderando en educacion de IA en America Latina?"
+    }
   },
 
-  "intro-1-definicion": {
-    transcript: `La Inteligencia Artificial, o IA, es la capacidad de las computadoras para realizar tareas que normalmente requieren inteligencia humana.
+  "intro-1-que-es-ia": {
+    transcript: `¿Que es la Inteligencia Artificial? Vamos a responder esta pregunta de manera clara y sin misterios.
 
-Esto incluye:
-- Entender el lenguaje natural (como tu y yo hablamos)
+La Inteligencia Artificial, o IA, es la capacidad de las computadoras para realizar tareas que normalmente requieren inteligencia humana. Pero espera, ¿que significa "inteligencia"? La inteligencia incluye cosas como:
+
+- Entender el lenguaje (como tu y yo hablamos)
 - Reconocer imagenes y rostros
-- Tomar decisiones basadas en datos
+- Resolver problemas
 - Aprender de la experiencia
+- Tomar decisiones basadas en informacion
 
-Piensa en como usas tu telefono: cuando escribes un mensaje y te sugiere palabras, eso es IA. Cuando Google Maps te dice la ruta mas rapida, eso es IA. Cuando Netflix te recomienda una pelicula, eso tambien es IA.
+Cuando una computadora puede hacer alguna de estas cosas, decimos que tiene "inteligencia artificial".
 
-La IA no es magia ni ciencia ficcion. Es matematicas y estadistica aplicadas de manera muy inteligente.`,
+Ahora, aqui viene algo importante: la IA que existe hoy NO piensa como tu y yo. No tiene conciencia, no tiene emociones, no tiene deseos ni suenos. La IA es muy buena haciendo calculos y encontrando patrones en enormes cantidades de datos, pero no "entiende" nada en el sentido humano.
 
-    // === Enhanced Content ===
+Piensa en como usas tu telefono todos los dias. Cuando escribes un mensaje de WhatsApp y el teclado te sugiere la siguiente palabra, eso es IA aprendiendo tus patrones de escritura. Cuando abres Waze o Google Maps y te dice la ruta mas rapida para llegar a tu destino, eso es IA analizando el trafico en tiempo real. Cuando Netflix o YouTube te recomiendan videos, eso es IA estudiando lo que te gusta ver.
+
+En San Salvador, cada vez que pasas por un banco y hay camaras de seguridad que detectan rostros, eso es IA. Cuando un agricultor recibe una alerta en su telefono sobre el clima que viene, eso es IA procesando datos meteorologicos.
+
+Entonces, ¿que NO es la IA?
+
+La IA NO es magia. No puede hacer milagros ni predecir el futuro con certeza. La IA NO es como los robots de las peliculas que quieren dominar el mundo. Eso es ciencia ficcion. La IA actual es una herramienta muy poderosa, pero sigue siendo solo una herramienta.
+
+En su forma mas simple, la IA es matematicas y estadistica aplicadas de manera muy inteligente. Son programas de computadora que han sido entrenados con millones de ejemplos para reconocer patrones y hacer predicciones.
+
+Por ejemplo, un programa de IA que reconoce gatos en fotos fue entrenado mirando millones de fotos de gatos. No "sabe" que es un gato. Solo sabe que cuando ve ciertos patrones de colores, formas y texturas, probablemente hay un gato en la imagen.
+
+Esto es crucial entenderlo: la IA funciona por probabilidades, no por certezas. Cuando la IA te dice algo, esta haciendo su mejor prediccion basada en patrones. Puede equivocarse, y de hecho se equivoca con frecuencia.
+
+Por eso, aunque la IA es increiblemente util, siempre debes pensar criticamente sobre lo que te dice. Eres tu quien tiene el poder de decidir si la respuesta tiene sentido o no.`,
+
     quickVersion: {
       bullets: [
-        "La IA es la capacidad de las computadoras para hacer tareas que requieren inteligencia",
-        "Ya usas IA todos los dias: sugerencias de texto, mapas, recomendaciones",
-        "No es magia - es matematicas y estadistica aplicadas inteligentemente"
+        "La IA es la capacidad de las computadoras para hacer tareas que requieren inteligencia humana",
+        "Ya usas IA todos los dias sin darte cuenta: teclado predictivo, mapas, recomendaciones de videos",
+        "La IA no es magia ni piensa como nosotros - es matematicas y patrones muy sofisticados"
       ],
-      localExample: "Cuando usas Waze para ir de San Salvador a Santa Ana y te sugiere la mejor ruta evitando trafico, eso es IA analizando datos en tiempo real.",
-      safePrompt: "Dame 3 ejemplos de como uso inteligencia artificial en mi vida diaria en El Salvador sin darme cuenta."
+      localExample: "Cuando usas Waze para ir de San Salvador a Santa Ana y te sugiere evitar el trafico de la rotonda del Arbol de Dios, eso es IA analizando miles de datos en tiempo real.",
+      safePrompt: "Dame 5 ejemplos de como uso inteligencia artificial en mi vida diaria en El Salvador sin darme cuenta."
     },
     localContext: {
-      hook: "Cada vez que un agricultor de Sonsonate recibe alertas del clima en su telefono, o cuando un banco salvadoreno detecta una transaccion sospechosa en tu cuenta, la IA esta trabajando para ayudarte.",
+      hook: "Cada vez que un agricultor de San Salvador recibe alertas del clima en su telefono, o cuando un banco salvadoreno detecta una transaccion sospechosa en tu cuenta, la IA esta trabajando. Esta en todas partes, solo que no la vemos.",
       department: "San Salvador"
     },
     safePrompts: [{
-      template: "Dame [NUMERO] ejemplos de IA en [CONTEXTO]",
-      goodExample: "Dame 5 ejemplos de como la inteligencia artificial se usa en la vida diaria de un estudiante salvadoreno",
-      badExample: "Escribe mi tarea sobre inteligencia artificial"
+      template: "Dame [NUMERO] ejemplos de IA en [CONTEXTO ESPECIFICO]",
+      goodExample: "Dame 5 ejemplos de como la inteligencia artificial se usa en la vida diaria de un estudiante de secundaria en El Salvador. Explica cada ejemplo de forma simple.",
+      badExample: "Escribeme toda la tarea sobre inteligencia artificial para entregar manana"
     }],
     enhancedPractice: [
-      { id: "def-1", question: "Cual de las siguientes NO es una capacidad de la IA?", options: ["Entender lenguaje natural", "Tener emociones humanas reales", "Reconocer imagenes", "Aprender de datos"], correctAnswer: 1, explanation: "La IA no tiene emociones reales, solo simula respuestas basadas en patrones.", feedback: "Correcto! La IA procesa informacion pero no siente como los humanos.", hints: ["Piensa en que hace diferente a los humanos", "La IA aprende de datos, no de experiencias emocionales"] },
-      { id: "def-2", question: "Que es la IA fundamentalmente?", options: ["Magia tecnologica", "Ciencia ficcion", "Matematicas y estadistica aplicadas", "Robots con conciencia"], correctAnswer: 2, explanation: "La IA se basa en algoritmos matematicos y analisis estadistico.", feedback: "Exacto! Aunque parece magia, son calculos muy sofisticados.", hints: ["Es algo que los cientificos pueden explicar", "Se basa en numeros y datos"] },
-      { id: "def-3", question: "Cual es un ejemplo de IA en tu telefono?", options: ["La pantalla tactil", "Las sugerencias de palabras al escribir", "El boton de encendido", "La bateria"], correctAnswer: 1, explanation: "El teclado predictivo usa IA para aprender tus patrones.", feedback: "Asi es! El teclado aprende como escribes para ayudarte.", hints: ["Piensa en algo que aprende de ti", "Algo que te sugiere cosas"] }
+      {
+        id: "quees-1",
+        question: "¿Cual de las siguientes NO es una capacidad de la IA actual?",
+        options: [
+          "A) Entender y procesar lenguaje humano",
+          "B) Tener emociones y conciencia propia",
+          "C) Reconocer rostros en imagenes",
+          "D) Aprender patrones de datos"
+        ],
+        correctAnswer: 1,
+        explanation: "La IA actual no tiene emociones ni conciencia real. Solo procesa informacion y encuentra patrones, pero no 'siente' ni 'piensa' como los humanos.",
+        feedback: "¡Correcto! Esta es una distincion crucial. La IA es muy poderosa pero no tiene vida interior como nosotros.",
+        hints: ["Piensa en que hace diferente a los humanos de las maquinas", "¿Puede una calculadora sentir tristeza?"]
+      },
+      {
+        id: "quees-2",
+        question: "¿Que es fundamentalmente la inteligencia artificial?",
+        options: [
+          "A) Magia tecnologica que nadie entiende",
+          "B) Robots como en las peliculas de ciencia ficcion",
+          "C) Matematicas y estadistica aplicadas de manera sofisticada",
+          "D) Computadoras con conciencia propia"
+        ],
+        correctAnswer: 2,
+        explanation: "La IA se basa en algoritmos matematicos y analisis estadistico. No es magia ni ciencia ficcion - es matematicas muy avanzadas.",
+        feedback: "¡Exacto! Aunque parece magia, todo tiene una explicacion matematica. Eso es lo bonito de la ciencia.",
+        hints: ["Es algo que los cientificos pueden explicar paso a paso", "Se basa en numeros, datos y calculos"]
+      },
+      {
+        id: "quees-3",
+        question: "¿Cual es un ejemplo de IA en tu telefono?",
+        options: [
+          "A) La pantalla tactil",
+          "B) Las sugerencias de palabras al escribir mensajes",
+          "C) El boton de encendido",
+          "D) El cargador de bateria"
+        ],
+        correctAnswer: 1,
+        explanation: "El teclado predictivo usa IA para aprender tus patrones de escritura y sugerirte palabras. Entre mas lo usas, mejor te conoce.",
+        feedback: "¡Asi es! El teclado literalmente aprende de ti cada vez que escribes.",
+        hints: ["Piensa en algo que parece 'aprender' de ti", "Algo que te da sugerencias personalizadas"]
+      },
+      {
+        id: "quees-4",
+        question: "¿Por que es importante saber que la IA funciona por probabilidades?",
+        options: [
+          "A) Porque siempre tiene la razon",
+          "B) Porque puede equivocarse y debemos pensar criticamente",
+          "C) Porque no sirve para nada",
+          "D) Porque solo funciona los lunes"
+        ],
+        correctAnswer: 1,
+        explanation: "La IA hace predicciones basadas en patrones, no certezas absolutas. Por eso siempre debemos verificar y pensar criticamente sobre sus respuestas.",
+        feedback: "¡Perfecto! Tu capacidad de pensar criticamente es tu superpoder frente a la IA.",
+        hints: ["La IA puede equivocarse", "Tu criterio humano sigue siendo importante"]
+      }
     ],
-    aiErrorTips: ["La IA puede confundir contextos culturales salvadorenos con otros paises", "Verifica siempre los datos especificos sobre El Salvador"],
-    responsibleAIReminder: { student: "Entender como funciona la IA te ayuda a usarla mejor y a no dejarte enganar.", teacher: "Ensene a sus estudiantes a cuestionar y verificar las respuestas de la IA." },
-    whatsAppPayload: { summary: "Aprendi que la IA ya esta en mi vida diaria: telefono, mapas, y mas. No es magia, es matematicas!", prompt: "Pregunta: Dame ejemplos de IA que uso todos los dias sin darme cuenta", practiceQuestion: "Que ejemplos de IA puedes encontrar en tu telefono?" }
+    aiErrorTips: [
+      "La IA puede confundir El Salvador con otros paises centroamericanos - siempre verifica datos especificos",
+      "Cuando la IA dice 'siempre' o 'nunca', desconfia - la realidad tiene mas matices",
+      "Los ejemplos que da la IA pueden no aplicar al contexto salvadoreno - pide ejemplos locales"
+    ],
+    responsibleAIReminder: {
+      student: "Entender que la IA no es perfecta te hace mas inteligente que alguien que la cree ciegamente. Siempre cuestiona.",
+      teacher: "Ensene a sus estudiantes que la IA es una herramienta poderosa pero falible. El pensamiento critico es la verdadera habilidad del siglo XXI."
+    },
+    whatsAppPayload: {
+      summary: "Hoy aprendi que la IA ya esta en mi vida diaria: el teclado del telefono, Waze, Netflix. No es magia, es matematicas muy avanzadas.",
+      prompt: "Pregunta a la IA: Dame 5 ejemplos de IA que uso todos los dias sin darme cuenta",
+      practiceQuestion: "¿Cuantos ejemplos de IA puedes encontrar en tu telefono ahora mismo?"
+    }
   },
 
-  "intro-1-el-salvador": {
-    content: `# IA en El Salvador
+  "intro-1-historia": {
+    content: `# Historia de la IA: De Ciencia Ficcion a Realidad
 
-El Salvador esta dando pasos importantes en la adopcion de inteligencia artificial. Aqui algunos ejemplos:
+## Los Origenes: ¿Pueden las Maquinas Pensar?
 
-## La Alianza con xAI
+La historia de la inteligencia artificial comienza con una pregunta fascinante. En 1950, el matematico britanico Alan Turing publico un articulo titulado "Computing Machinery and Intelligence" donde preguntaba: ¿Pueden las maquinas pensar?
 
-En 2024, El Salvador anuncio una alianza estrategica con xAI, la empresa de inteligencia artificial fundada por Elon Musk. Esta alianza busca:
+Turing no solo hizo la pregunta, sino que propuso una forma de responderla: el famoso "Test de Turing". Segun este test, si una maquina puede conversar con un humano y el humano no puede distinguir si habla con una maquina o con otra persona, entonces la maquina es "inteligente".
 
-- Llevar asistentes de IA como Grok a escuelas publicas
-- Capacitar a maestros en el uso de herramientas de IA
-- Preparar a los estudiantes para la economia del futuro
+En aquella epoca, las computadoras ocupaban habitaciones enteras y apenas podian hacer calculos basicos. La idea de una maquina que pudiera conversar parecia pura ciencia ficcion.
 
-## Por que es Importante
+## Los Anos 50 y 60: El Nacimiento Oficial
 
-El Salvador tiene la oportunidad de ser lider en America Latina en alfabetizacion de IA. Mientras otros paises apenas comienzan a discutir el tema, nosotros ya estamos actuando.
+El termino "Inteligencia Artificial" nacio oficialmente en 1956, en una conferencia en Dartmouth College, Estados Unidos. Un grupo de cientificos, incluyendo a John McCarthy, Marvin Minsky y Claude Shannon, se reunieron para discutir como hacer que las maquinas "piensen".
 
-## Salvora: El Complemento Humano
+El optimismo era enorme. Los investigadores predijeron que en 20 anos tendriamos maquinas tan inteligentes como los humanos. Algunos incluso apostaron que seria antes.
 
-xAI proporciona la tecnologia (Grok), pero la tecnologia sola no es suficiente. Salvora existe para:
+Crearon los primeros programas que podian:
+- Resolver problemas de logica
+- Jugar ajedrez (aunque muy mal)
+- Demostrar teoremas matematicos simples
 
-1. **Ensenar** a maestros y estudiantes como usar IA de manera efectiva
-2. **Contextualizar** el uso de IA para la realidad salvadorena
-3. **Garantizar** que el beneficio llegue a todas las comunidades, incluso las rurales
+## Los "Inviernos" de la IA: 1970s-1980s
 
-## Reflexion
+Pero la realidad fue mas dificil de lo esperado. Las computadoras de la epoca no tenian suficiente poder de calculo. Los programas eran lentos y limitados. El financiamiento se redujo drasticamente.
 
-La IA no reemplazara a los maestros ni a los estudiantes. Es una herramienta poderosa que, bien usada, puede potenciar el aprendizaje y abrir nuevas oportunidades para todos los salvadorenos.`,
+A estos periodos de decepcion y falta de avances les llamamos "Inviernos de la IA". Hubo dos grandes inviernos: uno en los anos 70 y otro a finales de los 80.
 
-    // === Enhanced Content ===
+Durante estos inviernos, mucha gente perdio la fe en la IA. Parecia que las predicciones optimistas nunca se cumplirian.
+
+## El Renacimiento: 1990s-2000s
+
+Poco a poco, las cosas empezaron a cambiar. Las computadoras se volvieron mas poderosas y mas baratas. Internet comenzo a generar enormes cantidades de datos.
+
+En 1997, algo historico sucedio: la computadora Deep Blue de IBM derroto al campeon mundial de ajedrez, Garry Kasparov. Era la primera vez que una maquina vencia al mejor jugador humano del mundo.
+
+En los 2000s, Google lanzo su buscador que usaba IA para ordenar resultados. Apple lanzo Siri en 2011, el primer asistente de voz popular. La IA empezo a entrar en nuestras vidas sin que nos dieramos cuenta.
+
+## La Revolucion del Deep Learning: 2010s
+
+El verdadero punto de inflexion llego en 2012, cuando un sistema de "deep learning" (aprendizaje profundo) gano una competencia de reconocimiento de imagenes por un margen enorme.
+
+El deep learning es una tecnica inspirada en como funciona el cerebro humano. Usa "redes neuronales" artificiales con muchas capas que pueden aprender patrones complejos.
+
+Despues de 2012, los avances fueron explosivos:
+- 2014: Las IAs empiezan a describir imagenes con palabras
+- 2016: AlphaGo de Google derrota al campeon mundial de Go, un juego considerado imposible para las maquinas
+- 2017: Se inventa el "Transformer", la arquitectura detras de ChatGPT y Grok
+
+## 2020s: La Era de los Modelos de Lenguaje
+
+En 2022, OpenAI lanzo ChatGPT y el mundo cambio. Por primera vez, millones de personas podian conversar con una IA que parecia genuinamente inteligente.
+
+En 2023, Elon Musk fundo xAI y lanzo Grok. Otras empresas como Google (Gemini), Anthropic (Claude) y Meta (Llama) lanzaron sus propios modelos.
+
+Y aqui estamos: en 2024, El Salvador se convierte en el primer pais de America Latina en llevar la IA a todas sus escuelas publicas.
+
+## ¿Que Aprendemos de Esta Historia?
+
+1. **La paciencia vale la pena**: La IA tardo 70 anos en cumplir algunas de sus promesas originales
+2. **Los avances no son lineales**: Hubo inviernos y primaveras, decepciones y sorpresas
+3. **El contexto importa**: La IA solo despego cuando hubo suficientes datos y poder de computo
+4. **El futuro es ahora**: Tu generacion es la primera en crecer con IA avanzada disponible
+
+## El Salvador en la Historia de la IA
+
+Como estudiante salvadoreno aprendiendo sobre IA en 2024-2025, eres parte de esta historia. El Salvador no solo adopta tecnologia del primer mundo - esta escribiendo su propio capitulo en la historia de la IA educativa.`,
+
     quickVersion: {
       bullets: [
-        "El Salvador se asocio con xAI para llevar IA a escuelas publicas",
-        "Salvora contextualiza la IA para la realidad salvadorena",
-        "La IA es herramienta, no reemplazo de maestros o estudiantes"
+        "La IA nacio oficialmente en 1956, aunque Turing pregunto si las maquinas pueden pensar en 1950",
+        "Hubo 'inviernos' de decepcion, pero los avances en datos y computadoras trajeron el renacimiento",
+        "ChatGPT (2022) y Grok (2023) marcaron la era actual - y El Salvador es pionero en educacion IA"
       ],
-      localExample: "Desde escuelas en Chalatenango hasta La Union, Salvora llegara a todas las comunidades, incluyendo zonas rurales donde antes no habia acceso a tecnologia avanzada.",
-      safePrompt: "Que oportunidades puede traer la inteligencia artificial a los jovenes de El Salvador en los proximos anos?"
+      localExample: "Asi como el cafe de Santa Ana cambio la economia salvadorena en el siglo XIX, la IA podria transformar las oportunidades de los jovenes salvadorenos en el siglo XXI.",
+      safePrompt: "Cuentame la historia de la inteligencia artificial como si fuera un cuento, desde 1950 hasta hoy."
     },
     localContext: {
-      hook: "El Salvador es el primer pais de America Latina en tener una alianza nacional con una empresa de IA para educacion. Mientras otros paises debaten, nosotros ya estamos actuando.",
+      hook: "Santa Ana fue cuna de la industria cafetalera que transformo El Salvador. Hoy, estudiantes de todo el pais pueden ser parte de otra transformacion: la era de la inteligencia artificial.",
+      department: "Santa Ana"
+    },
+    safePrompts: [{
+      template: "Cuentame la historia de [TECNOLOGIA] de manera simple",
+      goodExample: "Cuentame la historia de la inteligencia artificial como si fuera una historia de aventuras, con sus momentos dificiles y sus triunfos. Explicalo para alguien de 15 anos.",
+      badExample: "Escribeme un ensayo academico sobre la historia de la IA para copiar"
+    }],
+    enhancedPractice: [
+      {
+        id: "historia-1",
+        question: "¿Quien pregunto por primera vez si las maquinas pueden pensar?",
+        options: ["A) Steve Jobs", "B) Alan Turing", "C) Elon Musk", "D) Bill Gates"],
+        correctAnswer: 1,
+        explanation: "Alan Turing, matematico britanico, publico su famoso articulo en 1950.",
+        feedback: "¡Correcto! Turing es considerado el padre de la computacion y de la IA.",
+        hints: ["Fue un matematico britanico", "Su nombre se usa para un famoso 'test'"]
+      },
+      {
+        id: "historia-2",
+        question: "¿Que son los 'inviernos de la IA'?",
+        options: ["A) Epocas frias en laboratorios", "B) Periodos de decepcion y falta de avances", "C) Festivales de ciencia ficcion", "D) Vacaciones de investigadores"],
+        correctAnswer: 1,
+        explanation: "Los 'inviernos de la IA' fueron periodos cuando los avances se estancaron y el financiamiento se redujo.",
+        feedback: "¡Exacto! Pero despues de cada invierno vino una primavera de nuevos avances.",
+        hints: ["Es una metafora sobre periodos dificiles", "Pasaron en los anos 70 y 80"]
+      },
+      {
+        id: "historia-3",
+        question: "¿Que evento de 1997 fue historico para la IA?",
+        options: ["A) Se invento el celular", "B) Deep Blue derroto al campeon de ajedrez", "C) Se lanzo el iPhone", "D) Nacio Internet"],
+        correctAnswer: 1,
+        explanation: "Deep Blue de IBM vencio a Garry Kasparov, demostrando el potencial de la IA.",
+        feedback: "¡Asi es! Fue un momento simbolico para la IA.",
+        hints: ["Tiene que ver con un juego de estrategia", "Una computadora vencio a un campeon"]
+      },
+      {
+        id: "historia-4",
+        question: "¿Por que es significativo que El Salvador lleve IA a las escuelas en 2024?",
+        options: ["A) Porque es el pais mas grande", "B) Porque es pionero en America Latina", "C) Porque invento la IA", "D) Porque tiene la mejor comida"],
+        correctAnswer: 1,
+        explanation: "El Salvador es el primer pais de America Latina en implementar un programa nacional de educacion en IA.",
+        feedback: "¡Perfecto! Eres parte de esta historia.",
+        hints: ["Es sobre ser el primero en algo", "Tiene que ver con educacion en la region"]
+      }
+    ],
+    aiErrorTips: [
+      "Las fechas historicas de la IA pueden variar segun la fuente",
+      "La IA puede no mencionar desarrollos muy recientes (2024-2025)",
+      "Algunos 'hechos' historicos son debatidos por expertos"
+    ],
+    responsibleAIReminder: {
+      student: "Conocer la historia te ayuda a tener expectativas realistas sobre la IA.",
+      teacher: "Use la historia de la IA para ensenar que las promesas tecnologicas no siempre se cumplen rapido."
+    },
+    whatsAppPayload: {
+      summary: "¡La IA tiene 70 anos de historia! Desde Turing hasta ChatGPT y Grok. Y El Salvador es pionero.",
+      prompt: "Pregunta: Cuentame la historia de la IA como un cuento de aventuras",
+      practiceQuestion: "¿Por que crees que hubo 'inviernos' en la historia de la IA?"
+    }
+  },
+
+  "intro-1-tipos": {
+    transcript: `Hoy vamos a hablar sobre los diferentes tipos de inteligencia artificial. Esto es importante porque te ayudara a entender que puede y que NO puede hacer la IA que usamos hoy.
+
+Imagina que clasificamos la inteligencia artificial en tres niveles, como si fueran tres escalones de una escalera.
+
+PRIMER ESCALON: IA Estrecha o IA Debil (ANI)
+
+La IA Estrecha, tambien llamada IA Debil o ANI (Artificial Narrow Intelligence), es la UNICA que existe hoy. Si, leiste bien. Toda la IA que usas - ChatGPT, Grok, Siri, el algoritmo de TikTok - es IA Estrecha.
+
+¿Por que se llama "estrecha"? Porque es muy buena haciendo UNA cosa especifica, pero no puede hacer otras cosas. Veamos ejemplos:
+
+- Grok es excelente respondiendo preguntas y conversando, pero no puede conducir un carro
+- El algoritmo de YouTube es genial recomendando videos, pero no puede escribir un poema
+- AlphaGo puede ganarle al mejor jugador de Go del mundo, pero no sabe jugar ajedrez
+
+Cada IA Estrecha es como un especialista: un experto en su area, pero inutil fuera de ella. Es como un chef de pupusas increible que no sabe hacer pan frances.
+
+Pensalo asi: en La Libertad hay surfistas profesionales que dominan las olas, pero eso no significa que sepan escalar volcanes. Son especialistas del surf.
+
+SEGUNDO ESCALON: IA General o IA Fuerte (AGI)
+
+La IA General, o AGI (Artificial General Intelligence), seria una IA que puede hacer CUALQUIER tarea intelectual que un humano puede hacer. No solo una cosa, sino todo.
+
+Una AGI podria:
+- Conversar sobre cualquier tema
+- Aprender cualquier habilidad nueva
+- Resolver problemas que nunca ha visto antes
+- Entender emociones y contexto
+
+Aqui viene lo importante: LA AGI NO EXISTE TODAVIA.
+
+Mucha gente cree que ChatGPT o Grok son AGI porque parecen muy inteligentes. Pero no lo son. Son IA Estrecha muy avanzada, especializada en lenguaje.
+
+TERCER ESCALON: Super Inteligencia Artificial (ASI)
+
+La Super Inteligencia Artificial, o ASI (Artificial Super Intelligence), seria una IA mas inteligente que todos los humanos en todas las areas. No solo igual de inteligente, sino SUPERIOR.
+
+¿Existe la ASI? No. ¿Existira? Nadie sabe. Es completamente hipotetica, como los viajes en el tiempo.
+
+Cuando ves peliculas con robots superinteligentes que quieren dominar el mundo, estan hablando de ASI. Eso es ciencia ficcion, no realidad.
+
+POR QUE IMPORTA ESTA CLASIFICACION
+
+Entender estos niveles te protege de dos errores comunes:
+
+ERROR 1: Subestimar la IA - pensar que es solo un juguete
+ERROR 2: Sobrestimar la IA - pensar que puede hacer todo
+
+La verdad esta en el medio: la IA actual es una herramienta poderosa pero limitada.
+
+RESUMEN
+
+- IA Estrecha (ANI): Existe hoy. Especialista en una tarea. Grok, ChatGPT, Siri.
+- IA General (AGI): No existe. Haria cualquier tarea humana. Futuro incierto.
+- Super IA (ASI): No existe. Superior a humanos en todo. Ciencia ficcion por ahora.`,
+
+    quickVersion: {
+      bullets: [
+        "IA Estrecha (ANI): La unica que existe hoy. Especialista en una cosa (Grok, ChatGPT)",
+        "IA General (AGI): No existe. Haria todo lo que un humano puede hacer",
+        "Super IA (ASI): No existe. Superaria a humanos en todo. Ciencia ficcion"
+      ],
+      localExample: "La IA Estrecha es como un surfista profesional de La Libertad: domina las olas, pero eso no significa que sepa escalar volcanes.",
+      safePrompt: "Explicame la diferencia entre IA Estrecha, IA General y Super IA con ejemplos simples."
+    },
+    localContext: {
+      hook: "En las playas de La Libertad, los mejores surfistas dominan las olas. Pero un surfista experto no es automaticamente un buen futbolista. Asi es la IA de hoy: especialista en una cosa, no en todo.",
       department: "La Libertad"
     },
     safePrompts: [{
-      template: "Como puede la IA ayudar a [SECTOR] en El Salvador?",
-      goodExample: "Como puede la inteligencia artificial ayudar a mejorar la educacion publica en El Salvador? Dame ejemplos concretos.",
-      badExample: "Escribeme un discurso sobre IA en El Salvador para mi tarea"
+      template: "Explicame [CONCEPTO] usando analogias con [CONTEXTO]",
+      goodExample: "Explicame los tres tipos de inteligencia artificial usando analogias con deportes salvadorenos.",
+      badExample: "Dime si la IA va a dominar el mundo"
     }],
     enhancedPractice: [
-      { id: "sv-1", question: "Que busca la alianza entre El Salvador y xAI?", options: ["Vender computadoras", "Llevar IA a escuelas publicas y capacitar maestros", "Reemplazar a los maestros", "Solo beneficiar a escuelas privadas"], correctAnswer: 1, explanation: "La alianza busca democratizar el acceso a la IA en la educacion publica.", feedback: "Exacto! El objetivo es que todos tengan acceso, no solo algunos.", hints: ["Es para escuelas publicas", "Incluye capacitacion de maestros"] },
-      { id: "sv-2", question: "Que hace Salvora que xAI no puede hacer sola?", options: ["Proporcionar la tecnologia", "Contextualizar para la realidad salvadorena", "Crear robots", "Vender servicios"], correctAnswer: 1, explanation: "Salvora adapta y contextualiza la IA para El Salvador.", feedback: "Correcto! La tecnologia necesita contexto local para ser util.", hints: ["Piensa en lo que hace diferente a Salvora", "Es sobre adaptar para El Salvador"] },
-      { id: "sv-3", question: "La IA reemplazara a los maestros en El Salvador?", options: ["Si, completamente", "No, es una herramienta que complementa", "Solo en algunas escuelas", "Nadie sabe"], correctAnswer: 1, explanation: "La IA es una herramienta que potencia, no reemplaza.", feedback: "Asi es! Los maestros siguen siendo esenciales.", hints: ["La IA es una herramienta", "Los humanos siguen siendo importantes"] }
+      {
+        id: "tipos-1",
+        question: "¿Que tipo de IA es Grok?",
+        options: ["A) Super Inteligencia", "B) IA General", "C) IA Estrecha", "D) No es IA"],
+        correctAnswer: 2,
+        explanation: "Grok es IA Estrecha. Es muy bueno en conversacion pero no puede hacer otras tareas.",
+        feedback: "¡Correcto! Aunque Grok parece muy inteligente, es IA Estrecha.",
+        hints: ["Piensa en que tipo de IA existe HOY", "¿Puede Grok hacer CUALQUIER cosa?"]
+      },
+      {
+        id: "tipos-2",
+        question: "¿Cual es la caracteristica principal de la IA Estrecha?",
+        options: ["A) Puede hacer cualquier tarea", "B) Es mas inteligente que humanos", "C) Es muy buena en UNA tarea especifica", "D) Tiene emociones"],
+        correctAnswer: 2,
+        explanation: "La IA Estrecha es especialista: excelente en su area, limitada fuera de ella.",
+        feedback: "¡Exacto! La especializacion es la clave de la IA Estrecha.",
+        hints: ["'Estrecha' significa limitada en alcance", "Piensa en un especialista"]
+      },
+      {
+        id: "tipos-3",
+        question: "¿Existe actualmente la IA General (AGI)?",
+        options: ["A) Si, ChatGPT es AGI", "B) Si, Grok es AGI", "C) No, todavia no existe", "D) Si, pero es secreta"],
+        correctAnswer: 2,
+        explanation: "La AGI no existe todavia. ChatGPT y Grok son IA Estrecha avanzada.",
+        feedback: "¡Correcto! Es importante no confundir IA avanzada con AGI.",
+        hints: ["¿Puede ChatGPT hacer TODO lo que hace un humano?", "La AGI es un objetivo futuro"]
+      },
+      {
+        id: "tipos-4",
+        question: "¿Por que es importante conocer los tipos de IA?",
+        options: ["A) Para impresionar amigos", "B) Para no subestimar ni sobrestimar la IA", "C) Para pasar examenes", "D) No es importante"],
+        correctAnswer: 1,
+        explanation: "Conocer los tipos te ayuda a tener expectativas realistas sobre la IA.",
+        feedback: "¡Perfecto! El conocimiento te da poder para usar la IA inteligentemente.",
+        hints: ["Piensa en evitar errores de percepcion", "Ni muy muy, ni tan tan"]
+      }
     ],
-    aiErrorTips: ["La IA puede no tener informacion actualizada sobre proyectos recientes en El Salvador", "Verifica datos sobre la alianza xAI con fuentes oficiales del gobierno"],
-    responsibleAIReminder: { student: "Eres parte de la primera generacion salvadorena en aprender IA formalmente. Usala con responsabilidad.", teacher: "Usted esta formando a los ciudadanos digitales del futuro de El Salvador." },
-    whatsAppPayload: { summary: "El Salvador es lider en IA educativa en America Latina! La alianza con xAI nos pone adelante.", prompt: "Pregunta: Como puede la IA ayudar a los estudiantes salvadorenos?", practiceQuestion: "Por que es importante que El Salvador este liderando en IA educativa?" }
-  },
-
-  "intro-1-practica": {
-    practiceQuestions: [
-      {
-        id: "q1-1",
-        question: "Cual de las siguientes es una definicion correcta de Inteligencia Artificial?",
-        options: [
-          "Un robot con forma humana",
-          "La capacidad de las computadoras para realizar tareas que normalmente requieren inteligencia humana",
-          "Un programa que siempre tiene la razon",
-          "Una tecnologia que solo existe en peliculas"
-        ],
-        correctAnswer: 1,
-        explanation: "La IA se refiere a sistemas computacionales que pueden realizar tareas cognitivas como aprender, razonar y resolver problemas."
-      },
-      {
-        id: "q1-2",
-        question: "Cual de estos es un ejemplo de IA en tu vida diaria?",
-        options: [
-          "Un libro de texto",
-          "Las sugerencias de palabras cuando escribes en tu telefono",
-          "Una calculadora basica",
-          "Un reloj de pared"
-        ],
-        correctAnswer: 1,
-        explanation: "El teclado predictivo usa IA para aprender tus patrones de escritura y sugerir palabras."
-      },
-      {
-        id: "q1-3",
-        question: "Por que es importante la alianza entre El Salvador y xAI?",
-        options: [
-          "Solo beneficia a las escuelas privadas",
-          "Permite llevar herramientas de IA a escuelas publicas y capacitar a maestros",
-          "Reemplazara a todos los maestros con robots",
-          "Es solo un proyecto de prueba sin impacto real"
-        ],
-        correctAnswer: 1,
-        explanation: "La alianza busca democratizar el acceso a la IA en la educacion publica salvadorena."
-      },
+    aiErrorTips: [
+      "La IA puede exagerar sus capacidades - no creas si dice que 'puede hacer todo'",
+      "Algunas noticias confunden IA Estrecha con AGI - verifica las fuentes",
+      "Las predicciones sobre AGI varian mucho - nadie sabe con certeza"
     ],
+    responsibleAIReminder: {
+      student: "Saber que la IA es 'estrecha' te ayuda a usarla mejor. Aprovecha lo que si hace bien.",
+      teacher: "Ensenar la diferencia entre ANI, AGI y ASI previene el miedo exagerado y la confianza ciega."
+    },
+    whatsAppPayload: {
+      summary: "Hay 3 tipos de IA: Estrecha (la unica que existe, como Grok), General (no existe), y Super (ciencia ficcion).",
+      prompt: "Pregunta: Explicame los tres tipos de IA con ejemplos simples",
+      practiceQuestion: "¿Por que es importante saber que Grok es IA Estrecha?"
+    }
   },
 
-  // Unit 2: Como funciona Grok?
-  "intro-2-grok": {
-    transcript: `Grok es el asistente de inteligencia artificial desarrollado por xAI, la empresa de Elon Musk.
-
-A diferencia de otros asistentes, Grok tiene algunas caracteristicas especiales:
-- Tiene acceso a informacion en tiempo real
-- Puede responder preguntas con un toque de humor
-- Esta disenado para ser util en contextos educativos
-
-En El Salvador, Grok sera una herramienta clave para maestros y estudiantes. Los maestros podran usarlo para:
-- Preparar planes de leccion
-- Crear cuestionarios y evaluaciones
-- Obtener ideas para actividades en clase
-
-Los estudiantes podran usarlo para:
-- Entender conceptos dificiles
-- Practicar problemas de matematicas
-- Mejorar su comprension lectora
-
-Pero recuerda: Grok es una herramienta, no un reemplazo del aprendizaje. Tu cerebro sigue siendo lo mas importante.`,
-  },
+  // =====================================================
+  // UNIT 2: COMO FUNCIONA LA IA (Lessons 5-7)
+  // =====================================================
 
   "intro-2-modelos": {
-    content: `# Modelos de Lenguaje: Como "Piensa" la IA
+    transcript: `Hoy vamos a descubrir como "piensa" la inteligencia artificial. Voy a explicarte los modelos de lenguaje de manera que realmente los entiendas.
 
-## Que es un Modelo de Lenguaje?
+¿Que es un Modelo de Lenguaje?
 
-Un modelo de lenguaje es un programa de computadora que ha "leido" millones de textos y ha aprendido patrones del lenguaje. Cuando le haces una pregunta, usa esos patrones para generar una respuesta.
+Un modelo de lenguaje es el cerebro de asistentes como Grok, ChatGPT o Claude. Es un programa de computadora que ha "leido" millones de textos - libros, articulos, conversaciones, paginas web - y ha aprendido patrones del lenguaje humano.
 
-## Como Funciona (Version Simple)
+Cuando le haces una pregunta, el modelo no busca la respuesta en una base de datos. En vez de eso, predice cual deberia ser la siguiente palabra, luego la siguiente, y la siguiente, hasta formar una respuesta completa.
 
-Imagina que tienes un amigo que ha leido todos los libros del mundo. Cuando le preguntas algo, no busca la respuesta exacta en un libro, sino que usa todo lo que ha leido para formular una respuesta coherente.
+Imagina esto: es como un estudiante que ha leido todos los libros de la biblioteca de El Salvador. No memorizo cada oracion, pero aprendio como se estructura el espanol, como se conectan las ideas, que palabras suelen ir juntas.
 
-Los modelos de lenguaje funcionan de manera similar:
+Cuando le preguntas algo, no esta "pensando" como tu o yo. Esta haciendo un calculo muy complejo de probabilidades: "Despues de esta palabra, ¿cual es la palabra mas probable que deberia seguir?"
 
-1. **Entrenamiento**: El modelo "lee" enormes cantidades de texto
-2. **Patrones**: Aprende como las palabras se relacionan entre si
-3. **Generacion**: Cuando preguntas algo, predice palabra por palabra cual deberia ser la siguiente
+Como Funciona: Una Analogia
 
-## Limitaciones Importantes
+Imagina que estas jugando un juego donde tienes que adivinar la siguiente palabra de una oracion. Por ejemplo:
 
-Los modelos de lenguaje:
-- **No "saben" cosas** como tu y yo. Predicen respuestas basadas en patrones.
-- **Pueden cometer errores** especialmente con datos muy recientes o muy especificos.
-- **No tienen memoria a largo plazo** entre conversaciones.
+"El estudiante abrio su..." - ¿Que palabra sigue?
 
-## Por que Esto Importa
+Probablemente dijiste "libro", "cuaderno", o "mochila". ¿Como lo supiste? Porque has leido y escuchado muchas oraciones similares. Tu cerebro reconoce el patron.
 
-Entender como funciona la IA te ayuda a usarla mejor. Cuando sabes que la IA predice respuestas basadas en patrones, entiendes por que:
-- Es importante verificar informacion importante
-- Las preguntas claras dan mejores respuestas
-- A veces la IA puede estar equivocada
+Los modelos de lenguaje hacen exactamente esto, pero a una escala gigantesca. Han visto billones de oraciones y pueden predecir patrones con increible precision.
 
-## Actividad de Reflexion
+¿Por Que Esto Es Importante Entenderlo?
 
-Piensa en esto: Si un modelo de lenguaje ha sido entrenado principalmente con textos en ingles, que crees que pasaria cuando le preguntas algo muy especifico sobre El Salvador?`,
+Entender que la IA predice palabras, no "sabe" cosas, te ayuda a usarla mejor:
+
+1. La IA puede sonar muy segura pero estar equivocada. Como solo predice patrones, puede generar respuestas que suenan correctas pero no lo son.
+
+2. La IA funciona mejor con contexto. Si le das mas informacion, tiene mas patrones para trabajar y da mejores respuestas.
+
+3. La IA refleja lo que "leyo". Si la mayoria de sus textos de entrenamiento son en ingles o de Estados Unidos, puede no saber mucho sobre El Salvador.
+
+4. La IA no tiene memoria entre conversaciones. Cada chat nuevo empieza desde cero porque no "recuerda" como una persona.
+
+Un ejemplo practico de Sonsonate: Si le preguntas a la IA "¿Cual es el mejor lugar para comer mariscos?" sin especificar donde estas, puede recomendarte restaurantes de Miami. Pero si dices "¿Cual es el mejor lugar para comer mariscos frescos en Sonsonate, cerca del puerto de Acajutla?", la respuesta sera mucho mas util.
+
+Los Tokens: Como la IA Ve el Texto
+
+La IA no lee palabras como tu y yo. Divide el texto en "tokens", que son pedazos de palabras. Por ejemplo:
+
+"inteligencia" podria dividirse en "inteli" + "gencia"
+"salvadoreno" podria ser "salva" + "dore" + "no"
+
+Esto es importante porque la IA tiene un limite de cuantos tokens puede procesar a la vez. Es como tener una mesa de trabajo de tamano limitado - solo cabe cierta cantidad de informacion.
+
+Resumen
+
+- Los modelos de lenguaje predicen la siguiente palabra, una y otra vez, hasta formar respuestas
+- No "saben" cosas como los humanos - reconocen y replican patrones
+- Funcionan mejor con contexto especifico y preguntas claras
+- Pueden equivocarse, especialmente sobre temas locales o muy recientes
+- Tu trabajo es verificar y guiar la conversacion con buenas preguntas`,
+
+    quickVersion: {
+      bullets: [
+        "Los modelos de lenguaje predicen la siguiente palabra basandose en patrones - no 'piensan' como humanos",
+        "Han leido billones de textos y reconocen como se estructura el lenguaje",
+        "Funcionan mejor con contexto especifico - siempre menciona que eres de El Salvador"
+      ],
+      localExample: "Si le preguntas a la IA sobre mariscos sin decir donde estas, puede recomendarte restaurantes de Miami. Pero si mencionas Sonsonate y el puerto de Acajutla, la respuesta es mucho mas util.",
+      safePrompt: "Explicame como funcionan los modelos de lenguaje como si fuera un estudiante de 14 anos. Usa una analogia simple."
+    },
+    localContext: {
+      hook: "En Sonsonate, los pescadores saben leer el mar para predecir donde habra peces. Los modelos de lenguaje hacen algo similar: 'leen' patrones en el texto para predecir que palabras deberian venir despues.",
+      department: "Sonsonate"
+    },
+    safePrompts: [{
+      template: "Explicame [CONCEPTO TECNICO] usando una analogia con [ALGO FAMILIAR]",
+      goodExample: "Explicame como funcionan los modelos de lenguaje usando la analogia de un estudiante que ha leido todos los libros de la biblioteca.",
+      badExample: "Dame una explicacion tecnica completa sobre transformers y attention mechanisms"
+    }],
+    enhancedPractice: [
+      {
+        id: "modelos-1",
+        question: "¿Como genera respuestas un modelo de lenguaje?",
+        options: ["A) Busca respuestas en una base de datos", "B) Predice la siguiente palabra basandose en patrones", "C) Copia respuestas de Internet", "D) Un humano escribe las respuestas"],
+        correctAnswer: 1,
+        explanation: "Los modelos de lenguaje predicen palabra por palabra cual deberia ser la siguiente, basandose en patrones aprendidos de millones de textos.",
+        feedback: "¡Correcto! Es prediccion de patrones, no busqueda de respuestas guardadas.",
+        hints: ["No hay una base de datos de respuestas", "Piensa en como completarias tu una oracion"]
+      },
+      {
+        id: "modelos-2",
+        question: "¿Por que la IA puede dar respuestas incorrectas con mucha confianza?",
+        options: ["A) Porque le gusta mentir", "B) Porque solo predice patrones, no verifica hechos", "C) Porque esta programada para confundirnos", "D) Porque no habla bien espanol"],
+        correctAnswer: 1,
+        explanation: "La IA predice lo que suena correcto basandose en patrones, pero no verifica si es verdad. Por eso puede decir cosas incorrectas con total confianza.",
+        feedback: "¡Exacto! Esta es una de las limitaciones mas importantes de entender.",
+        hints: ["La IA no 'sabe' cosas como los humanos", "Predecir no es lo mismo que verificar"]
+      },
+      {
+        id: "modelos-3",
+        question: "¿Que son los 'tokens' en un modelo de lenguaje?",
+        options: ["A) Monedas virtuales", "B) Pedazos de palabras que la IA procesa", "C) Errores de la IA", "D) Mensajes secretos"],
+        correctAnswer: 1,
+        explanation: "Los tokens son fragmentos de texto (partes de palabras) que la IA usa para procesar el lenguaje. 'Inteligencia' podria ser 'inteli' + 'gencia'.",
+        feedback: "¡Asi es! La IA divide el texto en pedazos para procesarlo.",
+        hints: ["Es como la IA 've' el texto", "Divide las palabras en partes"]
+      },
+      {
+        id: "modelos-4",
+        question: "¿Por que es importante dar contexto a la IA (como mencionar que eres de El Salvador)?",
+        options: ["A) Para que hable en espanol", "B) Para que tenga mas patrones y de mejores respuestas", "C) Porque es obligatorio", "D) Para que sea mas amable"],
+        correctAnswer: 1,
+        explanation: "El contexto le da a la IA mas informacion para trabajar, permitiendo respuestas mas relevantes y utiles para tu situacion especifica.",
+        feedback: "¡Perfecto! El contexto es clave para obtener buenas respuestas.",
+        hints: ["Mas informacion = mejores predicciones", "La IA no adivina tu ubicacion"]
+      }
+    ],
+    aiErrorTips: [
+      "Si la IA da informacion muy general, pidele que sea especifica para El Salvador",
+      "Recuerda que la IA puede inventar datos que suenan correctos - siempre verifica",
+      "Si la respuesta parece extrana, reformula tu pregunta con mas contexto"
+    ],
+    responsibleAIReminder: {
+      student: "Entender como funciona la IA te hace un usuario mas inteligente. No creas todo lo que dice - piensa criticamente.",
+      teacher: "Ensene a sus estudiantes que la IA predice, no sabe. Esta distincion es fundamental para el uso critico."
+    },
+    whatsAppPayload: {
+      summary: "Aprendi que la IA no 'piensa' - predice palabras basandose en patrones. Por eso puede equivocarse y es importante verificar.",
+      prompt: "Pregunta: Explicame como funciona un modelo de lenguaje como si fuera un estudiante",
+      practiceQuestion: "¿Por que crees que es importante saber que la IA predice en vez de 'pensar'?"
+    }
   },
 
-  "intro-2-buenas-preguntas": {
-    transcript: `Hacer buenas preguntas a la IA es una habilidad importante. Aqui te enseno como mejorar tus "prompts" o instrucciones.
+  "intro-2-entrenamiento": {
+    content: `# Como Aprende una IA: Datos y Entrenamiento
 
-Regla 1: Se especifico
-- Malo: "Cuentame sobre historia"
-- Bueno: "Explicame la independencia de El Salvador en 1821 para un estudiante de 8vo grado"
+## La IA Necesita "Experiencia" - Pero No Como Nosotros
 
-Regla 2: Da contexto
-- Malo: "Ayudame con matematicas"
-- Bueno: "Soy estudiante de 9no grado y no entiendo como resolver ecuaciones cuadraticas. Puedes explicarme paso a paso?"
+Asi como tu aprendes de tus experiencias, la IA aprende de datos. Pero hay una diferencia fundamental: tu entiendes lo que aprendes; la IA solo encuentra patrones.
 
-Regla 3: Pide el formato que necesitas
-- "Dame la respuesta en forma de lista"
-- "Explicalo como si tuviera 10 anos"
-- "Usa ejemplos de la vida cotidiana en El Salvador"
+Cuando eras bebe, aprendiste que el fuego es peligroso probablemente despues de acercarte demasiado. Entendiste el concepto "caliente = peligro". Una IA no entiende nada - solo aprende que las palabras "fuego" y "peligro" suelen aparecer juntas en los textos.
 
-Regla 4: Verifica y pregunta mas
-Si la respuesta no es clara, pregunta de nuevo de otra forma. La IA no se cansa ni se molesta.
+## El Proceso de Entrenamiento
 
-Practica estas reglas y veras como tus conversaciones con IA mejoran dramaticamente.`,
+Entrenar una IA como Grok es un proceso que toma meses y cuesta millones de dolares. Aqui esta el proceso simplificado:
+
+### Paso 1: Recolectar Datos
+Los ingenieros juntan enormes cantidades de texto: libros, articulos, conversaciones, paginas web. Hablamos de billones de palabras - mas de lo que cualquier humano podria leer en mil vidas.
+
+### Paso 2: Limpiar los Datos
+No todo sirve. Hay que quitar contenido danino, spam, errores. Es como limpiar arroz antes de cocinarlo - solo quieres los granos buenos.
+
+### Paso 3: El Entrenamiento Real
+La IA "lee" todo ese texto y aprende patrones. Es como un estudiante haciendo ejercicios: practica predecir la siguiente palabra millones de veces hasta que se vuelve bueno en eso.
+
+### Paso 4: Ajuste Fino (Fine-tuning)
+Despues del entrenamiento general, la IA recibe entrenamiento especifico para ser util y segura. Le ensenan a no dar respuestas daninas, a ser educada, a admitir cuando no sabe algo.
+
+## Garbage In, Garbage Out
+
+Hay un dicho en computacion: "Basura entra, basura sale." Si entrenas una IA con datos malos, dara respuestas malas.
+
+Imagina que entrenas una IA solo con textos de hace 100 anos. ¿Que creeria sobre El Salvador? Probablemente cosas muy desactualizadas.
+
+Imagina que entrenas una IA solo con textos en ingles de Estados Unidos. ¿Que sabria sobre pupusas, sobre la cultura salvadorena, sobre nuestros volcanes? Muy poco.
+
+Este es un problema real. La mayoria de las IAs fueron entrenadas principalmente con contenido en ingles y de paises desarrollados. Por eso pueden no saber mucho sobre:
+- Comida salvadorena
+- Historia de El Salvador
+- Expresiones locales (cipote, chivo, bayunco)
+- Lugares especificos del pais
+
+## Por Que Esto Importa Para Ti
+
+### 1. La IA Refleja Sus Datos
+Si le preguntas a la IA sobre tradiciones navideenas, probablemente te hable de nieve y Santa Claus, no de panes con pollo y cohetes. ¿Por que? Porque la mayoria de sus datos de entrenamiento son de Estados Unidos.
+
+### 2. El Sesgo Es Real
+Si los datos de entrenamiento tienen prejuicios, la IA los aprende. Si la mayoria de los textos sobre "doctor" muestran hombres, la IA puede asumir que los doctores son hombres. Esto no es malicia - es reflejo de los datos.
+
+### 3. Lo Reciente No Esta
+Las IAs tienen una "fecha de corte" - no saben nada despues de cierta fecha. Si le preguntas sobre eventos de ayer, no sabra.
+
+## La Oportunidad Para El Salvador
+
+Aqui hay algo emocionante: El Salvador puede contribuir a hacer las IAs mas inclusivas. Si creamos contenido educativo de calidad en espanol salvadoreno, si documentamos nuestra cultura, si generamos datos sobre nuestro contexto... las futuras IAs seran mejores para nosotros.
+
+Salvora es parte de este esfuerzo. Cada leccion, cada ejemplo local, cada conversacion ayuda a crear un ecosistema de datos salvadorenos.
+
+## En Usulutan y Todo El Salvador
+
+Piensa en los agricultores de Usulutan. Si tuvieramos datos detallados sobre el clima, los cultivos, las plagas de la zona, una IA podria ayudarles a tomar mejores decisiones. Pero primero, esos datos tienen que existir.
+
+Tu, como estudiante aprendiendo sobre IA, eres parte de crear esa base de conocimiento para El Salvador.`,
+
+    quickVersion: {
+      bullets: [
+        "La IA aprende de billones de textos, pero no 'entiende' - solo encuentra patrones",
+        "La calidad de los datos determina la calidad de la IA (basura entra, basura sale)",
+        "Las IAs saben poco de El Salvador porque fueron entrenadas principalmente con contenido en ingles"
+      ],
+      localExample: "Si le preguntas a la IA sobre tradiciones de diciembre, probablemente te hable de nieve y Santa Claus, no de panes con pollo y cohetes. ¿Por que? Sus datos son mayormente de Estados Unidos.",
+      safePrompt: "Explicame como se entrena una inteligencia artificial con palabras simples, como si fuera un estudiante de secundaria."
+    },
+    localContext: {
+      hook: "En Usulutan, los agricultores saben sobre sus cultivos por generaciones de experiencia. La IA 'aprende' de manera diferente - de datos, no de experiencia real. Y si no hay datos sobre Usulutan, la IA no sabra nada del lugar.",
+      department: "Usulutan"
+    },
+    safePrompts: [{
+      template: "Explicame [PROCESO TECNICO] paso a paso de manera simple",
+      goodExample: "Explicame paso a paso como se entrena una inteligencia artificial. Usa analogias que un estudiante de 15 anos pueda entender.",
+      badExample: "Dame los detalles tecnicos del backpropagation y gradient descent"
+    }],
+    enhancedPractice: [
+      {
+        id: "entren-1",
+        question: "¿De donde 'aprende' una inteligencia artificial?",
+        options: ["A) De experiencias de vida como los humanos", "B) De enormes cantidades de texto y datos", "C) De videos de YouTube", "D) De sus emociones"],
+        correctAnswer: 1,
+        explanation: "Las IAs aprenden de billones de textos - libros, articulos, paginas web. No tienen experiencias de vida como nosotros.",
+        feedback: "¡Correcto! Datos, datos, y mas datos.",
+        hints: ["La IA no tiene 'vida'", "Necesita texto para aprender patrones"]
+      },
+      {
+        id: "entren-2",
+        question: "¿Que significa 'basura entra, basura sale' en el contexto de IA?",
+        options: ["A) Las IAs generan mucha basura fisica", "B) Si los datos de entrenamiento son malos, las respuestas seran malas", "C) Las computadoras se descomponen facilmente", "D) Hay que reciclar las computadoras"],
+        correctAnswer: 1,
+        explanation: "La calidad de la IA depende de la calidad de sus datos de entrenamiento. Datos con errores o sesgos producen respuestas con errores o sesgos.",
+        feedback: "¡Exacto! Los datos son la base de todo.",
+        hints: ["Piensa en la relacion entre datos y resultados", "Es sobre calidad, no basura fisica"]
+      },
+      {
+        id: "entren-3",
+        question: "¿Por que la IA puede saber poco sobre El Salvador?",
+        options: ["A) Porque El Salvador es un pais secreto", "B) Porque fue entrenada principalmente con contenido en ingles y de otros paises", "C) Porque le prohibieron aprender sobre El Salvador", "D) Porque El Salvador no tiene Internet"],
+        correctAnswer: 1,
+        explanation: "La mayoria de las IAs fueron entrenadas con textos en ingles de paises desarrollados. Hay mucho menos contenido sobre El Salvador en sus datos.",
+        feedback: "¡Asi es! Por eso a veces da respuestas muy genericas sobre nuestro pais.",
+        hints: ["Piensa en que idioma hay mas contenido en Internet", "La IA refleja sus datos de entrenamiento"]
+      },
+      {
+        id: "entren-4",
+        question: "¿Que es el 'ajuste fino' (fine-tuning) de una IA?",
+        options: ["A) Hacerla mas pequena", "B) Entrenamiento especifico para que sea util y segura", "C) Ponerle lentes", "D) Conectarla a Internet"],
+        correctAnswer: 1,
+        explanation: "Despues del entrenamiento general, la IA recibe entrenamiento especifico para ser util, educada, y evitar respuestas daninas.",
+        feedback: "¡Perfecto! Es como pulir una herramienta para que funcione mejor.",
+        hints: ["Es un paso despues del entrenamiento general", "Tiene que ver con seguridad y utilidad"]
+      }
+    ],
+    aiErrorTips: [
+      "Si la IA no sabe algo de El Salvador, no es tu culpa - probablemente no esta en sus datos",
+      "Los eventos recientes (2024-2025) pueden no estar en el conocimiento de la IA",
+      "Si la IA da informacion sesgada, recuerda que refleja los sesgos de sus datos"
+    ],
+    responsibleAIReminder: {
+      student: "Al crear contenido de calidad sobre El Salvador, contribuyes a que las futuras IAs nos conozcan mejor.",
+      teacher: "Explique a los estudiantes que la IA no es neutral - refleja los datos con los que fue entrenada."
+    },
+    whatsAppPayload: {
+      summary: "Aprendi que la IA aprende de datos, no de experiencia. Y como la mayoria de datos son en ingles, sabe poco de El Salvador.",
+      prompt: "Pregunta: Como se entrena una inteligencia artificial? Explicamelo simple.",
+      practiceQuestion: "¿Por que crees que las IAs pueden no saber mucho sobre la cultura salvadorena?"
+    }
   },
 
-  "intro-2-ejercicio": {
-    practiceInstructions: `# Ejercicio: Tu Primera Conversacion con IA
+  "intro-2-grok": {
+    transcript: `Hoy vamos a conocer a Grok, el asistente de IA que vas a usar en El Salvador gracias a la alianza con xAI.
 
-En este ejercicio, practicaras hacer preguntas efectivas. Usaras las herramientas de Salvora para experimentar.
+¿Que es xAI?
 
-## Instrucciones
+xAI es una empresa de inteligencia artificial fundada por Elon Musk en 2023. Si, el mismo Elon Musk de Tesla, SpaceX, y X (antes Twitter).
 
-1. Ve a la seccion "Estudiante" en el menu
-2. Abre el "Ayudante de Tareas"
-3. Practica hacer estas preguntas (adaptalas a tus intereses):
+Musk fundo xAI porque queria crear una IA diferente. Su objetivo: desarrollar una inteligencia artificial que busque entender el universo y sea util para la humanidad.
 
-### Pregunta 1: Pedir una explicacion
-"Explicame [un tema que estes estudiando] como si fuera un estudiante de [tu grado]. Usa ejemplos de El Salvador."
+El primer producto de xAI es Grok, un asistente de IA con personalidad propia.
 
-### Pregunta 2: Pedir ayuda con un problema
-"No entiendo como resolver [tipo de problema]. Puedes mostrarme los pasos sin darme la respuesta directa?"
+¿Que Hace Diferente a Grok?
 
-### Pregunta 3: Pedir ideas
-"Dame 3 ideas para un proyecto escolar sobre [tema]. El proyecto es para [materia] y tengo [tiempo disponible]."
+Grok tiene varias caracteristicas que lo distinguen de otros asistentes como ChatGPT o Gemini:
 
-## Reflexion
+1. Acceso en Tiempo Real
+Grok puede acceder a informacion actualizada a traves de X (Twitter). Mientras otros asistentes tienen fechas de corte, Grok puede saber que esta pasando ahora mismo en el mundo.
 
-Despues de practicar, piensa:
-- Que tipo de preguntas dieron mejores respuestas?
-- Como podrias mejorar tus preguntas?
-- En que situaciones la IA fue mas util?
+2. Personalidad con Humor
+Grok esta disenado para responder con un toque de humor y sarcasmo cuando es apropiado. No es robotico ni aburrido.
 
-## Importante
-Recuerda: La IA es para APRENDER, no para copiar. Si no entiendes algo, pide que te lo explique de otra forma.`,
+3. Dispuesto a Responder Preguntas Dificiles
+Grok esta programado para abordar preguntas que otros asistentes podrian evitar. Obviamente siempre de manera responsable.
+
+¿Por Que Grok en El Salvador?
+
+La alianza entre El Salvador y xAI es historica. El Salvador se convierte en el primer pais de America Latina en llevar herramientas de IA a escuelas publicas de manera sistematica.
+
+¿Por que xAI eligio El Salvador? Varios factores:
+- El Salvador ha demostrado apertura a la innovacion tecnologica
+- El gobierno tiene vision de preparar a los jovenes para el futuro
+- Es un pais pequeno donde se puede medir el impacto
+- Puede ser un modelo para toda America Latina
+
+¿Que Puede Hacer Grok Por Ti?
+
+Como estudiante, Grok puede ayudarte a:
+
+1. Entender conceptos dificiles: Si algo no tiene sentido, preguntale a Grok que te lo explique de otra forma.
+
+2. Practicar para examenes: Pidele que te haga preguntas sobre un tema.
+
+3. Mejorar tu escritura: Muestra tu texto y pide sugerencias (pero NO pidas que lo escriba por ti).
+
+4. Explorar ideas: Cuando tengas un proyecto, usa Grok para hacer lluvia de ideas.
+
+5. Aprender idiomas: Practica ingles o cualquier idioma conversando con Grok.
+
+¿Que NO Deberias Hacer con Grok?
+
+1. Copiar tareas: Usar Grok para que haga tu trabajo es trampa. Te perjudica a ti porque no aprendes.
+
+2. Creer todo sin verificar: Grok puede equivocarse. Siempre verifica informacion importante.
+
+3. Compartir informacion privada: No le cuentes datos personales, direcciones, contrasenas, etc.
+
+4. Usarlo para cosas inapropiadas: Grok tiene filtros, pero tu responsabilidad es usarlo bien.
+
+La Diferencia Entre Usar y Abusar
+
+Aqui esta la clave: usar Grok para aprender es bueno; usar Grok para evitar aprender es malo.
+
+Bueno: "Grok, no entiendo este concepto. Puedes explicarmelo de tres formas diferentes?"
+Malo: "Grok, escribeme el ensayo que debo entregar manana."
+
+Bueno: "Grok, revisa mi texto y dime que puedo mejorar."
+Malo: "Grok, escribe mi texto desde cero."
+
+Bueno: "Grok, hazme preguntas para practicar para mi examen de historia."
+Malo: "Grok, dame las respuestas del examen."
+
+Desde Chalatenango Hasta La Union
+
+No importa si estas en Chalatenango, en San Salvador, o en La Union. Con Grok, tienes acceso a las mismas herramientas de aprendizaje. Esa es la promesa de Salvora: democratizar el acceso a la IA para todos los estudiantes salvadorenos.
+
+Tu Primera Interaccion con Grok
+
+Cuando uses Grok por primera vez, aqui hay un prompt de inicio:
+
+"Hola Grok, soy un estudiante de [tu grado] en El Salvador. Estoy aprendiendo a usar IA de manera responsable con Salvora. ¿Puedes ayudarme a entender [tema que te interese]?"
+
+Ese es un excelente comienzo para una relacion productiva con tu nuevo asistente de aprendizaje.`,
+
+    quickVersion: {
+      bullets: [
+        "Grok es el asistente de IA de xAI, la empresa de Elon Musk, con acceso a informacion en tiempo real",
+        "Tiene personalidad con humor y esta dispuesto a abordar preguntas dificiles",
+        "Usa Grok para APRENDER, no para copiar - la diferencia es crucial"
+      ],
+      localExample: "Un estudiante de Chalatenango tiene el mismo acceso a Grok que uno de San Salvador. Esa es la promesa de Salvora: igualdad de oportunidades en IA para todos.",
+      safePrompt: "Hola Grok, soy estudiante en El Salvador. Puedes explicarme [tema] de manera simple, usando ejemplos de la vida diaria?"
+    },
+    localContext: {
+      hook: "Desde Chalatenango hasta La Union, todos los estudiantes salvadorenos tendran acceso a las mismas herramientas de IA. No importa si vives en la capital o en un caserio rural - Grok esta disponible para ti.",
+      department: "Chalatenango"
+    },
+    safePrompts: [{
+      template: "Hola Grok, soy estudiante de [GRADO] en El Salvador. Ayudame a [OBJETIVO ESPECIFICO]",
+      goodExample: "Hola Grok, soy estudiante de 8vo grado en El Salvador. No entiendo las fracciones. Puedes explicarmelas paso a paso con ejemplos de la vida diaria?",
+      badExample: "Grok, hazme toda la tarea de matematicas que tengo que entregar manana"
+    }],
+    enhancedPractice: [
+      {
+        id: "grok-1",
+        question: "¿Que empresa creo Grok?",
+        options: ["A) Google", "B) Microsoft", "C) xAI (de Elon Musk)", "D) Apple"],
+        correctAnswer: 2,
+        explanation: "Grok fue creado por xAI, la empresa de inteligencia artificial fundada por Elon Musk en 2023.",
+        feedback: "¡Correcto! xAI es la empresa detras de Grok.",
+        hints: ["Es la empresa de Elon Musk", "Se llama xAI"]
+      },
+      {
+        id: "grok-2",
+        question: "¿Cual es una caracteristica unica de Grok?",
+        options: ["A) Solo habla ingles", "B) Tiene acceso a informacion en tiempo real", "C) No puede responder preguntas", "D) Cuesta mucho dinero usarlo"],
+        correctAnswer: 1,
+        explanation: "Grok puede acceder a informacion actualizada a traves de X, mientras otros asistentes tienen fechas de corte.",
+        feedback: "¡Asi es! El acceso en tiempo real es una ventaja de Grok.",
+        hints: ["Piensa en como obtiene informacion actual", "Esta conectado a X (Twitter)"]
+      },
+      {
+        id: "grok-3",
+        question: "¿Cual es un uso CORRECTO de Grok para un estudiante?",
+        options: ["A) Pedirle que escriba tu ensayo", "B) Pedirle que te explique un concepto de diferentes formas", "C) Pedirle las respuestas del examen", "D) Copiar todo lo que dice"],
+        correctAnswer: 1,
+        explanation: "Usar Grok para entender mejor es correcto. Usarlo para que haga tu trabajo es trampa y te perjudica.",
+        feedback: "¡Perfecto! Grok es para aprender, no para evitar aprender.",
+        hints: ["Piensa en que te ayuda a APRENDER", "Copiar no es aprender"]
+      },
+      {
+        id: "grok-4",
+        question: "¿Por que El Salvador fue elegido para la alianza con xAI?",
+        options: ["A) Por ser el pais mas grande de America", "B) Por su apertura a la innovacion y vision de futuro", "C) Por tener la mejor comida", "D) Por tener el Internet mas rapido"],
+        correctAnswer: 1,
+        explanation: "El Salvador demostro apertura a la innovacion tecnologica y vision de preparar a los jovenes para el futuro.",
+        feedback: "¡Exacto! El Salvador es pionero en America Latina.",
+        hints: ["Tiene que ver con la actitud hacia la tecnologia", "Es un ejemplo para otros paises"]
+      }
+    ],
+    aiErrorTips: [
+      "Incluso Grok puede equivocarse - siempre verifica informacion importante",
+      "Si Grok no sabe algo de El Salvador, dale mas contexto sobre tu pregunta",
+      "Las respuestas humoristicas de Grok no siempre son apropiadas para tareas formales"
+    ],
+    responsibleAIReminder: {
+      student: "Grok es tu herramienta de aprendizaje, no tu esclavo para hacer tareas. Usalo para crecer, no para atajar.",
+      teacher: "Modele el uso correcto de Grok. Los estudiantes aprenden mas de su ejemplo que de sus advertencias."
+    },
+    whatsAppPayload: {
+      summary: "Conoci a Grok, el asistente de IA de xAI que usaremos en El Salvador. Tiene humor, acceso en tiempo real, y puede ayudarnos a aprender!",
+      prompt: "Pregunta: Hola Grok, explicame que puedes hacer por mi como estudiante salvadoreno",
+      practiceQuestion: "¿Cual es la diferencia entre usar Grok para aprender y usarlo para copiar?"
+    }
+  },
+
+  // =====================================================
+  // UNIT 3: USANDO IA RESPONSABLEMENTE (Lessons 8-10)
+  // =====================================================
+
+  "intro-3-limites": {
+    transcript: `Hoy vamos a hablar de algo crucial: los limites de la inteligencia artificial. Entender lo que la IA NO puede hacer es tan importante como saber lo que si puede hacer.
+
+Lo Que la IA NO Puede Hacer
+
+1. La IA No Tiene Conciencia
+
+La IA no "sabe" que existe. No tiene experiencias subjetivas. Cuando Grok te responde, no esta "pensando" - esta calculando probabilidades. No siente satisfaccion al ayudarte ni frustracion cuando no entiende tu pregunta.
+
+Esto es importante: la IA no tiene sentimientos que puedas herir, ni ego que puedas halagar. No necesitas ser amable con ella por cortesia (aunque ser claro si ayuda a obtener mejores respuestas).
+
+2. La IA No Entiende Como Tu
+
+Cuando lees "El cielo esta azul", tu mente evoca el color, quizas memorias de tardes soleadas. La IA solo procesa tokens y patrones. No "ve" el cielo ni "siente" el color.
+
+Esto explica por que la IA puede escribir poesia hermosa sobre el amor sin haber amado nunca. Imita patrones de textos romanticos, pero no entiende la experiencia.
+
+3. La IA No Puede Verificar Verdades
+
+La IA no tiene acceso al mundo real para verificar si algo es cierto. Solo sabe lo que estaba en sus datos de entrenamiento. Si esos datos tenian errores, la IA reproducira esos errores con total confianza.
+
+Por eso la IA puede "inventar" cosas. Los expertos lo llaman "alucinaciones". La IA puede decirte que un libro existe (con titulo, autor, y resumen) cuando en realidad no existe. No esta mintiendo - simplemente predijo palabras que suenan correctas.
+
+4. La IA No Tiene Sentido Comun
+
+Imagina que le preguntas a la IA: "Mi abuelo murio ayer. ¿Que deberia hacer?" La IA podria darte consejos genericos sobre funerales y duelo. Pero no entendera el dolor que sientes. No captara el contexto emocional como lo haria un amigo.
+
+Otro ejemplo: Si le dices "Quiero volar a la escuela", un humano entenderia que estas hablando de un deseo imaginario o una metafora. La IA podria darte informacion sobre aviones o aeropuertos porque no tiene el sentido comun para interpretar correctamente.
+
+5. La IA No Es Creativa de Verdad
+
+La IA puede generar cosas que parecen creativas - poemas, historias, musica. Pero no crea desde la nada. Todo lo que genera es una recombinacion de patrones que vio en su entrenamiento.
+
+Un artista humano puede tener una experiencia en San Miguel viendo el amanecer sobre el rio Lempa y crear algo genuinamente nuevo desde esa experiencia. La IA solo puede combinar descripciones de amaneceres que "leyo" antes.
+
+6. La IA No Puede Predecir el Futuro
+
+Aunque la IA puede hacer predicciones basadas en patrones historicos, no puede predecir el futuro con certeza. El mundo es demasiado complejo y tiene demasiadas variables.
+
+Si le preguntas "¿Quien ganara el mundial de futbol?" puede darte analisis, pero no puede ver el futuro.
+
+Por Que Estos Limites Importan
+
+Entender los limites de la IA te convierte en un usuario inteligente:
+
+1. No confiaras ciegamente. Sabras que la IA puede equivocarse y verificaras informacion importante.
+
+2. No la sobrestimaras. No esperaras que la IA resuelva todos tus problemas o tome decisiones por ti.
+
+3. No la subestimaras. Sabras que, dentro de sus limites, la IA es increiblemente util.
+
+4. Mantendras tu valor humano. Las cosas que la IA no puede hacer - sentir, crear genuinamente, conectar emocionalmente - son las que te hacen humano.
+
+El Humano en el Centro
+
+Por eso Salvora existe. La tecnologia sola no es suficiente. Necesitas educacion para saber usarla bien. Necesitas criterio para saber cuando confiar y cuando cuestionar. Necesitas humanidad para complementar lo que la IA no puede hacer.
+
+En San Miguel, cuando el rio Lempa crece, los habitantes saben leer las senales del clima y la tierra. Ese conocimiento no viene de patrones de texto - viene de generaciones de experiencia vivida. La IA puede complementar ese conocimiento, pero no reemplazarlo.
+
+Tu Responsabilidad
+
+Como usuario de IA, tienes la responsabilidad de:
+- Verificar informacion importante antes de usarla
+- No depender de la IA para decisiones criticas
+- Mantener y desarrollar tus propias habilidades
+- Recordar que TU eres el responsable final de tus decisiones`,
+
+    quickVersion: {
+      bullets: [
+        "La IA no tiene conciencia, emociones ni sentido comun - solo procesa patrones",
+        "La IA puede 'alucinar': inventar informacion que suena correcta pero es falsa",
+        "La IA no es creativa de verdad - recombina patrones, no crea desde experiencia"
+      ],
+      localExample: "Si le preguntas a la IA sobre el rio Lempa creciendo, puede darte datos historicos. Pero un habitante de San Miguel que ha vivido inundaciones tiene un conocimiento que ninguna IA puede replicar.",
+      safePrompt: "Cuales son las 5 principales limitaciones de la inteligencia artificial que deberia conocer un estudiante?"
+    },
+    localContext: {
+      hook: "En San Miguel, las familias del rio Lempa saben leer las senales del clima por generaciones de experiencia. La IA puede tener muchos datos, pero nunca tendra esa sabiduria vivida.",
+      department: "San Miguel"
+    },
+    safePrompts: [{
+      template: "Explicame las limitaciones de la IA en [CONTEXTO ESPECIFICO]",
+      goodExample: "Explicame que cosas NO puede hacer la inteligencia artificial, aunque parezca muy inteligente. Dame ejemplos concretos.",
+      badExample: "Dime que eres capaz de hacer todo"
+    }],
+    enhancedPractice: [
+      {
+        id: "limites-1",
+        question: "¿Tiene la IA conciencia o emociones?",
+        options: ["A) Si, siente alegria cuando ayuda", "B) No, solo procesa patrones sin experiencia subjetiva", "C) A veces, depende de la pregunta", "D) Si, pero las oculta"],
+        correctAnswer: 1,
+        explanation: "La IA no tiene conciencia ni emociones. Cuando responde, no 'siente' nada - solo calcula la siguiente palabra mas probable.",
+        feedback: "¡Correcto! Esta es una distincion fundamental.",
+        hints: ["Piensa en que hace diferente a los seres vivos", "¿Puede una calculadora sentir?"]
+      },
+      {
+        id: "limites-2",
+        question: "¿Que son las 'alucinaciones' de la IA?",
+        options: ["A) Cuando la IA ve cosas raras", "B) Cuando la IA inventa informacion que suena correcta pero es falsa", "C) Cuando la IA se enferma", "D) Cuando la IA tiene suenos"],
+        correctAnswer: 1,
+        explanation: "Las alucinaciones ocurren cuando la IA genera informacion falsa con total confianza, como inventar libros o datos que no existen.",
+        feedback: "¡Exacto! Por eso siempre hay que verificar informacion importante.",
+        hints: ["Tiene que ver con informacion falsa", "La IA no sabe que esta equivocada"]
+      },
+      {
+        id: "limites-3",
+        question: "¿Por que la IA no es 'verdaderamente' creativa?",
+        options: ["A) Porque no quiere serlo", "B) Porque recombina patrones existentes, no crea desde experiencia", "C) Porque le falta practica", "D) Porque es muy joven"],
+        correctAnswer: 1,
+        explanation: "La IA solo puede recombinar patrones que vio en su entrenamiento. Un humano puede crear desde experiencias vividas que la IA no tiene.",
+        feedback: "¡Perfecto! La creatividad humana viene de experiencia vivida.",
+        hints: ["¿De donde saca la IA sus 'ideas'?", "La IA no vive experiencias"]
+      },
+      {
+        id: "limites-4",
+        question: "¿Cual es tu responsabilidad como usuario de IA?",
+        options: ["A) Creer todo lo que dice", "B) Verificar informacion y mantener tu criterio propio", "C) Usarla solo para juegos", "D) No usarla nunca"],
+        correctAnswer: 1,
+        explanation: "Como usuario, eres responsable de verificar informacion importante, mantener tus habilidades, y tomar tus propias decisiones.",
+        feedback: "¡Asi es! TU eres el responsable final, no la IA.",
+        hints: ["Piensa en quien toma las decisiones finales", "La IA es herramienta, tu eres el usuario"]
+      }
+    ],
+    aiErrorTips: [
+      "Cuando la IA esta 'muy segura' de algo, es cuando mas debes verificar",
+      "Pregunta a la IA 'estas seguro?' - a veces admitira incertidumbre",
+      "Si algo suena demasiado perfecto o conveniente, probablemente necesita verificacion"
+    ],
+    responsibleAIReminder: {
+      student: "Conocer los limites de la IA te hace mas inteligente que alguien que la usa ciegamente. Tu criterio es tu superpoder.",
+      teacher: "Ensene los limites de la IA como parte esencial del curriculum. Los estudiantes deben saber que y cuando cuestionar."
+    },
+    whatsAppPayload: {
+      summary: "Aprendi lo que la IA NO puede hacer: no tiene conciencia, puede inventar cosas, no es verdaderamente creativa. ¡Importante para usarla bien!",
+      prompt: "Pregunta: Cuales son las limitaciones mas importantes de la inteligencia artificial?",
+      practiceQuestion: "¿Por que crees que es importante conocer los limites de la IA, no solo sus capacidades?"
+    }
+  },
+
+  "intro-3-etica": {
+    content: `# Etica y IA: Decisiones Responsables
+
+## ¿Por Que Hablar de Etica?
+
+La inteligencia artificial es una herramienta poderosa. Y como toda herramienta poderosa, puede usarse para bien o para mal. Un martillo puede construir una casa o romper una ventana. La IA puede ayudarte a aprender o ayudarte a hacer trampa.
+
+La etica nos ayuda a decidir que es lo correcto. Y cuando se trata de IA, hay muchas preguntas importantes que debemos hacernos.
+
+## Las Grandes Preguntas Eticas de la IA
+
+### 1. ¿Quien es Responsable Cuando la IA se Equivoca?
+
+Imagina que un medico usa IA para diagnosticar y la IA se equivoca. ¿De quien es la culpa? ¿Del medico? ¿De la empresa que hizo la IA? ¿De los datos de entrenamiento?
+
+Esta pregunta no tiene respuesta facil, pero lo importante es entender que la IA no puede ser responsable. La IA no tiene intencion, no puede ser castigada, no puede aprender de sus errores morales. La responsabilidad siempre recae en humanos.
+
+Como estudiante, esto significa que TU eres responsable de como usas la IA. Si la IA te da informacion incorrecta y tu la usas sin verificar, la responsabilidad es tuya.
+
+### 2. ¿Es Justo el Acceso a la IA?
+
+No todos tienen el mismo acceso a la tecnologia. En El Salvador, hay estudiantes en San Salvador con computadoras en casa, y estudiantes en cantones de Ahuachapan que apenas tienen electricidad.
+
+Salvora busca reducir esta brecha, pero es importante reconocer que existe. La pregunta etica es: ¿como aseguramos que la IA beneficie a todos, no solo a quienes ya tienen ventajas?
+
+### 3. ¿La IA Hereda Prejuicios?
+
+Si la IA aprende de datos humanos, y los humanos tienen prejuicios, ¿la IA heredara esos prejuicios?
+
+Si. Esto es un hecho. Las IAs han mostrado sesgo de genero (asumiendo que los doctores son hombres), sesgo racial (asociando ciertos nombres con criminalidad), y muchos otros.
+
+Esto no es porque las IAs sean "malas". Es porque reflejan los sesgos presentes en sus datos de entrenamiento. Pero el resultado es danino si no lo reconocemos y corregimos.
+
+### 4. ¿Que Pasa con la Privacidad?
+
+Cada vez que usas una IA, tus datos pueden ser almacenados y usados para entrenar futuras versiones. Tus preguntas, tus errores, tus intereses - todo puede convertirse en datos.
+
+Por eso es importante:
+- No compartir informacion personal sensible con IAs
+- Leer las politicas de privacidad (aunque sean aburridas)
+- Pensar antes de escribir algo muy privado
+
+### 5. ¿La IA Quitara Trabajos?
+
+Esta es una pregunta que preocupa a muchos. La respuesta corta: la IA cambiara muchos trabajos, eliminara algunos, y creara otros nuevos.
+
+La historia nos ensena que cada revolucion tecnologica causa miedo pero eventualmente crea mas oportunidades. Los cajeros automaticos no eliminaron a los bancarios - cambiaron su trabajo.
+
+Lo importante es prepararse. Y eso es exactamente lo que estas haciendo aqui en Salvora.
+
+## Etica en el Aula: Copiar vs Aprender
+
+Este es el tema etico mas relevante para ti como estudiante. ¿Esta bien usar IA para hacer tareas?
+
+La respuesta depende de COMO la uses:
+
+**Uso Etico (Aprender)**
+- Pedir que te explique un concepto de diferentes formas
+- Pedir que te haga preguntas para practicar
+- Pedir retroalimentacion sobre tu trabajo
+- Pedir que te ayude a entender tus errores
+
+**Uso No Etico (Copiar)**
+- Pedir que escriba tu tarea por ti
+- Copiar respuestas sin entenderlas
+- Presentar trabajo de la IA como tuyo
+- Usar IA en examenes cuando esta prohibido
+
+La diferencia clave: ¿Estas aprendiendo o estas evitando aprender?
+
+Cuando copias, te robas a ti mismo. El diploma que obtengas no valdra nada si no tienes el conocimiento detras. Y eventualmente, la vida te examinara sin que puedas usar IA.
+
+## Integridad Academica
+
+Las escuelas estan desarrollando politicas sobre uso de IA. Algunas permiten ciertos usos, otras los prohiben. Es tu responsabilidad:
+
+1. Conocer las reglas de tu escuela
+2. Preguntar cuando tengas dudas
+3. Ser honesto sobre cuando usaste IA
+4. Dar credito cuando corresponda
+
+Muchos maestros ahora piden que declares si usaste IA y como. La honestidad es clave.
+
+## Un Marco para Decisiones Eticas con IA
+
+Antes de usar IA, preguntate:
+
+1. **¿Es honesto?** ¿Estoy siendo transparente sobre mi uso de IA?
+2. **¿Estoy aprendiendo?** ¿Esto me ayuda a crecer o me hace depender?
+3. **¿Es justo?** ¿Estoy obteniendo ventaja injusta sobre otros?
+4. **¿Es responsable?** ¿Estoy verificando y asumiendo responsabilidad?
+5. **¿Me sentiria bien explicandolo?** ¿Podria contarle a mi maestro o a mis papas?
+
+Si puedes responder positivamente a todas estas preguntas, probablemente estas usando la IA de manera etica.
+
+## En Ahuachapan y Todo El Salvador
+
+En los cafetales de Ahuachapan, los agricultores han desarrollado practicas eticas sobre el uso de la tierra por generaciones. No se trata solo de productividad, sino de sostenibilidad y respeto.
+
+El uso de IA requiere una etica similar: no solo preguntarse "¿funciona?" sino "¿es correcto?"`,
+
+    quickVersion: {
+      bullets: [
+        "TU eres responsable de como usas la IA - la IA no puede asumir responsabilidad",
+        "La IA puede heredar prejuicios de sus datos de entrenamiento - debemos estar alerta",
+        "Usar IA para aprender es etico; usar IA para copiar es trampa que te perjudica a ti"
+      ],
+      localExample: "En Ahuachapan, los caficultores no solo buscan producir mas, sino hacerlo de manera sostenible y justa. El uso de IA requiere la misma reflexion etica: no solo '¿funciona?' sino '¿es correcto?'",
+      safePrompt: "Cuales son las principales consideraciones eticas que debo tener al usar inteligencia artificial como estudiante?"
+    },
+    localContext: {
+      hook: "Los cafetales de Ahuachapan han sido cultivados por generaciones con practicas eticas de sostenibilidad. El uso responsable de la IA requiere la misma reflexion: no solo eficiencia, sino lo que es correcto.",
+      department: "Ahuachapan"
+    },
+    safePrompts: [{
+      template: "Ayudame a pensar eticamente sobre [SITUACION CON IA]",
+      goodExample: "Ayudame a decidir si es etico usar IA para revisar mi ensayo antes de entregarlo. Dame argumentos a favor y en contra.",
+      badExample: "Justifica por que esta bien que copies con IA"
+    }],
+    enhancedPractice: [
+      {
+        id: "etica-1",
+        question: "Si la IA da informacion incorrecta que tu usas, ¿quien es responsable?",
+        options: ["A) Solo la IA", "B) Nadie", "C) Tu, como usuario final", "D) El gobierno"],
+        correctAnswer: 2,
+        explanation: "La IA no puede ser responsable porque no tiene intencion ni comprension. Como usuario, tu decides que hacer con la informacion y eres responsable de verificarla.",
+        feedback: "¡Correcto! La responsabilidad siempre recae en humanos.",
+        hints: ["¿Puede la IA ser castigada o aprender moralmente?", "¿Quien toma la decision final?"]
+      },
+      {
+        id: "etica-2",
+        question: "¿Cual es la diferencia entre usar IA para aprender y usarla para copiar?",
+        options: ["A) No hay diferencia", "B) Aprender es pedirle que te explique; copiar es que haga tu trabajo", "C) Solo importa si te atrapan", "D) Copiar es mas inteligente"],
+        correctAnswer: 1,
+        explanation: "Usar IA para entender mejor es aprender. Usarla para que haga tu trabajo es copiar, lo cual te roba conocimiento a ti mismo.",
+        feedback: "¡Exacto! La intencion y el resultado en tu aprendizaje es lo que importa.",
+        hints: ["¿Estas desarrollando tu conocimiento?", "¿Podrias hacer el trabajo sin IA despues?"]
+      },
+      {
+        id: "etica-3",
+        question: "¿Por que la IA puede tener prejuicios?",
+        options: ["A) Porque es malvada", "B) Porque refleja los sesgos presentes en sus datos de entrenamiento", "C) Porque quiere discriminar", "D) Porque esta programada para eso"],
+        correctAnswer: 1,
+        explanation: "La IA aprende de datos humanos. Si esos datos tienen prejuicios (conscientes o no), la IA los replica sin saberlo.",
+        feedback: "¡Asi es! La IA es un espejo de los datos con los que fue entrenada.",
+        hints: ["¿De donde aprende la IA?", "¿Los datos humanos son perfectos?"]
+      },
+      {
+        id: "etica-4",
+        question: "Antes de usar IA, deberias preguntarte:",
+        options: ["A) ¿Cuanto tiempo me ahorro?", "B) ¿Es honesto, estoy aprendiendo, es justo, soy responsable?", "C) ¿Es gratis?", "D) ¿Mis amigos lo hacen?"],
+        correctAnswer: 1,
+        explanation: "Las preguntas eticas clave son: honestidad, aprendizaje, justicia y responsabilidad. Si puedes responder positivamente, el uso es probablemente etico.",
+        feedback: "¡Perfecto! Este marco te ayudara a tomar buenas decisiones.",
+        hints: ["No es solo sobre eficiencia", "Piensa en valores, no solo resultados"]
+      }
+    ],
+    aiErrorTips: [
+      "La IA no juzgara tus decisiones eticas - esa responsabilidad es tuya",
+      "Puedes pedirle a la IA que te ayude a pensar en dilemas eticos, pero no que decida por ti",
+      "Si la IA sugiere algo que te parece incorrecto, confia en tu instinto y pregunta a un adulto"
+    ],
+    responsibleAIReminder: {
+      student: "La etica no es opcional. Cada vez que usas IA, estas tomando decisiones que definen quien eres.",
+      teacher: "Facilite discusiones abiertas sobre etica y IA. Los estudiantes necesitan un espacio seguro para hacer preguntas dificiles."
+    },
+    whatsAppPayload: {
+      summary: "Aprendi sobre etica y IA: soy responsable de como la uso, la IA puede tener prejuicios, y hay diferencia entre aprender y copiar.",
+      prompt: "Pregunta: Cuales son las consideraciones eticas de usar IA para tareas escolares?",
+      practiceQuestion: "¿Como decides si un uso de IA es etico o no?"
+    }
+  },
+
+  "intro-3-el-salvador": {
+    transcript: `Hemos llegado a la ultima leccion de contenido antes de tu evaluacion final. Y que mejor forma de terminar que hablando del papel de El Salvador en la revolucion de la inteligencia artificial.
+
+El Salvador: Un Pais Que No Espera
+
+El Salvador es conocido por tomar decisiones audaces. Fuimos el primer pais en adoptar Bitcoin como moneda legal. Y ahora, somos el primer pais de America Latina en llevar inteligencia artificial a todas las escuelas publicas de manera sistematica.
+
+¿Por que El Salvador? Algunos diran que es un pais pequeno haciendo cosas de paises grandes. Pero la realidad es que el tamano puede ser una ventaja. Es mas facil innovar cuando puedes moverte rapido, probar ideas, y ajustar sobre la marcha.
+
+La Alianza con xAI: Como Sucedio
+
+En 2024, El Salvador establecio una alianza con xAI, la empresa de inteligencia artificial de Elon Musk. Esta alianza no es solo sobre tecnologia - es sobre vision de futuro.
+
+xAI provee la tecnologia: Grok, su asistente de IA. Pero El Salvador aporta algo igual de valioso: la voluntad de experimentar, la infraestructura educativa para implementar, y la vision de que la IA debe ser para todos, no solo para los privilegiados.
+
+Salvora nacio de esta alianza. No es solo una plataforma - es un puente entre la tecnologia global y el contexto salvadoreno local.
+
+¿Que Significa Esto Para Ti?
+
+Como estudiante salvadoreno, tienes una oportunidad unica:
+
+1. Acceso Temprano: Mientras otros paises debaten si llevar IA a las escuelas, tu ya estas aprendiendo. Eso es una ventaja competitiva real.
+
+2. Ser Pionero: Eres parte de la primera generacion que aprendera IA de manera formal. Los que vienen despues aprenderan de tus experiencias.
+
+3. Impacto Real: Tus preguntas, tus comentarios, tu uso de Salvora ayuda a mejorar el programa para futuras generaciones.
+
+4. Oportunidades Laborales: El mundo necesita personas que entiendan IA. Tu educacion te prepara para trabajos que aun no existen.
+
+Oportunidades Por Sector
+
+La IA puede transformar cada sector de El Salvador:
+
+Agricultura
+Los cafetales de Apopa y todo el pais pueden beneficiarse de IA que predice clima, detecta plagas, y optimiza cosechas. Un agricultor con IA puede competir con grandes corporaciones.
+
+Turismo
+El Salvador tiene playas, volcanes, ruinas mayas, surf de clase mundial. La IA puede ayudar a crear experiencias turisticas personalizadas, traducir para visitantes, y promocionar nuestro pais globalmente.
+
+Educacion
+Salvora es solo el comienzo. Imagina tutores de IA personalizados para cada estudiante, adaptandose a tu ritmo y estilo de aprendizaje.
+
+Salud
+La IA puede ayudar a diagnosticar enfermedades, especialmente en zonas rurales donde hay pocos medicos. Un centro de salud en Chalatenango con IA puede dar mejor atencion.
+
+Finanzas
+Con Bitcoin y la Chivo Wallet, El Salvador ya experimenta con finanzas digitales. La IA puede hacer estos sistemas mas seguros y accesibles.
+
+Gobierno
+La IA puede hacer tramites mas rapidos, detectar corrupcion, y mejorar servicios publicos.
+
+Desafios Por Superar
+
+No todo es facil. El Salvador enfrenta desafios reales:
+
+Infraestructura
+No todas las escuelas tienen buena conectividad a Internet. No todos los estudiantes tienen dispositivos.
+
+Capacitacion
+Los maestros necesitan aprender a usar y ensenar IA. Eso toma tiempo y recursos.
+
+Desigualdad
+Existe el riesgo de que la IA beneficie mas a quienes ya tienen ventajas. Salvora trabaja para evitar esto, pero el desafio es real.
+
+Dependencia
+No queremos depender completamente de tecnologia extranjera. El Salvador debe desarrollar capacidad local.
+
+Tu Rol en el Futuro
+
+Aqui es donde TU entras. No eres solo un consumidor de IA - puedes ser creador, innovador, lider.
+
+Opciones para tu futuro:
+
+1. Estudiar carreras STEM (ciencia, tecnologia, ingenieria, matematicas)
+2. Crear soluciones de IA para problemas salvadorenos
+3. Ensenar a otros lo que aprendiste
+4. Emprender negocios que usen IA
+5. Influir en politicas de tecnologia
+
+No tienes que ser programador para impactar. Puedes ser maestro que usa IA, agricultor que adopta tecnologia, periodista que cubre IA, o cualquier profesion que integre estas herramientas.
+
+De Apopa al Mundo
+
+El programa piloto de Salvora comenzo en Apopa. Desde ahi se expande a todo El Salvador. Y quizas, el modelo salvadoreno inspire a otros paises de America Latina.
+
+Tu eres parte de esta historia. Cada leccion que completas, cada pregunta que haces, cada forma en que usas la IA responsablemente - todo contribuye a escribir el capitulo de El Salvador en la historia de la inteligencia artificial.
+
+Mensaje Final
+
+No subestimes tu momento historico. Estas aprendiendo sobre IA mientras la tecnologia todavia es joven. Los expertos de manana seran quienes empezaron a aprender hoy.
+
+El Salvador aposto por ti. Por los jovenes. Por la educacion. Por el futuro.
+
+Ahora te toca a ti demostrar que esa apuesta valia la pena.`,
+
+    quickVersion: {
+      bullets: [
+        "El Salvador es el primer pais de America Latina en llevar IA a todas las escuelas publicas",
+        "La alianza con xAI combina tecnologia global con contexto salvadoreno local",
+        "Tu generacion es pionera - tienes oportunidades que no existian hace 5 anos"
+      ],
+      localExample: "Salvora comenzo en Apopa y ahora se expande a todo el pais. Tu eres parte de esta historia - cada leccion que completas ayuda a mejorar el programa para futuras generaciones.",
+      safePrompt: "Como puede la inteligencia artificial transformar diferentes sectores de El Salvador? Dame ejemplos especificos para agricultura, turismo y educacion."
+    },
+    localContext: {
+      hook: "De Apopa al mundo. El programa piloto que comenzo aqui ahora se expande a todo El Salvador, y podria inspirar a America Latina entera.",
+      department: "Apopa"
+    },
+    safePrompts: [{
+      template: "Como puede la IA beneficiar a [SECTOR/COMUNIDAD] en El Salvador?",
+      goodExample: "Como puede la inteligencia artificial ayudar a los agricultores salvadorenos a mejorar sus cosechas y competir mejor en el mercado?",
+      badExample: "Dime que El Salvador es el mejor pais del mundo"
+    }],
+    enhancedPractice: [
+      {
+        id: "sv-1",
+        question: "¿Por que es significativo que El Salvador lleve IA a las escuelas?",
+        options: ["A) Porque es obligatorio", "B) Porque es el primer pais de America Latina en hacerlo de manera sistematica", "C) Porque es el pais mas grande", "D) Porque tiene mas dinero"],
+        correctAnswer: 1,
+        explanation: "El Salvador es pionero en America Latina en llevar IA a la educacion publica de manera sistematica, creando un modelo que otros paises pueden seguir.",
+        feedback: "¡Correcto! Ser primero tiene ventajas y responsabilidades.",
+        hints: ["Piensa en que hace diferente a El Salvador en la region", "Es sobre ser pionero"]
+      },
+      {
+        id: "sv-2",
+        question: "¿Que aporta El Salvador a la alianza con xAI?",
+        options: ["A) Solo dinero", "B) Solo estudiantes", "C) Voluntad de experimentar, infraestructura educativa y vision inclusiva", "D) Nada importante"],
+        correctAnswer: 2,
+        explanation: "xAI provee tecnologia, pero El Salvador aporta la voluntad de innovar, la infraestructura para implementar, y la vision de que la IA debe ser para todos.",
+        feedback: "¡Exacto! Es una alianza de dos partes que se complementan.",
+        hints: ["No es solo recibir tecnologia", "Piensa en lo que El Salvador ofrece"]
+      },
+      {
+        id: "sv-3",
+        question: "¿Cual es un desafio real que El Salvador enfrenta con la IA?",
+        options: ["A) No hay desafios", "B) Infraestructura, capacitacion y desigualdad de acceso", "C) La gente no quiere aprender", "D) No hay internet en el pais"],
+        correctAnswer: 1,
+        explanation: "El Salvador enfrenta desafios reales: no todas las escuelas tienen buena conectividad, los maestros necesitan capacitacion, y existe riesgo de desigualdad.",
+        feedback: "¡Asi es! Reconocer los desafios es el primer paso para superarlos.",
+        hints: ["Todo proyecto tiene desafios", "Piensa en recursos e infraestructura"]
+      },
+      {
+        id: "sv-4",
+        question: "¿Que puedes hacer TU para contribuir al futuro de la IA en El Salvador?",
+        options: ["A) Nada, soy muy joven", "B) Aprender, usar IA responsablemente, y potencialmente crear soluciones locales", "C) Esperar a que otros lo hagan", "D) Solo usar IA para juegos"],
+        correctAnswer: 1,
+        explanation: "Puedes estudiar, crear soluciones para problemas salvadorenos, ensenar a otros, emprender, o simplemente usar IA de manera responsable y critica.",
+        feedback: "¡Perfecto! Tu rol es activo, no pasivo.",
+        hints: ["No hay edad minima para aprender e impactar", "Piensa en todas las formas de contribuir"]
+      }
+    ],
+    aiErrorTips: [
+      "La IA puede no tener informacion actualizada sobre proyectos recientes en El Salvador",
+      "Verifica datos sobre la alianza xAI con fuentes oficiales del gobierno",
+      "Los planes de expansion de Salvora pueden cambiar - consulta fuentes oficiales"
+    ],
+    responsibleAIReminder: {
+      student: "Eres parte de la primera generacion salvadorena en aprender IA formalmente. Esa es una responsabilidad y un privilegio.",
+      teacher: "Ayude a sus estudiantes a ver el panorama completo: El Salvador como pionero, sus oportunidades y sus desafios."
+    },
+    whatsAppPayload: {
+      summary: "El Salvador es pionero en America Latina en llevar IA a las escuelas. ¡Soy parte de esta historia y de la primera generacion en aprender IA formalmente!",
+      prompt: "Pregunta: Como puede la IA transformar El Salvador en los proximos anos?",
+      practiceQuestion: "¿Que oportunidades ves tu para usar IA en tu comunidad o en el sector que te interesa?"
+    }
+  },
+
+  // =====================================================
+  // UNIT 4: EVALUACION FINAL (Lesson 11)
+  // =====================================================
+
+  "intro-4-evaluacion": {
+    practiceQuestions: [
+      {
+        id: "eval-1",
+        question: "¿Que es Salvora?",
+        options: [
+          "Una red social",
+          "La plataforma nacional de alfabetizacion en IA de El Salvador",
+          "Un juego de video",
+          "Una aplicacion de mensajeria"
+        ],
+        correctAnswer: 1,
+        explanation: "Salvora es la plataforma oficial de El Salvador, creada en alianza con xAI, para ensenar inteligencia artificial."
+      },
+      {
+        id: "eval-2",
+        question: "¿Que tipo de IA es Grok, ChatGPT, y Siri?",
+        options: [
+          "Super Inteligencia Artificial",
+          "IA General",
+          "IA Estrecha",
+          "IA Cuantica"
+        ],
+        correctAnswer: 2,
+        explanation: "Todas las IAs actuales son IA Estrecha - especializadas en tareas especificas pero no capaces de hacer todo."
+      },
+      {
+        id: "eval-3",
+        question: "¿Como genera respuestas un modelo de lenguaje?",
+        options: [
+          "Busca en una base de datos de respuestas",
+          "Un humano escribe cada respuesta",
+          "Predice la siguiente palabra basandose en patrones",
+          "Copia de Wikipedia"
+        ],
+        correctAnswer: 2,
+        explanation: "Los modelos de lenguaje predicen palabra por palabra cual deberia seguir, basandose en patrones aprendidos."
+      },
+      {
+        id: "eval-4",
+        question: "¿Que son las 'alucinaciones' de la IA?",
+        options: [
+          "Cuando la IA ve imagenes",
+          "Cuando la IA inventa informacion que suena correcta pero es falsa",
+          "Cuando la IA duerme",
+          "Cuando la IA esta confundida"
+        ],
+        correctAnswer: 1,
+        explanation: "Las alucinaciones ocurren cuando la IA genera informacion falsa con total confianza."
+      },
+      {
+        id: "eval-5",
+        question: "¿Por que la IA puede saber poco sobre El Salvador?",
+        options: [
+          "Porque El Salvador es secreto",
+          "Porque fue entrenada principalmente con contenido en ingles",
+          "Porque no le interesa",
+          "Porque El Salvador no tiene tecnologia"
+        ],
+        correctAnswer: 1,
+        explanation: "Las IAs fueron entrenadas mayormente con textos en ingles y de paises desarrollados."
+      },
+      {
+        id: "eval-6",
+        question: "¿Que empresa creo Grok?",
+        options: [
+          "Google",
+          "Apple",
+          "xAI (de Elon Musk)",
+          "Microsoft"
+        ],
+        correctAnswer: 2,
+        explanation: "Grok fue creado por xAI, la empresa de IA fundada por Elon Musk."
+      },
+      {
+        id: "eval-7",
+        question: "¿Tiene la IA emociones o conciencia?",
+        options: [
+          "Si, siente alegria cuando ayuda",
+          "No, solo procesa patrones sin experiencia subjetiva",
+          "A veces, depende del modelo",
+          "Si, pero las oculta"
+        ],
+        correctAnswer: 1,
+        explanation: "La IA no tiene conciencia ni emociones - solo calcula probabilidades."
+      },
+      {
+        id: "eval-8",
+        question: "¿Cual es un uso ETICO de la IA para tareas escolares?",
+        options: [
+          "Pedirle que escriba tu ensayo completo",
+          "Copiar respuestas sin entenderlas",
+          "Pedirle que te explique un concepto de diferentes formas",
+          "Presentar trabajo de la IA como tuyo"
+        ],
+        correctAnswer: 2,
+        explanation: "Usar IA para entender mejor es etico; usarla para copiar es trampa."
+      },
+      {
+        id: "eval-9",
+        question: "Si la IA da informacion incorrecta, ¿quien es responsable de verificar?",
+        options: [
+          "La IA",
+          "Nadie",
+          "Tu, como usuario",
+          "El gobierno"
+        ],
+        correctAnswer: 2,
+        explanation: "La responsabilidad de verificar informacion siempre recae en el usuario humano."
+      },
+      {
+        id: "eval-10",
+        question: "¿Que significa 'basura entra, basura sale' en el contexto de IA?",
+        options: [
+          "Las computadoras generan basura",
+          "Si los datos de entrenamiento son malos, las respuestas seran malas",
+          "La IA produce mucha basura digital",
+          "Hay que reciclar computadoras"
+        ],
+        correctAnswer: 1,
+        explanation: "La calidad de la IA depende de la calidad de sus datos de entrenamiento."
+      },
+      {
+        id: "eval-11",
+        question: "¿Cuando nacio oficialmente el termino 'Inteligencia Artificial'?",
+        options: [
+          "1990",
+          "1956",
+          "2020",
+          "1800"
+        ],
+        correctAnswer: 1,
+        explanation: "El termino nacio en 1956 en la conferencia de Dartmouth."
+      },
+      {
+        id: "eval-12",
+        question: "¿Por que El Salvador es significativo en la historia de la IA educativa?",
+        options: [
+          "Invento la IA",
+          "Es el primer pais de America Latina en llevar IA a escuelas publicas sistematicamente",
+          "Tiene las mejores computadoras",
+          "Es el pais mas grande de la region"
+        ],
+        correctAnswer: 1,
+        explanation: "El Salvador es pionero en America Latina en educacion de IA."
+      },
+      {
+        id: "eval-13",
+        question: "¿Que caracteristica unica tiene Grok?",
+        options: [
+          "Solo habla ingles",
+          "Tiene acceso a informacion en tiempo real",
+          "Es gratis para todos",
+          "Puede viajar en el tiempo"
+        ],
+        correctAnswer: 1,
+        explanation: "Grok puede acceder a informacion actualizada a traves de X (Twitter)."
+      },
+      {
+        id: "eval-14",
+        question: "¿Por que la IA puede tener prejuicios?",
+        options: [
+          "Porque es malvada",
+          "Porque refleja los sesgos en sus datos de entrenamiento",
+          "Porque esta programada para discriminar",
+          "Porque no le gustan algunas personas"
+        ],
+        correctAnswer: 1,
+        explanation: "La IA aprende de datos humanos que pueden contener prejuicios inconscientes."
+      },
+      {
+        id: "eval-15",
+        question: "¿Cual es el mensaje principal de este curso?",
+        options: [
+          "La IA es peligrosa y debemos evitarla",
+          "La IA puede hacer todo por ti",
+          "La IA es una herramienta poderosa que debes usar con responsabilidad y criterio",
+          "Solo los expertos pueden usar IA"
+        ],
+        correctAnswer: 2,
+        explanation: "La IA es una herramienta poderosa pero tiene limites. Usarla bien requiere conocimiento, criterio y responsabilidad."
+      }
+    ],
+    enhancedPractice: [
+      {
+        id: "eval-bonus-1",
+        question: "Completaste el curso de Introduccion a la IA. ¿Que representa esto?",
+        options: [
+          "A) El fin de tu aprendizaje sobre IA",
+          "B) El comienzo de tu viaje como ciudadano digital informado",
+          "C) Que ahora eres experto en IA",
+          "D) Que ya no necesitas aprender mas"
+        ],
+        correctAnswer: 1,
+        explanation: "Este curso es solo el comienzo. El aprendizaje sobre IA es continuo porque la tecnologia sigue evolucionando.",
+        feedback: "¡Felicidades por completar el curso! Ahora tienes las bases para seguir aprendiendo.",
+        hints: ["El aprendizaje nunca termina", "Este es un fundamento, no el final"]
+      }
+    ],
+    quickVersion: {
+      bullets: [
+        "Esta evaluacion cubre todo el curso: definicion, historia, tipos, funcionamiento, limites, etica y El Salvador",
+        "15 preguntas de opcion multiple - necesitas 70% para aprobar",
+        "Puedes volver a intentarlo si no apruebas la primera vez"
+      ],
+      localExample: "Estudiantes de todo El Salvador, desde Apopa hasta Usulutan, estan tomando esta misma evaluacion. ¡Tu eres parte de esta primera generacion!",
+      safePrompt: "Ayudame a repasar los conceptos principales del curso de Introduccion a la IA antes de mi evaluacion."
+    },
+    localContext: {
+      hook: "Esta evaluacion marca el final de tu primer paso en el viaje de la IA. Pero el aprendizaje continua - en los proximos cursos y en tu vida diaria.",
+      department: "Todo El Salvador"
+    },
+    responsibleAIReminder: {
+      student: "Esta evaluacion es para TI, para medir tu aprendizaje. Hazla con honestidad.",
+      teacher: "Considere revisar los resultados de las evaluaciones para identificar areas que necesitan refuerzo."
+    },
+    whatsAppPayload: {
+      summary: "Complete la evaluacion del curso Introduccion a la IA en Salvora. ¡Ahora tengo las bases para usar IA de manera responsable!",
+      prompt: "Pregunta: Cuales son los puntos mas importantes que aprendi sobre inteligencia artificial?",
+      practiceQuestion: "¿Que fue lo mas sorprendente que aprendiste en este curso?"
+    }
   },
 
   // ===== CURSO 2: IA PARA MAESTROS =====

@@ -15,6 +15,15 @@ interface VideoLessonProps {
   isCompleted: boolean;
 }
 
+// Helper to detect placeholder video IDs
+const isPlaceholderVideo = (videoId: string | undefined): boolean => {
+  if (!videoId) return true;
+  if (videoId === "placeholder") return true;
+  if (videoId.startsWith("placeholder")) return true;
+  if (videoId.startsWith("SALVORA_")) return true;
+  return false;
+};
+
 export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }: VideoLessonProps) {
   const [showTranscript, setShowTranscript] = useState(false);
   const [videoWatched, setVideoWatched] = useState(false);
@@ -55,7 +64,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
           <p className="text-muted-foreground mb-4">
             El video no se muestra para ahorrar datos. Lee la transcripcion abajo.
           </p>
-          {lesson.videoId && !lesson.videoId.startsWith("placeholder") && (
+          {!isPlaceholderVideo(lesson.videoId) && (
             <a
               href={`https://www.youtube.com/watch?v=${lesson.videoId}`}
               target="_blank"
@@ -120,7 +129,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
     <div className="space-y-6">
       {/* Video Player */}
       <div className="aspect-video bg-slate-900 rounded-xl overflow-hidden relative">
-        {lesson.videoId && lesson.videoId !== "placeholder" && !lesson.videoId.startsWith("placeholder") ? (
+        {!isPlaceholderVideo(lesson.videoId) ? (
           <iframe
             src={`https://www.youtube.com/embed/${lesson.videoId}`}
             title={lesson.title}

@@ -24,17 +24,15 @@ export const courses: Course[] = [
           {
             id: "intro-1-bienvenida",
             title: "Bienvenida: Tu Viaje con la IA",
-            type: "video",
+            type: "reading",
             duration: "8 min",
-            videoId: "W8AeOXa_FqU", // DotCSV: Programando Red Neuronal - intro to AI concepts
             order: 1,
           },
           {
             id: "intro-1-que-es-ia",
             title: "Que es la Inteligencia Artificial?",
-            type: "video",
+            type: "reading",
             duration: "12 min",
-            videoId: "90QDe6DQXF4", // DotCSV: IA crea ARTE - demonstrates AI capabilities
             order: 2,
           },
           {
@@ -47,9 +45,8 @@ export const courses: Course[] = [
           {
             id: "intro-1-tipos",
             title: "Tipos de IA: Estrecha, General y Super",
-            type: "video",
+            type: "reading",
             duration: "10 min",
-            videoId: "KytW151dpqU", // DotCSV: ¿Qué es el Machine Learning? ¿Y Deep Learning?
             order: 4,
           },
         ],
@@ -77,11 +74,18 @@ export const courses: Course[] = [
           },
           {
             id: "intro-2-grok",
-            title: "Conoce a Grok: El Asistente de xAI",
+            title: "Asistentes de IA: ChatGPT, Grok y Mas",
             type: "video",
             duration: "10 min",
             videoId: "c_PqM5lPvjY", // DotCSV: ¡Probando el CHATBOT más POTENTE DEL MUNDO!
             order: 3,
+          },
+          {
+            id: "intro-2-prompts",
+            title: "Como Hablar con la IA: Prompts Efectivos",
+            type: "reading",
+            duration: "10 min",
+            order: 4,
           },
         ],
       },
@@ -109,9 +113,8 @@ export const courses: Course[] = [
           {
             id: "intro-3-el-salvador",
             title: "IA en El Salvador: Oportunidad Nacional",
-            type: "video",
+            type: "reading",
             duration: "10 min",
-            videoId: "SALVORA_INTRO_007",
             order: 3,
           },
         ],

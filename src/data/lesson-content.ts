@@ -966,8 +966,200 @@ Ese es un excelente comienzo para una relacion productiva con tu nuevo asistente
     }
   },
 
+  "intro-2-prompts": {
+    content: `Como Hablar con la IA: Prompts Efectivos
+
+La forma en que le hablas a la IA determina la calidad de las respuestas que obtienes. Un "prompt" es simplemente la instruccion o pregunta que le das a la IA. Aprender a escribir buenos prompts es una habilidad fundamental.
+
+¿Por Que Importa Como Preguntas?
+
+Imagina que le preguntas a alguien en la calle: "¿Donde hay comida?" vs "¿Conoces un buen lugar para comer pupusas cerca del centro de San Salvador?" La segunda pregunta dara una respuesta mucho mas util.
+
+Lo mismo pasa con la IA. Preguntas vagas dan respuestas vagas. Preguntas especificas dan respuestas utiles.
+
+Los 5 Elementos de un Buen Prompt
+
+1. CONTEXTO
+Dile a la IA quien eres y por que preguntas.
+- Malo: "Explicame fotosintesis"
+- Bueno: "Soy estudiante de 8vo grado en El Salvador. Explicame la fotosintesis de manera simple para un examen de ciencias"
+
+2. ESPECIFICIDAD
+Se claro sobre exactamente que necesitas.
+- Malo: "Habla sobre la historia"
+- Bueno: "Dame un resumen de 5 puntos clave sobre la independencia de Centroamerica en 1821"
+
+3. FORMATO
+Pide el formato que necesitas.
+- "Explicalo en una lista numerada"
+- "Dame 3 ejemplos"
+- "Respondeme en 2 parrafos cortos"
+- "Hazme una tabla comparativa"
+
+4. RESTRICCIONES
+Di lo que NO quieres.
+- "No uses palabras dificiles"
+- "Explicalo sin usar formulas matematicas"
+- "Mantenlo en menos de 100 palabras"
+
+5. EJEMPLOS
+Si es posible, muestra lo que buscas.
+- "Quiero algo como esto: [ejemplo]"
+- "El estilo debe ser similar a..."
+
+Prompts Buenos vs Malos: Ejemplos Reales
+
+MALO: "Que es el volcan de San Salvador?"
+BUENO: "Soy estudiante de secundaria en El Salvador. Dame 5 datos interesantes sobre el volcan de San Salvador que pueda usar en una presentacion de geografia. Incluye un dato sobre actividad reciente."
+
+MALO: "Ayudame con matematicas"
+BUENO: "No entiendo como resolver ecuaciones de primer grado. Explicame el proceso paso a paso con un ejemplo simple, como si tuviera 13 anos."
+
+MALO: "Escribe sobre El Salvador"
+BUENO: "Escribe un parrafo de 80 palabras sobre la economia de El Salvador que incluya: Bitcoin, turismo y agricultura. Es para una tarea de estudios sociales de 9no grado."
+
+El Truco de la Iteracion
+
+No tienes que obtener la respuesta perfecta al primer intento. Puedes seguir conversando:
+
+1. Haces tu primera pregunta
+2. La IA responde
+3. Tu dices: "Eso esta bien, pero puedes hacerlo mas simple?"
+4. La IA ajusta
+5. Tu dices: "Ahora dame un ejemplo de El Salvador"
+6. La IA mejora
+
+Esto se llama "iteracion" - ir mejorando la respuesta poco a poco.
+
+Errores Comunes que Debes Evitar
+
+1. Ser demasiado vago
+   No: "Dime algo interesante"
+   Si: "Dame un dato curioso sobre los mayas en El Salvador"
+
+2. Pedir demasiado a la vez
+   No: "Explicame toda la historia de El Salvador, su economia, cultura y politica en detalle"
+   Si: "Explicame brevemente por que El Salvador adopto el dolar en 2001"
+
+3. No dar contexto de tu nivel
+   No: "Que es la inflacion?"
+   Si: "Que es la inflacion? Explicalo para un estudiante de secundaria sin usar terminos economicos complicados"
+
+4. Aceptar la primera respuesta sin pensar
+   Siempre preguntate: ¿Esto tiene sentido? ¿Es completo? ¿Necesito mas detalles?
+
+Prompt de Oro para Estudiantes Salvadorenos
+
+Aqui tienes una plantilla que funciona para casi cualquier pregunta:
+
+"Soy estudiante de [grado] en El Salvador. Necesito entender [tema] para [proposito]. Explicamelo de forma simple con ejemplos de la vida cotidiana. [Restriccion adicional si la hay]."
+
+Ejemplo aplicado:
+"Soy estudiante de 9no grado en El Salvador. Necesito entender que es el cambio climatico para una tarea de ciencias. Explicamelo de forma simple con ejemplos de como afecta a Centroamerica. Usa maximo 150 palabras."
+
+Practica Hace al Maestro
+
+La unica forma de mejorar escribiendo prompts es practicando. Cada vez que uses la IA, piensa:
+- ¿Fui lo suficientemente claro?
+- ¿La respuesta fue util?
+- ¿Como podria preguntar mejor la proxima vez?
+
+Con el tiempo, escribir buenos prompts se volvera natural.`,
+
+    quickVersion: {
+      bullets: [
+        "Un prompt es la instruccion o pregunta que le das a la IA - su calidad determina la calidad de la respuesta",
+        "Buenos prompts incluyen: contexto, especificidad, formato deseado, restricciones y ejemplos",
+        "Puedes mejorar respuestas iterando: pide ajustes, mas detalles o ejemplos adicionales"
+      ],
+      localExample: "En vez de preguntar '¿Que hay en El Salvador?', pregunta 'Dame 5 lugares turisticos de El Salvador que un estudiante de secundaria pueda visitar con su familia, incluyendo costo aproximado.'",
+      safePrompt: "Soy estudiante de [grado] en El Salvador. Necesito entender [tema] para [proposito]. Explicamelo de forma simple con ejemplos de la vida cotidiana."
+    },
+    localContext: {
+      hook: "Un estudiante de Usulutan que sabe escribir buenos prompts obtendra mejores respuestas que uno de San Salvador que no sabe. La habilidad de comunicarte con la IA es tu ventaja competitiva.",
+      department: "Usulutan"
+    },
+    safePrompts: [{
+      template: "Soy estudiante de [GRADO] en El Salvador. Necesito entender [TEMA] para [PROPOSITO]. Explicamelo de forma simple.",
+      goodExample: "Soy estudiante de 8vo grado en El Salvador. Necesito entender las fracciones para mi examen de matematicas. Explicamelo con ejemplos de dividir pupusas.",
+      badExample: "Explicame matematicas"
+    }],
+    enhancedPractice: [
+      {
+        id: "prompts-1",
+        question: "¿Cual de estos es un MEJOR prompt?",
+        options: [
+          "A) Dime sobre ciencia",
+          "B) Soy estudiante de 7mo. Explicame en 3 puntos simples que es la gravedad.",
+          "C) Ciencia para ninos",
+          "D) Quiero saber todo sobre el universo"
+        ],
+        correctAnswer: 1,
+        explanation: "La opcion B incluye contexto (estudiante de 7mo), formato (3 puntos), y especificidad (la gravedad). Las otras son demasiado vagas.",
+        feedback: "¡Exacto! Un buen prompt es especifico, da contexto y pide un formato claro.",
+        hints: ["Busca el que tiene mas detalles", "¿Cual dice quien pregunta y que necesita exactamente?"]
+      },
+      {
+        id: "prompts-2",
+        question: "¿Que elemento falta en este prompt? 'Explicame la fotosintesis'",
+        options: [
+          "A) La palabra 'por favor'",
+          "B) Contexto sobre quien pregunta y para que",
+          "C) Emojis",
+          "D) Nada, esta perfecto"
+        ],
+        correctAnswer: 1,
+        explanation: "Sin contexto, la IA no sabe si explicar para un nino de primaria o un estudiante universitario. El contexto mejora drasticamente las respuestas.",
+        feedback: "¡Correcto! Siempre incluye quien eres y para que necesitas la informacion.",
+        hints: ["La IA no sabe tu edad ni nivel", "¿Como sabria que tan simple o compleja hacer la explicacion?"]
+      },
+      {
+        id: "prompts-3",
+        question: "Si la primera respuesta de la IA no es lo que necesitas, ¿que deberias hacer?",
+        options: [
+          "A) Rendirte y buscar en otro lado",
+          "B) Copiar la respuesta aunque no sirva",
+          "C) Iterar: pedir que ajuste, simplifique o de mas ejemplos",
+          "D) Quejarte de que la IA no funciona"
+        ],
+        correctAnswer: 2,
+        explanation: "La iteracion es clave. Puedes decir 'hazlo mas simple', 'dame un ejemplo de El Salvador', o 'explicalo de otra forma' para mejorar la respuesta.",
+        feedback: "¡Perfecto! Iterar es la clave para obtener exactamente lo que necesitas.",
+        hints: ["Puedes seguir conversando con la IA", "No tienes que aceptar la primera respuesta"]
+      },
+      {
+        id: "prompts-4",
+        question: "¿Cual restriccion es util agregar a un prompt para tarea escolar?",
+        options: [
+          "A) 'Responde en chino'",
+          "B) 'Usa maximo 100 palabras y evita terminos tecnicos'",
+          "C) 'Hazlo lo mas largo posible'",
+          "D) 'No me importa como lo hagas'"
+        ],
+        correctAnswer: 1,
+        explanation: "Las restricciones como limites de palabras y nivel de lenguaje ayudan a obtener respuestas adecuadas para tu proposito.",
+        feedback: "¡Asi es! Las restricciones guian a la IA para darte exactamente lo que necesitas.",
+        hints: ["Piensa en que seria util para una tarea", "¿Que te ayudaria a entender mejor?"]
+      }
+    ],
+    aiErrorTips: [
+      "Si la IA da una respuesta muy larga, pide 'Resumelo en 3 oraciones'",
+      "Si usa palabras que no entiendes, di 'Explicalo como para alguien de 12 anos'",
+      "Si la respuesta no es sobre El Salvador, agrega 'con ejemplos de Centroamerica'"
+    ],
+    responsibleAIReminder: {
+      student: "Un buen prompt no es para que la IA haga tu trabajo. Es para que la IA te ayude a entender y aprender mejor.",
+      teacher: "Ensene a los estudiantes que escribir buenos prompts es una habilidad valiosa para el futuro, no un atajo para evitar pensar."
+    },
+    whatsAppPayload: {
+      summary: "Aprendi a escribir buenos prompts! La clave es dar contexto, ser especifico, y pedir el formato que necesitas.",
+      prompt: "Plantilla: Soy estudiante de [grado] en El Salvador. Necesito entender [tema] para [proposito]. Explicamelo simple.",
+      practiceQuestion: "Escribe un prompt para pedirle a la IA que te explique por que El Salvador uso el colon antes del dolar."
+    }
+  },
+
   // =====================================================
-  // UNIT 3: USANDO IA RESPONSABLEMENTE (Lessons 8-10)
+  // UNIT 3: USANDO IA RESPONSABLEMENTE (Lessons 9-11)
   // =====================================================
 
   "intro-3-limites": {

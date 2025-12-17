@@ -158,7 +158,7 @@ export const courses: Course[] = [
             title: "Plantillas y objetivos de aprendizaje",
             type: "video",
             duration: "12 min",
-            videoId: "placeholder-templates",
+            videoId: "GdK0Kre4zxo", // FLACSO Argentina: Charla Abierta - IA en Educación
             order: 1,
           },
           {
@@ -188,7 +188,7 @@ export const courses: Course[] = [
             title: "Generador de cuestionarios",
             type: "video",
             duration: "10 min",
-            videoId: "placeholder-quizzes",
+            videoId: "1RpxpE6lHk0", // La Inteligencia Artificial en educación
             order: 1,
           },
           {
@@ -218,7 +218,7 @@ export const courses: Course[] = [
             title: "Seguridad y privacidad",
             type: "video",
             duration: "10 min",
-            videoId: "placeholder-safety",
+            videoId: "_MkqpvnAbd8", // Educando en pensamiento crítico con IA
             order: 1,
           },
           {
@@ -233,7 +233,7 @@ export const courses: Course[] = [
             title: "Protegiendo la privacidad estudiantil",
             type: "video",
             duration: "8 min",
-            videoId: "placeholder-privacy",
+            videoId: "t2BwqYDfgMY", // Seguridad en Internet para niños y familias
             order: 3,
           },
         ],
@@ -262,7 +262,7 @@ export const courses: Course[] = [
             title: "Como pedir ayuda a la IA",
             type: "video",
             duration: "10 min",
-            videoId: "placeholder-asking",
+            videoId: "m5L3VeIIusM", // Benja Martínez: La mejor forma de estudiar con ChatGPT
             order: 1,
           },
           {
@@ -270,7 +270,7 @@ export const courses: Course[] = [
             title: "Aprender, no copiar",
             type: "video",
             duration: "8 min",
-            videoId: "placeholder-learn",
+            videoId: "DZ2KfW5mfg0", // Inteligencia Artificial y Docencia Científica
             order: 2,
           },
           {
@@ -293,7 +293,7 @@ export const courses: Course[] = [
             title: "Explicaciones paso a paso",
             type: "video",
             duration: "12 min",
-            videoId: "placeholder-math",
+            videoId: "1k_WwjqDi5Q", // TEC Monterrey: IA para estudiantes - tips para estudiar
             order: 1,
           },
           {
@@ -316,7 +316,7 @@ export const courses: Course[] = [
             title: "Simplificador de textos",
             type: "video",
             duration: "8 min",
-            videoId: "placeholder-simplify",
+            videoId: "afIJamZRzTk", // TEC Monterrey: Herramientas de IA para estudiantes
             order: 1,
           },
           {
@@ -352,7 +352,7 @@ export const courses: Course[] = [
             title: "Cultivos inteligentes",
             type: "video",
             duration: "10 min",
-            videoId: "placeholder-agriculture",
+            videoId: "R9fMbiQu6Z8", // Drones en agricultura - mapeo y precisión
             order: 1,
           },
           {
@@ -375,7 +375,7 @@ export const courses: Course[] = [
             title: "IA en finanzas",
             type: "video",
             duration: "12 min",
-            videoId: "placeholder-finance",
+            videoId: "IyxtSlzBwAo", // Tecnología y mapeo - agricultura de precisión
             order: 1,
           },
           {
@@ -398,7 +398,7 @@ export const courses: Course[] = [
             title: "IA para turistas y visitantes",
             type: "video",
             duration: "8 min",
-            videoId: "placeholder-tourism",
+            videoId: "nGD558g9Cl4", // Turismo inteligente y ciudades digitales
             order: 1,
           },
         ],
@@ -414,7 +414,7 @@ export const courses: Course[] = [
             title: "Protegiendo el planeta con IA",
             type: "video",
             duration: "10 min",
-            videoId: "placeholder-environment",
+            videoId: "akMU9CsZebE", // Robots y automatización - el futuro de los servicios
             order: 1,
           },
         ],
@@ -430,7 +430,7 @@ export const courses: Course[] = [
             title: "Analisis deportivo con IA",
             type: "video",
             duration: "8 min",
-            videoId: "placeholder-sports",
+            videoId: "udoCfnREtUc", // CNN: ¿Camareros humanos o robots? - IA en servicios
             order: 1,
           },
         ],

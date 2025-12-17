@@ -212,6 +212,10 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   };
 
   const isLessonUnlocked = (courseId: string, lessonId: string): boolean => {
+    // TESTING MODE: All lessons unlocked for review
+    // TODO: Remove this line to re-enable lesson locking
+    return true;
+
     const course = getCourseById(courseId);
     if (!course) return false;
 

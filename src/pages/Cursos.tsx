@@ -60,7 +60,7 @@ function LessonIcon({
 }
 
 function CourseSection({ course }: { course: Course }) {
-  const [expandedUnits, setExpandedUnits] = useState<string[]>([course.units[0]?.id || ""]);
+  const [expandedUnits, setExpandedUnits] = useState<string[]>([]);
   const { isLessonComplete, getCourseProgress } = useProgress();
 
   const toggleUnit = (unitId: string) => {

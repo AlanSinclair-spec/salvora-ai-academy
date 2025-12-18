@@ -4,79 +4,56 @@ const reasons = [
   {
     icon: AlertTriangle,
     title: "Brecha de IA",
-    description: "Mientras otros países avanzan, millones de estudiantes salvadoreños aún no tienen acceso a educación sobre inteligencia artificial. Esta brecha crece cada día.",
-    color: "salvora-orange",
+    description: "Mientras otros países avanzan, millones de estudiantes salvadoreños aún no tienen acceso a educación sobre inteligencia artificial.",
   },
   {
     icon: Users,
     title: "Maestros saturados",
-    description: "Los docentes enfrentan aulas de 40+ estudiantes sin herramientas para integrar IA. Necesitan recursos prácticos, no más carga de trabajo.",
-    color: "salvora-purple",
+    description: "Los docentes enfrentan aulas de 40+ estudiantes sin herramientas para integrar IA. Necesitan recursos prácticos.",
   },
   {
     icon: Sparkles,
     title: "Oportunidad histórica",
-    description: "El Salvador puede ser el primer país en alfabetizar a toda una generación en IA. El momento es ahora, y Salvora es el vehículo.",
-    color: "salvora-cyan",
+    description: "El Salvador puede ser el primer país en alfabetizar a toda una generación en IA. El momento es ahora.",
   },
 ];
 
-const colorClasses: Record<string, { bg: string; text: string; border: string }> = {
-  "salvora-orange": {
-    bg: "bg-salvora-orange/10",
-    text: "text-salvora-orange",
-    border: "border-salvora-orange/20",
-  },
-  "salvora-purple": {
-    bg: "bg-salvora-purple/10",
-    text: "text-salvora-purple",
-    border: "border-salvora-purple/20",
-  },
-  "salvora-cyan": {
-    bg: "bg-salvora-cyan/10",
-    text: "text-salvora-cyan",
-    border: "border-salvora-cyan/20",
-  },
-};
-
 export function WhySalvoraSection() {
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
-      {/* Floating orbs */}
-      <div className="floating-orb bg-salvora-orange/15 w-80 h-80 -top-20 -right-20 -z-10" style={{ animation: "float-slow 10s ease-in-out infinite" }} />
-      <div className="floating-orb bg-salvora-purple/10 w-64 h-64 bottom-10 -left-20 -z-10" style={{ animation: "float 8s ease-in-out 2s infinite" }} />
-
-      <div className="salvora-container relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Por qué Salvora existe
+    <section className="py-24 md:py-32 relative">
+      <div className="salvora-container">
+        <div className="mb-16">
+          <p className="text-sm text-muted-foreground uppercase tracking-wider mb-3">Por qué existimos</p>
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground max-w-xl">
+            Una respuesta a un momento decisivo
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            No es solo una plataforma educativa. Es una respuesta a un momento decisivo.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {reasons.map((reason, index) => {
-            const colors = colorClasses[reason.color];
-            return (
-              <div
-                key={reason.title}
-                className={`relative p-8 rounded-2xl border ${colors.border} bg-card hover:shadow-xl transition-all duration-300 group`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${colors.bg} ${colors.text} mb-6 group-hover:scale-110 transition-transform`}>
-                  <reason.icon className="w-7 h-7" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                  {reason.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {reason.description}
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30 rounded-lg overflow-hidden">
+          {reasons.map((reason, index) => (
+            <div
+              key={reason.title}
+              className="bg-background p-8 md:p-10 group"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-xs text-muted-foreground font-medium tabular-nums">
+                  0{index + 1}
+                </span>
+                <div className="w-8 h-px bg-border/50" />
               </div>
-            );
-          })}
+              
+              <div className="mb-6">
+                <reason.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </div>
+              
+              <h3 className="font-display text-lg font-semibold text-foreground mb-3">
+                {reason.title}
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {reason.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

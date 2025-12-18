@@ -211,29 +211,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return isVideoWatched(courseId, lessonId) && isPracticeCompleted(courseId, lessonId);
   };
 
-  const isLessonUnlocked = (courseId: string, lessonId: string): boolean => {
-    const course = getCourseById(courseId);
-    if (!course) return false;
-
-    // Flatten all lessons to get order
-    const allLessons: { lessonId: string; unitId: string }[] = [];
-    for (const unit of course.units) {
-      for (const lesson of unit.lessons) {
-        allLessons.push({ lessonId: lesson.id, unitId: unit.id });
-      }
-    }
-
-    const currentIndex = allLessons.findIndex((l) => l.lessonId === lessonId);
-
-    // First lesson is always unlocked
-    if (currentIndex === 0) return true;
-
-    // Lesson not found
-    if (currentIndex === -1) return false;
-
-    // Check if previous lesson is completed
-    const prevLesson = allLessons[currentIndex - 1];
-    return isLessonComplete(courseId, prevLesson.lessonId);
+  const isLessonUnlocked = (_courseId: string, _lessonId: string): boolean => {
+    return true; // All lessons accessible
   };
 
   const getLessonProgress = (courseId: string, lessonId: string): UserProgress | undefined => {

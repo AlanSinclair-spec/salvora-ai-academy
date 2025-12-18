@@ -1,7 +1,7 @@
 // Practice Lesson Component
-// Interactive exercises with links to AI tools
+// Interactive exercises with links to AI tools - SAFE rendering (no dangerouslySetInnerHTML)
 
-import { useState } from "react";
+import { useState, Fragment, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,7 +22,59 @@ interface PracticeLessonProps {
   isCompleted: boolean;
 }
 
-// Simple markdown-like parser for instructions
+/**
+ * Safely parses inline markdown formatting (bold, italic, highlights) into React elements.
+ * SECURITY: This function does NOT use dangerouslySetInnerHTML - all content is escaped by React.
+ */
+function parseInlineFormatting(text: string): ReactNode[] {
+  const result: ReactNode[] = [];
+  let remaining = text;
+  let key = 0;
+
+  while (remaining.length > 0) {
+    // Match bold first (** **) since it's more specific
+    const boldMatch = remaining.match(/^(.*?)\*\*(.+?)\*\*(.*)$/s);
+    if (boldMatch) {
+      const [, before, boldText, after] = boldMatch;
+      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
+      result.push(<strong key={key++}>{boldText}</strong>);
+      remaining = after;
+      continue;
+    }
+
+    // Match italic (* *)
+    const italicMatch = remaining.match(/^(.*?)\*(.+?)\*(.*)$/s);
+    if (italicMatch) {
+      const [, before, italicText, after] = italicMatch;
+      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
+      result.push(<em key={key++}>{italicText}</em>);
+      remaining = after;
+      continue;
+    }
+
+    // Match highlight brackets [text]
+    const highlightMatch = remaining.match(/^(.*?)\[(.+?)\](.*)$/s);
+    if (highlightMatch) {
+      const [, before, highlightText, after] = highlightMatch;
+      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
+      result.push(
+        <span key={key++} className="bg-primary/10 text-primary px-1 rounded">
+          {highlightText}
+        </span>
+      );
+      remaining = after;
+      continue;
+    }
+
+    // No more formatting, add remaining text
+    result.push(<Fragment key={key++}>{remaining}</Fragment>);
+    break;
+  }
+
+  return result;
+}
+
+// Simple markdown-like parser for instructions - SAFE (no dangerouslySetInnerHTML)
 function parseInstructions(content: string) {
   const lines = content.split("\n");
   const elements: JSX.Element[] = [];
@@ -33,7 +85,7 @@ function parseInstructions(content: string) {
       elements.push(
         <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-2 mb-4 text-muted-foreground ml-4">
           {listItems.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{parseInlineFormatting(item)}</li>
           ))}
         </ul>
       );
@@ -74,17 +126,11 @@ function parseInstructions(content: string) {
       elements.push(<hr key={index} className="my-6 border-border" />);
     } else if (trimmed.length > 0) {
       flushList();
-      const processed = trimmed
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-        .replace(/\*(.*?)\*/g, "<em>$1</em>")
-        .replace(/\[(.*?)\]/g, '<span class="bg-primary/10 text-primary px-1 rounded">$1</span>');
-
+      // SAFE: Using React elements instead of dangerouslySetInnerHTML
       elements.push(
-        <p
-          key={index}
-          className="text-muted-foreground mb-3 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: processed }}
-        />
+        <p key={index} className="text-muted-foreground mb-3 leading-relaxed">
+          {parseInlineFormatting(trimmed)}
+        </p>
       );
     }
   });

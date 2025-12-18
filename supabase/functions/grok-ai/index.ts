@@ -8,6 +8,14 @@ const corsHeaders = {
 const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
 const XAI_MODEL = "grok-beta";
 
+// Input validation constants
+const MAX_TEXT_LENGTH = 5000;
+const MAX_TOPIC_LENGTH = 200;
+const MAX_SUBJECT_LENGTH = 100;
+const MAX_MESSAGES = 50;
+const VALID_GRADES = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'primaria', 'secundaria', 'bachillerato'];
+const VALID_ACTIONS = ['chat', 'lesson-plan', 'quiz', 'simplify', 'math', 'rubric'];
+
 interface GrokMessage {
   role: "system" | "user" | "assistant";
   content: string;
@@ -19,6 +27,67 @@ interface RequestBody {
   request?: Record<string, unknown>;
 }
 
+// Sanitize text input to prevent prompt injection
+function sanitizeText(input: unknown, maxLength: number): string {
+  if (typeof input !== 'string') return '';
+  // Remove potentially dangerous characters and limit length
+  return input
+    .slice(0, maxLength)
+    .replace(/[<>{}[\]\\]/g, '') // Remove brackets and backslashes
+    .trim();
+}
+
+// Validate and sanitize number input
+function sanitizeNumber(input: unknown, min: number, max: number, defaultVal: number): number {
+  const num = typeof input === 'number' ? input : parseInt(String(input), 10);
+  if (isNaN(num) || num < min || num > max) return defaultVal;
+  return num;
+}
+
+// Validate grade input
+function validateGrade(grade: unknown): string {
+  const gradeStr = String(grade || '').toLowerCase().trim();
+  if (VALID_GRADES.includes(gradeStr)) return gradeStr;
+  return 'secundaria'; // default
+}
+
+// Validate action
+function validateAction(action: unknown): string | null {
+  const actionStr = String(action || '').toLowerCase().trim();
+  if (VALID_ACTIONS.includes(actionStr)) return actionStr;
+  return null;
+}
+
+// Validate messages array
+function validateMessages(messages: unknown): GrokMessage[] {
+  if (!Array.isArray(messages)) return [];
+  
+  return messages
+    .slice(0, MAX_MESSAGES)
+    .filter((msg): msg is GrokMessage => {
+      if (typeof msg !== 'object' || msg === null) return false;
+      const m = msg as Record<string, unknown>;
+      return (
+        (m.role === 'system' || m.role === 'user' || m.role === 'assistant') &&
+        typeof m.content === 'string'
+      );
+    })
+    .map(msg => ({
+      role: msg.role,
+      content: sanitizeText(msg.content, MAX_TEXT_LENGTH)
+    }));
+}
+
+// Validate question types
+function validateQuestionTypes(types: unknown): string[] {
+  const validTypes = ['multiple_choice', 'true_false', 'short_answer'];
+  if (!Array.isArray(types)) return ['multiple_choice'];
+  
+  return types
+    .filter(t => typeof t === 'string' && validTypes.includes(t))
+    .slice(0, 3);
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -28,15 +97,33 @@ serve(async (req) => {
   try {
     const XAI_API_KEY = Deno.env.get('VITE_XAI_API_KEY');
     if (!XAI_API_KEY) {
-      console.error("VITE_XAI_API_KEY is not configured");
+      console.error("API key configuration error");
       return new Response(
-        JSON.stringify({ error: "VITE_XAI_API_KEY no está configurada" }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "El servicio no está disponible temporalmente", code: "SERVICE_CONFIG_ERROR" }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const body: RequestBody = await req.json();
-    const { action, messages, request: toolRequest } = body;
+    let body: RequestBody;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Solicitud inválida", code: "INVALID_REQUEST" }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { messages, request: toolRequest } = body;
+    
+    // Validate action
+    const action = validateAction(body.action);
+    if (!action) {
+      return new Response(
+        JSON.stringify({ error: "Acción no válida", code: "INVALID_ACTION" }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     console.log(`Grok AI request: action=${action}`);
 
@@ -44,10 +131,28 @@ serve(async (req) => {
 
     switch (action) {
       case "chat":
-        grokMessages = messages || [];
+        grokMessages = validateMessages(messages);
+        if (grokMessages.length === 0) {
+          return new Response(
+            JSON.stringify({ error: "Mensajes inválidos", code: "INVALID_MESSAGES" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
         break;
 
-      case "lesson-plan":
+      case "lesson-plan": {
+        const topic = sanitizeText(toolRequest?.topic, MAX_TOPIC_LENGTH);
+        const subject = sanitizeText(toolRequest?.subject, MAX_SUBJECT_LENGTH);
+        const grade = validateGrade(toolRequest?.grade);
+        const duration = sanitizeNumber(toolRequest?.duration, 15, 180, 45);
+
+        if (!topic || !subject) {
+          return new Response(
+            JSON.stringify({ error: "Tema y materia son requeridos", code: "MISSING_FIELDS" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         grokMessages = [
           {
             role: "system",
@@ -58,10 +163,10 @@ Responde SOLO con JSON válido, sin texto adicional.`
           {
             role: "user",
             content: `Genera un plan de lección para:
-- Tema: ${toolRequest?.topic}
-- Materia: ${toolRequest?.subject}
-- Grado: ${toolRequest?.grade}
-- Duración: ${toolRequest?.duration} minutos
+- Tema: ${topic}
+- Materia: ${subject}
+- Grado: ${grade}
+- Duración: ${duration} minutos
 
 Responde con este formato JSON exacto:
 {
@@ -78,8 +183,20 @@ Responde con este formato JSON exacto:
           }
         ];
         break;
+      }
 
-      case "quiz":
+      case "quiz": {
+        const text = sanitizeText(toolRequest?.text, MAX_TEXT_LENGTH);
+        const questionCount = sanitizeNumber(toolRequest?.questionCount, 1, 20, 5);
+        const types = validateQuestionTypes(toolRequest?.types);
+
+        if (!text) {
+          return new Response(
+            JSON.stringify({ error: "Texto o tema es requerido", code: "MISSING_TEXT" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         grokMessages = [
           {
             role: "system",
@@ -89,10 +206,10 @@ Responde SOLO con JSON válido, sin texto adicional.`
           },
           {
             role: "user",
-            content: `Genera ${toolRequest?.questionCount} preguntas basadas en este texto/tema:
-"${toolRequest?.text}"
+            content: `Genera ${questionCount} preguntas basadas en este texto/tema:
+"${text}"
 
-Tipos de preguntas a incluir: ${(toolRequest?.types as string[])?.join(", ")}
+Tipos de preguntas a incluir: ${types.join(", ")}
 
 Responde con este formato JSON exacto:
 {
@@ -115,8 +232,18 @@ Para short_answer, omite options y usa correctAnswer como string.`
           }
         ];
         break;
+      }
 
-      case "simplify":
+      case "simplify": {
+        const text = sanitizeText(toolRequest?.text, MAX_TEXT_LENGTH);
+
+        if (!text) {
+          return new Response(
+            JSON.stringify({ error: "Texto es requerido", code: "MISSING_TEXT" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         grokMessages = [
           {
             role: "system",
@@ -127,7 +254,7 @@ Responde SOLO con JSON válido.`
           {
             role: "user",
             content: `Simplifica este texto a 3 niveles diferentes:
-"${toolRequest?.text}"
+"${text}"
 
 Responde con este formato JSON:
 {
@@ -141,8 +268,18 @@ Responde con este formato JSON:
           }
         ];
         break;
+      }
 
-      case "math":
+      case "math": {
+        const problem = sanitizeText(toolRequest?.problem, MAX_TEXT_LENGTH);
+
+        if (!problem) {
+          return new Response(
+            JSON.stringify({ error: "Problema es requerido", code: "MISSING_PROBLEM" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         grokMessages = [
           {
             role: "system",
@@ -153,7 +290,7 @@ Responde SOLO con JSON válido.`
           {
             role: "user",
             content: `Resuelve este problema matemático paso a paso:
-"${toolRequest?.problem}"
+"${problem}"
 
 Responde con este formato JSON:
 {
@@ -167,8 +304,22 @@ Responde con este formato JSON:
           }
         ];
         break;
+      }
 
-      case "rubric":
+      case "rubric": {
+        const subject = sanitizeText(toolRequest?.subject, MAX_SUBJECT_LENGTH);
+        const criteria = Array.isArray(toolRequest?.criteria) 
+          ? (toolRequest.criteria as string[]).slice(0, 10).map(c => sanitizeText(c, 100)).filter(Boolean)
+          : [];
+        const levels = sanitizeNumber(toolRequest?.levels, 2, 6, 4);
+
+        if (!subject) {
+          return new Response(
+            JSON.stringify({ error: "Actividad es requerida", code: "MISSING_SUBJECT" }),
+            { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         grokMessages = [
           {
             role: "system",
@@ -179,9 +330,9 @@ Responde SOLO con JSON válido.`
           {
             role: "user",
             content: `Crea una rúbrica de evaluación para:
-- Actividad: ${toolRequest?.subject}
-- Criterios: ${(toolRequest?.criteria as string[])?.join(", ")}
-- Niveles de desempeño: ${toolRequest?.levels}
+- Actividad: ${subject}
+- Criterios: ${criteria.length > 0 ? criteria.join(", ") : "criterios apropiados para la actividad"}
+- Niveles de desempeño: ${levels}
 
 Responde con este formato JSON:
 {
@@ -202,12 +353,7 @@ Usa estos nombres de niveles: Excelente, Bueno, En desarrollo, Necesita mejora`
           }
         ];
         break;
-
-      default:
-        return new Response(
-          JSON.stringify({ error: `Acción no reconocida: ${action}` }),
-          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
+      }
     }
 
     // Call xAI/Grok API
@@ -227,25 +373,25 @@ Usa estos nombres de niveles: Excelente, Bueno, En desarrollo, Necesita mejora`
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`xAI API error (${response.status}):`, errorText);
+      console.error(`External API error (${response.status}):`, errorText);
       
       if (response.status === 429) {
         return new Response(
-          JSON.stringify({ error: "Límite de solicitudes alcanzado. Intenta de nuevo en unos minutos." }),
+          JSON.stringify({ error: "Servicio ocupado. Intenta de nuevo en unos minutos.", code: "RATE_LIMITED" }),
           { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
       
       return new Response(
-        JSON.stringify({ error: `Error de xAI API: ${response.status}` }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: "Error al procesar la solicitud", code: "EXTERNAL_ERROR" }),
+        { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content || "";
 
-    console.log("Grok response received successfully");
+    console.log("AI response received successfully");
 
     return new Response(
       JSON.stringify({ content }),
@@ -253,9 +399,9 @@ Usa estos nombres de niveles: Excelente, Bueno, En desarrollo, Necesita mejora`
     );
 
   } catch (error) {
-    console.error("Grok AI function error:", error);
+    console.error("Function error:", error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : "Error desconocido" }),
+      JSON.stringify({ error: "Error interno del servidor", code: "INTERNAL_ERROR" }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

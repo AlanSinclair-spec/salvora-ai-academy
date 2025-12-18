@@ -1,4 +1,4 @@
 project_id = "drdefwhmvebokgsedxga"
 
 [functions.grok-ai]
-verify_jwt = false
+verify_jwt = true

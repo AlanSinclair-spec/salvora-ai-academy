@@ -195,11 +195,15 @@ const Estudiante = () => {
 
       <div className="salvora-container py-12">
         {/* Tool tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Herramientas de estudio">
           {tools.map((tool) => (
             <button
               key={tool.id}
               onClick={() => setActiveTab(tool.id)}
+              role="tab"
+              aria-selected={activeTab === tool.id}
+              aria-label={tool.title}
+              aria-controls={`panel-${tool.id}`}
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors",
                 activeTab === tool.id
@@ -214,7 +218,7 @@ const Estudiante = () => {
         </div>
 
         {/* Content */}
-        <div className="max-w-4xl">
+        <div className="max-w-4xl" role="tabpanel" id={`panel-${activeTab}`} aria-labelledby={activeTab}>
           {activeTab === "chat" && <SafeChat />}
           {activeTab === "simplifier" && <TextSimplifier />}
           {activeTab === "math" && <MathHelper />}

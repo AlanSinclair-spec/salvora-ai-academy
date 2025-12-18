@@ -54,7 +54,7 @@ export function SafeChat() {
         onError: () => {
           const errorMessage: ChatMessage = {
             role: "assistant",
-            content: "Lo siento, ocurrio un error. Intenta de nuevo.",
+            content: "Lo siento, ocurrió un error. Intenta de nuevo.",
             timestamp: Date.now(),
           };
           setMessages((prev) => [...prev, errorMessage]);
@@ -78,7 +78,7 @@ export function SafeChat() {
   ];
 
   return (
-    <div className="bg-card rounded-xl border border-border overflow-hidden flex flex-col h-[600px]">
+    <div className="bg-card rounded-xl border border-border overflow-hidden flex flex-col h-[600px] max-h-[70vh] min-h-[400px]">
       {/* Header */}
       <div className="p-4 border-b border-border bg-muted/30">
         <h3 className="font-bold text-foreground flex items-center gap-2">
@@ -109,6 +109,7 @@ export function SafeChat() {
                 <button
                   key={question}
                   onClick={() => setInput(question)}
+                  aria-label={`Pregunta sugerida: ${question}`}
                   className={cn(
                     "w-full text-left text-sm p-3 rounded-lg bg-muted/50 hover:bg-muted transition-all text-muted-foreground hover:text-foreground hover:translate-x-1 opacity-0 animate-slide-up",
                   )}

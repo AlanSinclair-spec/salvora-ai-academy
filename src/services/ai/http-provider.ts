@@ -24,11 +24,9 @@ import type {
 export class HttpProvider implements AIProvider {
   name = "http";
   private endpoint: string;
-  private apiKey: string;
 
   constructor() {
     this.endpoint = import.meta.env.VITE_AI_API_URL || "";
-    this.apiKey = import.meta.env.VITE_AI_API_KEY || "";
   }
 
   private async request<T>(path: string, body: unknown): Promise<T> {
@@ -37,11 +35,6 @@ export class HttpProvider implements AIProvider {
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
-
-    // Add API key if provided (for backend proxy authentication)
-    if (this.apiKey) {
-      headers["Authorization"] = `Bearer ${this.apiKey}`;
-    }
 
     try {
       const response = await fetch(url, {

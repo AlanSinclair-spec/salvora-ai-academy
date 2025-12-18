@@ -439,8 +439,14 @@ const Programas = () => {
                   <p>Ubicacion: {event.location}</p>
                   <p>Cupos: {event.spots} disponibles</p>
                 </div>
-                <Button variant="outline" size="sm" className="w-full">
-                  Inscribirse
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                  disabled
+                  title="Inscripciones próximamente"
+                >
+                  Inscribirse (Próximamente)
                 </Button>
               </div>
             ))}

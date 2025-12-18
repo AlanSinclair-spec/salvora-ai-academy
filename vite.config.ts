@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     define: {
       "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(resolvedSupabaseUrl),
       "import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY": JSON.stringify(
-        env.VITE_SUPABASE_PUBLISHABLE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRyZGVmd2htdmVib2tnc2VkeGdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1MTE3OTIsImV4cCI6MjA4MTA4Nzc5Mn0.EnjrvWc8Phc3uJYuIgx89OQFj3dpfPxF8kxRLAIW_jo"
+        env.VITE_SUPABASE_PUBLISHABLE_KEY || ""
       ),
     },
     plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),

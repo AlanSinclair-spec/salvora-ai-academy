@@ -1,10 +1,22 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+// CORS configuration - restrict to known origins
+const ALLOWED_ORIGINS = [
+  'https://salvora-ai-academy.lovable.app',
+  'https://salvora.edu.sv',
+  'http://localhost:8080',
+  'http://localhost:5173',
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  };
+}
 
 const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
 const XAI_MODEL = "grok-beta";
@@ -90,6 +102,8 @@ function validateQuestionTypes(types: unknown): string[] {
 }
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -144,7 +158,7 @@ serve(async (req) => {
     }
 
     const { messages, request: toolRequest } = body;
-    
+
     // Validate action
     const action = validateAction(body.action);
     if (!action) {

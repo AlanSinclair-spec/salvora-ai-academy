@@ -125,6 +125,8 @@ function CourseSection({ course }: { course: Course }) {
             <div key={unit.id}>
               <button
                 onClick={() => toggleUnit(unit.id)}
+                aria-expanded={isExpanded}
+                aria-controls={`unit-content-${unit.id}`}
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-muted/50 transition-colors"
               >
                 <div className="flex items-center gap-3">
@@ -141,7 +143,7 @@ function CourseSection({ course }: { course: Course }) {
               </button>
 
               {isExpanded && (
-                <div className="bg-background/30 animate-accordion-down">
+                <div id={`unit-content-${unit.id}`} className="bg-background/30 animate-accordion-down">
                   {unit.lessons.map((lesson) => {
                     const completed = isLessonComplete(course.id, lesson.id);
 

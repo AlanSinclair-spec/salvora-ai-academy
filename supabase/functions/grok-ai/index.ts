@@ -26,11 +26,11 @@ serve(async (req) => {
   }
 
   try {
-    const XAI_API_KEY = Deno.env.get('XAI_API_KEY');
+    const XAI_API_KEY = Deno.env.get('VITE_XAI_API_KEY');
     if (!XAI_API_KEY) {
-      console.error("XAI_API_KEY is not configured");
+      console.error("VITE_XAI_API_KEY is not configured");
       return new Response(
-        JSON.stringify({ error: "XAI_API_KEY no está configurada" }),
+        JSON.stringify({ error: "VITE_XAI_API_KEY no está configurada" }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }

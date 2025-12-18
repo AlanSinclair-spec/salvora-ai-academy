@@ -2,10 +2,22 @@
 // Manages app-wide settings including Lite Mode and Classroom Mode
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { z } from "zod";
 import type { AppSettings } from "@/types/settings";
 import { DEFAULT_SETTINGS } from "@/types/settings";
 
 const STORAGE_KEY = "salvora-settings";
+
+// Zod schema for AppSettings validation
+const AppSettingsSchema = z.object({
+  liteMode: z.boolean(),
+  disableVideos: z.boolean(),
+  offlineSaving: z.boolean(),
+  classroomMode: z.boolean(),
+  preferredLanguage: z.literal("es"),
+  reduceMotion: z.boolean(),
+  defaultQuickView: z.boolean(),
+});
 
 interface SettingsContextType {
   settings: AppSettings;
@@ -20,13 +32,21 @@ const SettingsContext = createContext<SettingsContextType | undefined>(undefined
 function loadSettings(): AppSettings {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+    if (!stored) return DEFAULT_SETTINGS;
+    
+    const parsed = JSON.parse(stored);
+    const validated = AppSettingsSchema.safeParse(parsed);
+    
+    if (validated.success) {
+      return { ...DEFAULT_SETTINGS, ...validated.data };
     }
+    
+    console.warn("Invalid settings data, using defaults");
+    return DEFAULT_SETTINGS;
   } catch (error) {
     console.error("Error loading settings:", error);
+    return DEFAULT_SETTINGS;
   }
-  return DEFAULT_SETTINGS;
 }
 
 function saveSettings(settings: AppSettings): void {

@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 const XAI_API_URL = "https://api.x.ai/v1/chat/completions";
-const XAI_MODEL = "grok-beta";
+const XAI_MODEL = "grok-3";
 
 // Input validation constants
 const MAX_TEXT_LENGTH = 5000;

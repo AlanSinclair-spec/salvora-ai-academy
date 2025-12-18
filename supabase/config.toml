@@ -2,3 +2,6 @@ project_id = "drdefwhmvebokgsedxga"
 
 [functions.grok-ai]
 verify_jwt = true
+
+[functions.salvora-ai]
+verify_jwt = false

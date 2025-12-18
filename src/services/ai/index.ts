@@ -4,6 +4,7 @@
 import { PlaceholderProvider } from "./placeholder-provider";
 import { HttpProvider } from "./http-provider";
 import { XAIProvider } from "./xai-provider";
+import { LovableAIProvider } from "./lovable-provider";
 import type { AIProvider } from "./types";
 
 // Export types
@@ -20,15 +21,16 @@ export {
 /**
  * Get the AI provider based on environment configuration
  * Priority:
- * 1. VITE_AI_MODE="xai" → XAIProvider (requires edge function + API key)
- * 2. VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (custom backend)
- * 3. Default → PlaceholderProvider (smart mock responses, always works)
+ * 1. Default → LovableAIProvider (uses Lovable AI Gateway - recommended)
+ * 2. VITE_AI_MODE="xai" → XAIProvider (requires xAI API key)
+ * 3. VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (custom backend)
+ * 4. VITE_AI_MODE="placeholder" → PlaceholderProvider (mock responses)
  */
 export function getAIProvider(): AIProvider {
   const mode = import.meta.env.VITE_AI_MODE;
   const apiUrl = import.meta.env.VITE_AI_API_URL;
 
-  // Use xAI provider only if explicitly enabled
+  // Use xAI provider if explicitly enabled
   if (mode === "xai") {
     console.info("🤖 AI Provider: xAI/Grok via Edge Function");
     return new XAIProvider();
@@ -40,9 +42,15 @@ export function getAIProvider(): AIProvider {
     return new HttpProvider();
   }
 
-  // Default to placeholder provider - works without external APIs
-  console.info("🤖 AI Provider: Salvora AI (demo mode)");
-  return new PlaceholderProvider();
+  // Use placeholder for development/testing
+  if (mode === "placeholder") {
+    console.info("🤖 AI Provider: Placeholder (demo mode)");
+    return new PlaceholderProvider();
+  }
+
+  // Default to Lovable AI provider - works with built-in API key
+  console.info("🤖 AI Provider: Salvora AI (Lovable AI Gateway)");
+  return new LovableAIProvider();
 }
 
 // Create and export the default AI service instance

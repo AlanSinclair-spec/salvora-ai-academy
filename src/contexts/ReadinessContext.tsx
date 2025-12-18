@@ -2,6 +2,7 @@
 // Tracks AI Readiness Score with 4 pillars
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { z } from "zod";
 import type {
   ReadinessState,
   ReadinessScore,
@@ -13,6 +14,41 @@ import { DEFAULT_PILLARS, PILLAR_LESSONS, getReadinessRecommendation } from "@/t
 import { useProgress } from "./ProgressContext";
 
 const STORAGE_KEY = "salvora-readiness";
+
+// Zod schemas for ReadinessState validation
+const ReadinessPillarIdSchema = z.enum(['conceptos', 'prompts', 'uso_responsable', 'aplicacion']);
+
+const ReadinessPillarSchema = z.object({
+  id: ReadinessPillarIdSchema,
+  label: z.string(),
+  score: z.number(),
+  progress: z.number(),
+});
+
+const ReadinessScoreSchema = z.object({
+  total: z.number(),
+  pillars: z.array(ReadinessPillarSchema),
+  lastUpdated: z.number(),
+});
+
+const ReadinessCheckpointSchema = z.object({
+  lessonId: z.string(),
+  pillar: ReadinessPillarIdSchema,
+  completed: z.boolean(),
+  timestamp: z.number(),
+});
+
+const PracticeResultSchema = z.object({
+  correct: z.number(),
+  total: z.number(),
+});
+
+const ReadinessStateSchema = z.object({
+  score: ReadinessScoreSchema,
+  checkpoints: z.record(z.string(), ReadinessCheckpointSchema),
+  practiceResults: z.record(z.string(), PracticeResultSchema),
+  practiceAccuracy: z.number(),
+});
 
 interface ReadinessContextType {
   // State
@@ -45,13 +81,21 @@ const initialState: ReadinessState = {
 function loadReadiness(): ReadinessState {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      return JSON.parse(stored);
+    if (!stored) return initialState;
+    
+    const parsed = JSON.parse(stored);
+    const validated = ReadinessStateSchema.safeParse(parsed);
+    
+    if (validated.success) {
+      return validated.data as ReadinessState;
     }
+    
+    console.warn("Invalid readiness data, resetting to defaults");
+    return initialState;
   } catch (error) {
     console.error("Error loading readiness:", error);
+    return initialState;
   }
-  return initialState;
 }
 
 function saveReadiness(state: ReadinessState): void {

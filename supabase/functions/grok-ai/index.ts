@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 // CORS configuration
 const corsHeaders = {
@@ -97,7 +98,34 @@ serve(async (req) => {
   }
 
   try {
-    // No authentication required - open access for educational platform
+    // Authentication check - verify user is logged in
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      console.error("No authorization header provided");
+      return new Response(
+        JSON.stringify({ error: "No autorizado - inicia sesión para usar herramientas IA", code: "UNAUTHORIZED" }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Verify the JWT and get user
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+    if (authError || !user) {
+      console.error("Authentication failed:", authError?.message);
+      return new Response(
+        JSON.stringify({ error: "No autorizado - sesión inválida", code: "UNAUTHORIZED" }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log(`Authenticated user: ${user.id}`);
+
     const XAI_API_KEY = Deno.env.get('VITE_XAI_API_KEY');
     if (!XAI_API_KEY) {
       console.error("API key configuration error");
@@ -128,7 +156,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Grok AI request: action=${action}`);
+    console.log(`Grok AI request: action=${action}, user=${user.id}`);
 
     let grokMessages: GrokMessage[] = [];
 
@@ -394,7 +422,7 @@ Usa estos nombres de niveles: Excelente, Bueno, En desarrollo, Necesita mejora`
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content || "";
 
-    console.log("AI response received successfully");
+    console.log(`AI response received successfully for user ${user.id}`);
 
     return new Response(
       JSON.stringify({ content }),

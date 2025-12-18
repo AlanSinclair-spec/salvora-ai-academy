@@ -2,11 +2,29 @@
 // Tracks lesson completion and quiz scores
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { z } from "zod";
 import type { UserProgress, ProgressState } from "@/types/settings";
 import { courses, getTotalLessons, getCourseById } from "@/data/courses";
 import { isDemoMode, demoProgress } from "@/data/demo-presets";
 
 const STORAGE_KEY = "salvora-progress";
+
+// Zod schema for UserProgress validation
+const UserProgressSchema = z.object({
+  lessonId: z.string(),
+  courseId: z.string(),
+  completed: z.boolean(),
+  quizScore: z.number().optional(),
+  lastAccessed: z.number(),
+  videoWatched: z.boolean().optional(),
+  practiceCompleted: z.boolean().optional(),
+});
+
+// Zod schema for ProgressState validation
+const ProgressStateSchema = z.object({
+  lessons: z.record(z.string(), UserProgressSchema),
+  lastUpdated: z.number(),
+});
 
 interface ProgressContextType {
   // Progress data
@@ -58,9 +76,30 @@ function migrateProgress(state: ProgressState): ProgressState {
 function loadProgress(): ProgressState {
   // In demo mode, load demo progress by default
   if (isDemoMode()) {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    // Only load demo if no existing progress
-    if (!stored || Object.keys(JSON.parse(stored).lessons || {}).length === 0) {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      // Only load demo if no existing progress
+      if (!stored) {
+        console.info("🎬 Demo Mode: Loading preset progress");
+        return migrateProgress({
+          lessons: demoProgress,
+          lastUpdated: Date.now(),
+        });
+      }
+      
+      const parsed = JSON.parse(stored);
+      const validated = ProgressStateSchema.safeParse(parsed);
+      
+      if (!validated.success || Object.keys(validated.data.lessons || {}).length === 0) {
+        console.info("🎬 Demo Mode: Loading preset progress");
+        return migrateProgress({
+          lessons: demoProgress,
+          lastUpdated: Date.now(),
+        });
+      }
+      
+      return migrateProgress(validated.data as ProgressState);
+    } catch {
       console.info("🎬 Demo Mode: Loading preset progress");
       return migrateProgress({
         lessons: demoProgress,
@@ -71,13 +110,21 @@ function loadProgress(): ProgressState {
 
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      return migrateProgress(JSON.parse(stored));
+    if (!stored) return initialState;
+    
+    const parsed = JSON.parse(stored);
+    const validated = ProgressStateSchema.safeParse(parsed);
+    
+    if (validated.success) {
+      return migrateProgress(validated.data as ProgressState);
     }
+    
+    console.warn("Invalid progress data, resetting to defaults");
+    return initialState;
   } catch (error) {
     console.error("Error loading progress:", error);
+    return initialState;
   }
-  return initialState;
 }
 
 function saveProgress(progress: ProgressState): void {

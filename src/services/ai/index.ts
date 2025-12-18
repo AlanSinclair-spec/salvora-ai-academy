@@ -20,17 +20,16 @@ export {
 /**
  * Get the AI provider based on environment configuration
  * Priority:
- * 1. XAIProvider → Uses edge function with XAI_API_KEY secret (recommended)
+ * 1. VITE_AI_MODE="xai" → XAIProvider (requires edge function + API key)
  * 2. VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (custom backend)
- * 3. Otherwise → PlaceholderProvider (mock responses for development)
+ * 3. Default → PlaceholderProvider (smart mock responses, always works)
  */
 export function getAIProvider(): AIProvider {
   const mode = import.meta.env.VITE_AI_MODE;
   const apiUrl = import.meta.env.VITE_AI_API_URL;
 
-  // Default to xAI provider which uses edge function
-  // The edge function will check if XAI_API_KEY is configured
-  if (mode !== "http" && mode !== "placeholder") {
+  // Use xAI provider only if explicitly enabled
+  if (mode === "xai") {
     console.info("🤖 AI Provider: xAI/Grok via Edge Function");
     return new XAIProvider();
   }
@@ -41,8 +40,8 @@ export function getAIProvider(): AIProvider {
     return new HttpProvider();
   }
 
-  // Fall back to placeholder provider for development
-  console.info("🤖 AI Provider: Placeholder (mock responses)");
+  // Default to placeholder provider - works without external APIs
+  console.info("🤖 AI Provider: Salvora AI (demo mode)");
   return new PlaceholderProvider();
 }
 

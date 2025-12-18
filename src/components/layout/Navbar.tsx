@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Settings, WifiOff, School } from "lucide-react";
+import { Menu, X, Settings, WifiOff, School, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSettings } from "@/contexts/SettingsContext";
+import { useAuth } from "@/contexts/AuthContext";
 import salvoraLogo from "@/assets/salvora-logo.png";
 
 // Custom hook for scroll progress
@@ -37,7 +38,13 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { settings } = useSettings();
+  const { user, signOut } = useAuth();
   const scrollProgress = useScrollProgress();
+
+  const handleSignOut = async () => {
+    await signOut();
+    setIsOpen(false);
+  };
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -114,10 +121,33 @@ export function Navbar() {
               <Settings className="w-5 h-5" />
             </Link>
 
-            {/* CTA Button */}
-            <Button variant="hero" size="sm" className="transition-transform hover:scale-105 active:scale-95" asChild>
-              <Link to="/cursos">Empieza Ahora</Link>
-            </Button>
+            {/* Auth Section */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted">
+                  <User className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
+                    {user.user_metadata?.full_name || user.email?.split("@")[0]}
+                  </span>
+                </div>
+                <button
+                  onClick={handleSignOut}
+                  className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  aria-label="Cerrar sesion"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to="/login">Iniciar Sesion</Link>
+                </Button>
+                <Button variant="hero" size="sm" className="transition-transform hover:scale-105 active:scale-95" asChild>
+                  <Link to="/registro">Registrarse</Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -185,15 +215,42 @@ export function Navbar() {
                 Configuracion
               </Link>
 
+              {/* Auth Section (Mobile) */}
               <div
                 className="pt-2 mt-2 border-t border-border opacity-0 animate-slide-up"
                 style={{ animationDelay: `${(navLinks.length + 1) * 50}ms`, animationFillMode: "forwards" }}
               >
-                <Button variant="hero" className="w-full transition-transform hover:scale-[1.02] active:scale-[0.98]" asChild>
-                  <Link to="/cursos" onClick={() => setIsOpen(false)}>
-                    Empieza Ahora
-                  </Link>
-                </Button>
+                {user ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-md bg-muted">
+                      <User className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-medium text-foreground truncate">
+                        {user.user_metadata?.full_name || user.email?.split("@")[0]}
+                      </span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Cerrar Sesion
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Button variant="outline" className="w-full" asChild>
+                      <Link to="/login" onClick={() => setIsOpen(false)}>
+                        Iniciar Sesion
+                      </Link>
+                    </Button>
+                    <Button variant="hero" className="w-full transition-transform hover:scale-[1.02] active:scale-[0.98]" asChild>
+                      <Link to="/registro" onClick={() => setIsOpen(false)}>
+                        Registrarse Gratis
+                      </Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

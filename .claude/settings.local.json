@@ -15,7 +15,13 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd lesson progression gating system with video/practice tracking\n\nFeatures:\n- Enhanced ProgressContext with videoWatched and practiceCompleted tracking\n- Lesson gating: Next button disabled until video watched + practice completed\n- First lesson always unlocked, subsequent lessons require previous completion\n- Backward compatibility: existing progress auto-migrated\n\nVideoLesson enhancements:\n- \"He visto el video\" confirmation button for video completion tracking\n- Lite Mode: \"Abrir en YouTube\" external link button\n- Scroll-based completion tracking for transcript in Lite Mode\n- Visual indicators for video watched state\n\nLessonNavigation updates:\n- Gated next button with Lock icon when disabled\n- Completion indicator showing \"Lección completada\" with checkmark\n- Tooltip explaining unlock requirements\n\nLeccion.tsx changes:\n- Locked lesson view for inaccessible lessons\n- Passes canProceed and completion handlers to child components\n\nLessonBlocks:\n- Wired onPracticeCompleted callback from EnhancedPractice\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit:*)",
       "Bash(/opt/homebrew/bin/npm run build)",
-      "Bash(PATH=\"/Users/williammenjivar/.nvm/versions/node/v22.19.0/bin:$PATH\" npm run build:*)"
+      "Bash(PATH=\"/Users/williammenjivar/.nvm/versions/node/v22.19.0/bin:$PATH\" npm run build:*)",
+      "Bash(git rm:*)",
+      "Bash(/Users/williammenjivar/.nvm/versions/node/v22.19.0/bin/npm run build)",
+      "Bash(/Users/williammenjivar/.nvm/versions/node/v22.19.0/bin/node /Users/williammenjivar/.nvm/versions/node/v22.19.0/bin/npm run build:*)",
+      "Bash(export NVM_DIR=\"$HOME/.nvm\")",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")"
     ]
   }
 }

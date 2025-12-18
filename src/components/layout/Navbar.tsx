@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Settings, WifiOff, School, LogOut, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, Settings, WifiOff, School } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSettings } from "@/contexts/SettingsContext";
-import { useAuth } from "@/contexts/AuthContext";
 import salvoraLogo from "@/assets/salvora-logo.png";
 
 function useScrollProgress() {
@@ -37,13 +35,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { settings } = useSettings();
-  const { user, signOut } = useAuth();
   const scrollProgress = useScrollProgress();
-
-  const handleSignOut = async () => {
-    await signOut();
-    setIsOpen(false);
-  };
 
   useEffect(() => {
     setIsOpen(false);
@@ -109,33 +101,6 @@ export function Navbar() {
             >
               <Settings className="w-4 h-4" />
             </Link>
-
-            {user ? (
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50">
-                  <User className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-sm text-foreground max-w-[100px] truncate">
-                    {user.user_metadata?.full_name || user.email?.split("@")[0]}
-                  </span>
-                </div>
-                <button
-                  onClick={handleSignOut}
-                  className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Cerrar sesión"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                  <Link to="/login">Iniciar Sesión</Link>
-                </Button>
-                <Button variant="default" size="sm" asChild>
-                  <Link to="/registro">Registrarse</Link>
-                </Button>
-              </div>
-            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -195,39 +160,6 @@ export function Navbar() {
                 <Settings className="w-4 h-4" />
                 Configuración
               </Link>
-
-              <div
-                className="pt-3 mt-3 border-t border-border/30 opacity-0 animate-slide-up"
-                style={{ animationDelay: `${(navLinks.length + 1) * 50}ms`, animationFillMode: "forwards" }}
-              >
-                {user ? (
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-md bg-secondary/50">
-                      <User className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-sm text-foreground truncate">
-                        {user.user_metadata?.full_name || user.email?.split("@")[0]}
-                      </span>
-                    </div>
-                    <Button variant="outline" className="w-full" onClick={handleSignOut}>
-                      <LogOut className="w-4 h-4 mr-2" />
-                      Cerrar Sesión
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link to="/login" onClick={() => setIsOpen(false)}>
-                        Iniciar Sesión
-                      </Link>
-                    </Button>
-                    <Button variant="default" className="w-full" asChild>
-                      <Link to="/registro" onClick={() => setIsOpen(false)}>
-                        Registrarse
-                      </Link>
-                    </Button>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         )}

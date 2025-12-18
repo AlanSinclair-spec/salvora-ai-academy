@@ -7,7 +7,6 @@ import { useSettings } from "@/contexts/SettingsContext";
 import { useAuth } from "@/contexts/AuthContext";
 import salvoraLogo from "@/assets/salvora-logo.png";
 
-// Custom hook for scroll progress
 function useScrollProgress() {
   const [progress, setProgress] = useState(0);
 
@@ -46,24 +45,20 @@ export function Navbar() {
     setIsOpen(false);
   };
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-card/80 backdrop-blur-md">
-      {/* Scroll Progress Bar */}
-      <div
-        className="scroll-progress"
-        style={{ transform: `scaleX(${scrollProgress / 100})` }}
-      />
+    <header className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-md">
+      <div className="scroll-progress" style={{ transform: `scaleX(${scrollProgress / 100})` }} />
+      
       <nav className="salvora-container">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={salvoraLogo} alt="Salvora" className="w-10 h-10 object-contain rounded-lg" />
-            <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+          <Link to="/" className="flex items-center gap-3 group">
+            <img src={salvoraLogo} alt="Salvora" className="w-8 h-8 object-contain rounded-md" />
+            <span className="font-display text-lg font-semibold text-foreground tracking-tight">
               Salvora
             </span>
           </Link>
@@ -75,75 +70,68 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  "relative px-4 py-2 rounded-md text-sm font-medium transition-all duration-200",
+                  "px-4 py-2 text-sm font-medium transition-colors duration-200",
                   location.pathname === link.href
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
-                {location.pathname === link.href && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-primary rounded-full animate-scale-in" />
-                )}
               </Link>
             ))}
           </div>
 
           {/* Right Section */}
-          <div className="hidden md:flex items-center gap-2">
-            {/* Classroom Mode Indicator */}
+          <div className="hidden md:flex items-center gap-3">
             {settings.classroomMode && (
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-primary/20 text-primary text-xs font-medium">
                 <School className="w-3 h-3" />
                 <span>Modo Aula</span>
               </div>
             )}
 
-            {/* Lite Mode Indicator */}
             {settings.liteMode && (
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-salvora-orange/10 text-salvora-orange text-xs font-medium">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-salvora-orange/20 text-salvora-orange text-xs font-medium">
                 <WifiOff className="w-3 h-3" />
                 <span>Modo Ligero</span>
               </div>
             )}
 
-            {/* Settings Link */}
             <Link
               to="/configuracion"
               className={cn(
                 "p-2 rounded-md transition-colors",
                 location.pathname === "/configuracion"
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               )}
-              aria-label="Configuracion"
+              aria-label="Configuración"
             >
-              <Settings className="w-5 h-5" />
+              <Settings className="w-4 h-4" />
             </Link>
 
-            {/* Auth Section */}
             {user ? (
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted">
-                  <User className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary/50">
+                  <User className="w-3.5 h-3.5 text-muted-foreground" />
+                  <span className="text-sm text-foreground max-w-[100px] truncate">
                     {user.user_metadata?.full_name || user.email?.split("@")[0]}
                   </span>
                 </div>
                 <button
                   onClick={handleSignOut}
-                  className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                  aria-label="Cerrar sesion"
+                  className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Cerrar sesión"
                 >
-                  <LogOut className="w-5 h-5" />
+                  <LogOut className="w-4 h-4" />
                 </button>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to="/login">Iniciar Sesion</Link>
+                <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                  <Link to="/login">Iniciar Sesión</Link>
                 </Button>
-                <Button variant="hero" size="sm" className="transition-transform hover:scale-105 active:scale-95" asChild>
+                <Button variant="default" size="sm" asChild>
                   <Link to="/registro">Registrarse</Link>
                 </Button>
               </div>
@@ -152,46 +140,40 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
-            {/* Classroom Mode Indicator (Mobile) */}
             {settings.classroomMode && (
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                <School className="w-4 h-4 text-primary" />
+              <div className="w-7 h-7 flex items-center justify-center rounded-full border border-primary/20">
+                <School className="w-3.5 h-3.5 text-primary" />
               </div>
             )}
-            {/* Lite Mode Indicator (Mobile) */}
             {settings.liteMode && (
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-salvora-orange/10">
-                <WifiOff className="w-4 h-4 text-salvora-orange" />
+              <div className="w-7 h-7 flex items-center justify-center rounded-full border border-salvora-orange/20">
+                <WifiOff className="w-3.5 h-3.5 text-salvora-orange" />
               </div>
             )}
             <button
-              className="p-2 rounded-md hover:bg-muted transition-all duration-200"
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
-              {isOpen ? (
-                <X className="w-6 h-6 animate-spin-once" />
-              ) : (
-                <Menu className="w-6 h-6 transition-transform hover:scale-110" />
-              )}
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-slide-in-top overflow-hidden">
-            <div className="flex flex-col gap-2">
+          <div className="md:hidden py-4 border-t border-border/30 animate-fade-in">
+            <div className="flex flex-col gap-1">
               {navLinks.map((link, index) => (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "px-4 py-3 rounded-md text-base font-medium transition-all duration-200 opacity-0 animate-slide-up",
+                    "px-4 py-3 rounded-md text-base font-medium transition-colors opacity-0 animate-slide-up",
                     location.pathname === link.href
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted hover:translate-x-1"
+                      ? "text-foreground bg-secondary/50"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/30"
                   )}
                   style={{ animationDelay: `${index * 50}ms`, animationFillMode: "forwards" }}
                 >
@@ -199,54 +181,48 @@ export function Navbar() {
                 </Link>
               ))}
 
-              {/* Settings Link (Mobile) */}
               <Link
                 to="/configuracion"
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "px-4 py-3 rounded-md text-base font-medium transition-all duration-200 flex items-center gap-2 opacity-0 animate-slide-up",
+                  "px-4 py-3 rounded-md text-base font-medium transition-colors flex items-center gap-2 opacity-0 animate-slide-up",
                   location.pathname === "/configuracion"
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted hover:translate-x-1"
+                    ? "text-foreground bg-secondary/50"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/30"
                 )}
                 style={{ animationDelay: `${navLinks.length * 50}ms`, animationFillMode: "forwards" }}
               >
-                <Settings className="w-5 h-5" />
-                Configuracion
+                <Settings className="w-4 h-4" />
+                Configuración
               </Link>
 
-              {/* Auth Section (Mobile) */}
               <div
-                className="pt-2 mt-2 border-t border-border opacity-0 animate-slide-up"
+                className="pt-3 mt-3 border-t border-border/30 opacity-0 animate-slide-up"
                 style={{ animationDelay: `${(navLinks.length + 1) * 50}ms`, animationFillMode: "forwards" }}
               >
                 {user ? (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-md bg-muted">
-                      <User className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium text-foreground truncate">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-md bg-secondary/50">
+                      <User className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-sm text-foreground truncate">
                         {user.user_metadata?.full_name || user.email?.split("@")[0]}
                       </span>
                     </div>
-                    <Button
-                      variant="outline"
-                      className="w-full"
-                      onClick={handleSignOut}
-                    >
+                    <Button variant="outline" className="w-full" onClick={handleSignOut}>
                       <LogOut className="w-4 h-4 mr-2" />
-                      Cerrar Sesion
+                      Cerrar Sesión
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full" asChild>
                       <Link to="/login" onClick={() => setIsOpen(false)}>
-                        Iniciar Sesion
+                        Iniciar Sesión
                       </Link>
                     </Button>
-                    <Button variant="hero" className="w-full transition-transform hover:scale-[1.02] active:scale-[0.98]" asChild>
+                    <Button variant="default" className="w-full" asChild>
                       <Link to="/registro" onClick={() => setIsOpen(false)}>
-                        Registrarse Gratis
+                        Registrarse
                       </Link>
                     </Button>
                   </div>

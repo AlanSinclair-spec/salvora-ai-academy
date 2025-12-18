@@ -10,60 +10,50 @@ const steps = [
   {
     number: "02",
     icon: Sparkles,
-    title: "Usa IA en clases y tareas",
+    title: "Usa IA en clases",
     description: "Herramientas prácticas: chat para dudas, simplificador de textos, asistente de matemáticas.",
   },
   {
     number: "03",
     icon: Rocket,
-    title: "Crea el futuro de El Salvador",
+    title: "Crea el futuro",
     description: "Aplica tus conocimientos para resolver problemas reales y construir oportunidades.",
   },
 ];
 
 export function HowItWorksSection() {
   return (
-    <section className="py-20 md:py-28 bg-card/20 relative overflow-hidden">
-      {/* Floating orbs */}
-      <div className="floating-orb bg-primary/15 w-72 h-72 top-20 -left-10 -z-10" style={{ animation: "float-reverse 9s ease-in-out infinite" }} />
-      <div className="floating-orb bg-salvora-green/10 w-56 h-56 -bottom-10 right-10 -z-10" style={{ animation: "float-slow 11s ease-in-out 1s infinite" }} />
-
-      <div className="salvora-container relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Cómo funciona Salvora
+    <section className="py-24 md:py-32 relative">
+      <div className="salvora-container">
+        <div className="mb-16">
+          <p className="text-sm text-muted-foreground uppercase tracking-wider mb-3">Cómo funciona</p>
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground max-w-xl">
+            Un camino claro desde cero hasta dominar la IA
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un camino claro desde cero hasta dominar la IA.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
-            <div
-              key={step.number}
-              className="relative"
-            >
+            <div key={step.number} className="relative group">
               {/* Connector line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-px bg-gradient-to-r from-primary/50 to-transparent" />
+                <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-px bg-border/50" />
               )}
               
-              <div className="text-center p-8 rounded-2xl bg-card border border-border hover:shadow-xl hover:border-primary/30 transition-all duration-300 group">
-                {/* Step number */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary font-display font-bold text-lg mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  {step.number}
-                </div>
-                
-                {/* Icon */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-salvora-cyan/20 mb-6">
-                  <step.icon className="w-8 h-8 text-primary" />
+              <div className="p-8 rounded-lg border border-border/50 bg-card/50 hover:border-border transition-all duration-300">
+                <div className="flex items-center gap-4 mb-8">
+                  <span className="font-display text-3xl font-semibold text-muted-foreground/30 group-hover:text-primary/50 transition-colors">
+                    {step.number}
+                  </span>
+                  <div className="w-10 h-10 rounded-md bg-secondary flex items-center justify-center">
+                    <step.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
                 </div>
 
-                <h3 className="font-display text-xl font-bold text-foreground mb-3">
+                <h3 className="font-display text-lg font-semibold text-foreground mb-3">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {step.description}
                 </p>
               </div>

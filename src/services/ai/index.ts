@@ -20,18 +20,18 @@ export {
 /**
  * Get the AI provider based on environment configuration
  * Priority:
- * 1. VITE_XAI_API_KEY → XAIProvider (direct xAI/Grok API)
+ * 1. XAIProvider → Uses edge function with XAI_API_KEY secret (recommended)
  * 2. VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (custom backend)
  * 3. Otherwise → PlaceholderProvider (mock responses for development)
  */
 export function getAIProvider(): AIProvider {
-  const xaiKey = import.meta.env.VITE_XAI_API_KEY;
   const mode = import.meta.env.VITE_AI_MODE;
   const apiUrl = import.meta.env.VITE_AI_API_URL;
 
-  // Use xAI/Grok provider if API key is configured
-  if (xaiKey) {
-    console.info("🤖 AI Provider: xAI/Grok Direct API");
+  // Default to xAI provider which uses edge function
+  // The edge function will check if XAI_API_KEY is configured
+  if (mode !== "http" && mode !== "placeholder") {
+    console.info("🤖 AI Provider: xAI/Grok via Edge Function");
     return new XAIProvider();
   }
 
@@ -41,7 +41,7 @@ export function getAIProvider(): AIProvider {
     return new HttpProvider();
   }
 
-  // Default to placeholder provider for development
+  // Fall back to placeholder provider for development
   console.info("🤖 AI Provider: Placeholder (mock responses)");
   return new PlaceholderProvider();
 }

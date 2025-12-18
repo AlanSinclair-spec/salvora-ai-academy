@@ -3,6 +3,7 @@
 
 import { PlaceholderProvider } from "./placeholder-provider";
 import { HttpProvider } from "./http-provider";
+import { XAIProvider } from "./xai-provider";
 import type { AIProvider } from "./types";
 
 // Export types
@@ -18,12 +19,21 @@ export {
 
 /**
  * Get the AI provider based on environment configuration
- * - VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (real AI backend)
- * - Otherwise → PlaceholderProvider (mock responses for development)
+ * Priority:
+ * 1. VITE_XAI_API_KEY → XAIProvider (direct xAI/Grok API)
+ * 2. VITE_AI_MODE="http" + VITE_AI_API_URL → HttpProvider (custom backend)
+ * 3. Otherwise → PlaceholderProvider (mock responses for development)
  */
 export function getAIProvider(): AIProvider {
+  const xaiKey = import.meta.env.VITE_XAI_API_KEY;
   const mode = import.meta.env.VITE_AI_MODE;
   const apiUrl = import.meta.env.VITE_AI_API_URL;
+
+  // Use xAI/Grok provider if API key is configured
+  if (xaiKey) {
+    console.info("🤖 AI Provider: xAI/Grok Direct API");
+    return new XAIProvider();
+  }
 
   // Use HTTP provider if explicitly configured with an API URL
   if (mode === "http" && apiUrl) {

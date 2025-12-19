@@ -4,3 +4,4 @@ export { ReadingLesson } from "./ReadingLesson";
 export { QuizLesson } from "./QuizLesson";
 export { PracticeLesson } from "./PracticeLesson";
 export { LessonNavigation } from "./LessonNavigation";
+export { VideoSection } from "./VideoSection";

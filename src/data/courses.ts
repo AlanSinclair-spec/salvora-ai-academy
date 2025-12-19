@@ -26,6 +26,7 @@ export const courses: Course[] = [
             title: "Bienvenida: Tu Viaje con la IA",
             type: "reading",
             duration: "8 min",
+            videoId: "cmep2mdip3k", // ¿Qué es la Inteligencia Artificial?
             order: 1,
           },
           {
@@ -33,6 +34,7 @@ export const courses: Course[] = [
             title: "Que es la Inteligencia Artificial?",
             type: "reading",
             duration: "12 min",
+            videoId: "cmep2mdip3k", // ¿Qué es la Inteligencia Artificial?
             order: 2,
           },
           {
@@ -40,6 +42,7 @@ export const courses: Course[] = [
             title: "Historia de la IA: De Ciencia Ficcion a Realidad",
             type: "reading",
             duration: "10 min",
+            videoId: "DiUqDJVy3so", // Historia de la IA
             order: 3,
           },
           {
@@ -47,6 +50,7 @@ export const courses: Course[] = [
             title: "Tipos de IA: Estrecha, General y Super",
             type: "reading",
             duration: "10 min",
+            videoId: "rO1Sm1Ss2Co", // Tipos de Inteligencia Artificial
             order: 4,
           },
         ],
@@ -62,7 +66,7 @@ export const courses: Course[] = [
             title: "Modelos de Lenguaje: Como Piensa la IA",
             type: "video",
             duration: "15 min",
-            videoId: "xi94v_jl26U", // DotCSV: Transformers - foundation of modern AI models
+            videoId: "_tA5cinv0U8", // Algoritmos y datos
             order: 1,
           },
           {
@@ -70,6 +74,7 @@ export const courses: Course[] = [
             title: "Como Aprende una IA: Datos y Entrenamiento",
             type: "reading",
             duration: "12 min",
+            videoId: "ukzFI9rgwfU", // Aprendizaje automático explicado
             order: 2,
           },
           {
@@ -77,7 +82,7 @@ export const courses: Course[] = [
             title: "Asistentes de IA: ChatGPT, Grok y Mas",
             type: "video",
             duration: "10 min",
-            videoId: "c_PqM5lPvjY", // DotCSV: ¡Probando el CHATBOT más POTENTE DEL MUNDO!
+            videoId: "j2TDoKbTlYs", // IA generativa (ChatGPT, Grok, etc.)
             order: 3,
           },
           {
@@ -85,6 +90,7 @@ export const courses: Course[] = [
             title: "Como Hablar con la IA: Prompts Efectivos",
             type: "reading",
             duration: "10 min",
+            videoId: "0Xb11hE8Ubc", // Redes neuronales simples
             order: 4,
           },
         ],
@@ -100,7 +106,7 @@ export const courses: Course[] = [
             title: "Limites de la IA: Lo Que No Puede Hacer",
             type: "video",
             duration: "12 min",
-            videoId: "Nh4fguuPvGI", // Dr. López de Mántaras: Qué puede y qué no puede hacer la IA
+            videoId: "JGQA_btxUyw", // Ética en la IA
             order: 1,
           },
           {
@@ -108,6 +114,7 @@ export const courses: Course[] = [
             title: "Etica y IA: Decisiones Responsables",
             type: "reading",
             duration: "10 min",
+            videoId: "gQXNfWFqm1w", // Privacidad y datos personales
             order: 2,
           },
           {
@@ -115,6 +122,7 @@ export const courses: Course[] = [
             title: "IA en El Salvador: Oportunidad Nacional",
             type: "reading",
             duration: "10 min",
+            videoId: "FINxubVOkP8", // Sesgos en la IA
             order: 3,
           },
         ],
@@ -130,6 +138,7 @@ export const courses: Course[] = [
             title: "Evaluacion: Demuestra Tu Conocimiento",
             type: "quiz",
             duration: "15 min",
+            videoId: "uk8zzNIInFg", // Repaso general de Introducción a la IA
             order: 1,
           },
         ],
@@ -158,7 +167,7 @@ export const courses: Course[] = [
             title: "Plantillas y objetivos de aprendizaje",
             type: "video",
             duration: "12 min",
-            videoId: "GdK0Kre4zxo", // FLACSO Argentina: Charla Abierta - IA en Educación
+            videoId: "L3fjFQWkIBI", // Cómo planear clases con IA
             order: 1,
           },
           {
@@ -166,6 +175,7 @@ export const courses: Course[] = [
             title: "Personalizando contenido para tu clase",
             type: "reading",
             duration: "10 min",
+            videoId: "jqdBLJRKi_E", // Ejemplos de planes de clase con IA
             order: 2,
           },
           {
@@ -173,6 +183,7 @@ export const courses: Course[] = [
             title: "Practica: Planifica una clase",
             type: "practice",
             duration: "20 min",
+            videoId: "_7Zwe-O7ydg", // Práctica: Crea tu propio plan
             order: 3,
           },
         ],
@@ -188,7 +199,7 @@ export const courses: Course[] = [
             title: "Generador de cuestionarios",
             type: "video",
             duration: "10 min",
-            videoId: "1RpxpE6lHk0", // La Inteligencia Artificial en educación
+            videoId: "ufmN-AABm2I", // Crear exámenes y quizzes con IA
             order: 1,
           },
           {
@@ -196,6 +207,7 @@ export const courses: Course[] = [
             title: "Crear rubricas efectivas",
             type: "reading",
             duration: "8 min",
+            videoId: "MIBGmhWLGfE", // Evaluaciones automáticas
             order: 2,
           },
           {
@@ -203,6 +215,7 @@ export const courses: Course[] = [
             title: "Practica: Genera un quiz de ejemplo",
             type: "practice",
             duration: "15 min",
+            videoId: "q1aX21Z4lmU", // Práctica con generador de quizzes
             order: 3,
           },
         ],
@@ -218,7 +231,7 @@ export const courses: Course[] = [
             title: "Seguridad y privacidad",
             type: "video",
             duration: "10 min",
-            videoId: "_MkqpvnAbd8", // Educando en pensamiento crítico con IA
+            videoId: "JGQA_btxUyw", // Reglas para usar IA en clase
             order: 1,
           },
           {
@@ -226,6 +239,7 @@ export const courses: Course[] = [
             title: "Detectando uso inapropiado",
             type: "reading",
             duration: "8 min",
+            videoId: "Pka3NixwYmA", // Casos reales en aulas
             order: 2,
           },
           {
@@ -233,7 +247,7 @@ export const courses: Course[] = [
             title: "Protegiendo la privacidad estudiantil",
             type: "video",
             duration: "8 min",
-            videoId: "t2BwqYDfgMY", // Seguridad en Internet para niños y familias
+            videoId: "3QILn3zIY3c", // Consejos para maestros
             order: 3,
           },
         ],
@@ -262,7 +276,7 @@ export const courses: Course[] = [
             title: "Como pedir ayuda a la IA",
             type: "video",
             duration: "10 min",
-            videoId: "m5L3VeIIusM", // Benja Martínez: La mejor forma de estudiar con ChatGPT
+            videoId: "gYrfGnYob5Q", // Cómo usar IA para estudiar mejor
             order: 1,
           },
           {
@@ -270,7 +284,7 @@ export const courses: Course[] = [
             title: "Aprender, no copiar",
             type: "video",
             duration: "8 min",
-            videoId: "DZ2KfW5mfg0", // Inteligencia Artificial y Docencia Científica
+            videoId: "q6QACUlYjms", // Herramientas útiles para estudiantes
             order: 2,
           },
           {
@@ -278,6 +292,7 @@ export const courses: Course[] = [
             title: "Practica: Escribe un resumen corto",
             type: "practice",
             duration: "15 min",
+            videoId: "cmep2mdip3k", // Práctica de estudio con IA
             order: 3,
           },
         ],
@@ -293,7 +308,7 @@ export const courses: Course[] = [
             title: "Explicaciones paso a paso",
             type: "video",
             duration: "12 min",
-            videoId: "1k_WwjqDi5Q", // TEC Monterrey: IA para estudiantes - tips para estudiar
+            videoId: "v6tk0CxaVU8", // Resolver problemas de matemáticas con IA
             order: 1,
           },
           {
@@ -301,6 +316,7 @@ export const courses: Course[] = [
             title: "Ejercicios guiados",
             type: "practice",
             duration: "20 min",
+            videoId: "0Xb11hE8Ubc", // Práctica matemática
             order: 2,
           },
         ],
@@ -316,7 +332,7 @@ export const courses: Course[] = [
             title: "Simplificador de textos",
             type: "video",
             duration: "8 min",
-            videoId: "afIJamZRzTk", // TEC Monterrey: Herramientas de IA para estudiantes
+            videoId: "1addR36As9M", // Mejorar lectura con IA
             order: 1,
           },
           {
@@ -324,6 +340,7 @@ export const courses: Course[] = [
             title: "Historias de El Salvador",
             type: "reading",
             duration: "10 min",
+            videoId: "ZwYIWnNo0y8", // Resúmenes y comprensión con IA
             order: 2,
           },
         ],
@@ -352,7 +369,7 @@ export const courses: Course[] = [
             title: "Cultivos inteligentes",
             type: "video",
             duration: "10 min",
-            videoId: "R9fMbiQu6Z8", // Drones en agricultura - mapeo y precisión
+            videoId: "742ZooBPRlQ", // IA en Agricultura
             order: 1,
           },
           {
@@ -360,6 +377,7 @@ export const courses: Course[] = [
             title: "Casos de exito en El Salvador",
             type: "reading",
             duration: "8 min",
+            videoId: "dUnu3qDYTIc", // IA en Agricultura - casos
             order: 2,
           },
         ],
@@ -375,7 +393,7 @@ export const courses: Course[] = [
             title: "IA en finanzas",
             type: "video",
             duration: "12 min",
-            videoId: "IyxtSlzBwAo", // Tecnología y mapeo - agricultura de precisión
+            videoId: "eB7Z66r23N8", // Bitcoin y Economía Digital
             order: 1,
           },
           {
@@ -383,6 +401,7 @@ export const courses: Course[] = [
             title: "El Salvador y la innovacion tecnologica",
             type: "reading",
             duration: "10 min",
+            videoId: "rryQmSdWW6g", // Bitcoin y Economía Digital - innovación
             order: 2,
           },
         ],
@@ -398,7 +417,7 @@ export const courses: Course[] = [
             title: "IA para turistas y visitantes",
             type: "video",
             duration: "8 min",
-            videoId: "nGD558g9Cl4", // Turismo inteligente y ciudades digitales
+            videoId: "m51HiaQqPTM", // Turismo Inteligente
             order: 1,
           },
         ],
@@ -414,7 +433,7 @@ export const courses: Course[] = [
             title: "Protegiendo el planeta con IA",
             type: "video",
             duration: "10 min",
-            videoId: "akMU9CsZebE", // Robots y automatización - el futuro de los servicios
+            videoId: "Lo1Gt6jf2aY", // Medio Ambiente
             order: 1,
           },
         ],
@@ -430,7 +449,7 @@ export const courses: Course[] = [
             title: "Analisis deportivo con IA",
             type: "video",
             duration: "8 min",
-            videoId: "udoCfnREtUc", // CNN: ¿Camareros humanos o robots? - IA en servicios
+            videoId: "sWH8af4sHbA", // Fútbol y Deportes
             order: 1,
           },
         ],

@@ -11,7 +11,8 @@ import {
   ReadingLesson,
   QuizLesson,
   PracticeLesson,
-  LessonNavigation
+  LessonNavigation,
+  VideoSection
 } from "@/components/lesson";
 import { LessonBlocks } from "@/components/lesson/blocks";
 import { ShareButton } from "@/components/ui/ShareButton";
@@ -117,50 +118,72 @@ const Leccion = () => {
   };
 
   // Render the appropriate lesson component based on type
+  // For non-video lessons with a videoId, show video first
   const renderLessonContent = () => {
-    switch (lesson.type) {
-      case "video":
-        return (
-          <VideoLesson
-            lesson={lesson}
-            onComplete={handleComplete}
-            onVideoWatched={handleVideoWatched}
-            isCompleted={isCompleted}
-          />
-        );
-      case "reading":
-        return (
-          <ReadingLesson
-            lesson={lesson}
-            onComplete={handleComplete}
-            isCompleted={isCompleted}
-          />
-        );
-      case "quiz":
-        return (
-          <QuizLesson
-            lesson={lesson}
-            onComplete={handleComplete}
-            isCompleted={isCompleted}
-          />
-        );
-      case "practice":
-        return (
-          <PracticeLesson
-            lesson={lesson}
-            onComplete={handleComplete}
-            isCompleted={isCompleted}
-          />
-        );
-      default:
-        return (
-          <div className="bg-muted/50 rounded-xl p-8 text-center">
-            <p className="text-muted-foreground">
-              Tipo de leccion no reconocido
-            </p>
-          </div>
-        );
+    // Video lessons use VideoLesson which already handles everything
+    if (lesson.type === "video") {
+      return (
+        <VideoLesson
+          lesson={lesson}
+          onComplete={handleComplete}
+          onVideoWatched={handleVideoWatched}
+          isCompleted={isCompleted}
+        />
+      );
     }
+
+    // For other lesson types, show video first (if available) then lesson-specific content
+    const videoSection = lesson.videoId ? (
+      <VideoSection
+        lesson={lesson}
+        onVideoWatched={handleVideoWatched}
+        showWatchButton={true}
+      />
+    ) : null;
+
+    const lessonTypeContent = (() => {
+      switch (lesson.type) {
+        case "reading":
+          return (
+            <ReadingLesson
+              lesson={lesson}
+              onComplete={handleComplete}
+              isCompleted={isCompleted}
+            />
+          );
+        case "quiz":
+          return (
+            <QuizLesson
+              lesson={lesson}
+              onComplete={handleComplete}
+              isCompleted={isCompleted}
+            />
+          );
+        case "practice":
+          return (
+            <PracticeLesson
+              lesson={lesson}
+              onComplete={handleComplete}
+              isCompleted={isCompleted}
+            />
+          );
+        default:
+          return (
+            <div className="bg-muted/50 rounded-xl p-8 text-center">
+              <p className="text-muted-foreground">
+                Tipo de leccion no reconocido
+              </p>
+            </div>
+          );
+      }
+    })();
+
+    return (
+      <div className="space-y-8">
+        {videoSection}
+        {lessonTypeContent}
+      </div>
+    );
   };
 
   return (

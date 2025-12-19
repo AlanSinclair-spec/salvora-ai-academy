@@ -17,7 +17,10 @@ import {
   Rocket,
   Lightbulb,
   Clock,
-  FileText
+  FileText,
+  Play,
+  Shield,
+  Zap
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -207,6 +210,109 @@ const Programas = () => {
           </div>
         </div>
       </div>
+
+      {/* Prepárate para Grok Banner */}
+      <section className="salvora-container pb-8">
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary via-salvora-purple to-salvora-green rounded-2xl p-8 md:p-12">
+          {/* Background decoration */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          </div>
+
+          <div className="relative grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-sm font-bold mb-4">
+                <Zap className="w-4 h-4" />
+                Preparación Oficial
+              </div>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-4">
+                Prepárate para Grok con lecciones responsables
+              </h2>
+              <p className="text-white/90 text-lg mb-6">
+                Salvora te enseña a usar Grok y otras herramientas de IA de forma
+                segura, ética y efectiva. Aprende antes de que llegue a tu escuela.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="bg-white text-primary hover:bg-white/90 font-bold"
+                  asChild
+                >
+                  <Link to="/cursos">
+                    Empezar Ahora
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="text-white border-white/30 border hover:bg-white/10"
+                  asChild
+                >
+                  <a href="#video-explainer">
+                    <Play className="w-5 h-5 mr-2" />
+                    Ver Video
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-white">
+                <Shield className="w-8 h-8 mb-2" />
+                <p className="font-bold">Uso Responsable</p>
+                <p className="text-sm text-white/70">Aprende los límites</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-white">
+                <BookOpen className="w-8 h-8 mb-2" />
+                <p className="font-bold">35 Lecciones</p>
+                <p className="text-sm text-white/70">Contenido completo</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-white">
+                <GraduationCap className="w-8 h-8 mb-2" />
+                <p className="font-bold">Para Todos</p>
+                <p className="text-sm text-white/70">Maestros y estudiantes</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur rounded-xl p-4 text-white">
+                <Sparkles className="w-8 h-8 mb-2" />
+                <p className="font-bold">100% Gratis</p>
+                <p className="text-sm text-white/70">Sin costo alguno</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Explainer Section */}
+      <section id="video-explainer" className="salvora-container py-12">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Cómo Salvora Complementa a Grok
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Mira este video para entender cómo nuestra plataforma prepara a El Salvador
+            para la era de la Inteligencia Artificial.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-2xl">
+            {/* Using a relevant AI education video - can be replaced with custom Salvora video */}
+            <iframe
+              src="https://www.youtube.com/embed/cmep2mdip3k"
+              title="Cómo Salvora Complementa a Grok en las Escuelas"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Video: Introducción a la Inteligencia Artificial para educadores salvadoreños
+          </p>
+        </div>
+      </section>
 
       {/* 3-Step Visual Journey */}
       <section className="salvora-container py-16">
@@ -416,6 +522,90 @@ const Programas = () => {
             </div>
           ))}
         </div>
+
+        {/* Platzi Certifícate Section */}
+        <section className="bg-gradient-to-br from-salvora-green/10 via-transparent to-primary/10 rounded-2xl border border-salvora-green/20 p-8 mb-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-salvora-green/20 text-salvora-green text-sm font-bold mb-4">
+                <Award className="w-4 h-4" />
+                Continúa tu Aprendizaje
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Después de Salvora: Certifícate en Platzi
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Salvora te da los fundamentos de IA. ¿Quieres ir más allá?
+                Platzi ofrece cursos avanzados de IA, programación y tecnología
+                para llevar tu carrera al siguiente nivel.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                  <span className="text-foreground">Cursos de Machine Learning y Deep Learning</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                  <span className="text-foreground">Certificaciones reconocidas en la industria</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                  <span className="text-foreground">Comunidad de profesionales en Latinoamérica</span>
+                </div>
+              </div>
+              <Button
+                variant="hero"
+                size="lg"
+                className="bg-salvora-green hover:bg-salvora-green/90"
+                asChild
+              >
+                <a
+                  href="https://platzi.com/cursos/inteligencia-artificial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explorar Cursos en Platzi
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </a>
+              </Button>
+            </div>
+            <div className="bg-card rounded-xl border border-border p-6">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
+                <Rocket className="w-5 h-5 text-salvora-green" />
+                Tu Camino de Aprendizaje
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    1
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Salvora: Fundamentos</p>
+                    <p className="text-sm text-muted-foreground">Aprende qué es IA y cómo usarla responsablemente</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-salvora-purple flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    2
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Salvora: Herramientas</p>
+                    <p className="text-sm text-muted-foreground">Usa Grok y otras IA en tu trabajo o estudio</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-salvora-green flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    3
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground">Platzi: Avanzado</p>
+                    <p className="text-sm text-muted-foreground">Certifícate y desarrolla una carrera en IA</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Upcoming Events */}
         <section className="bg-card/50 rounded-2xl border border-white/10 p-8">

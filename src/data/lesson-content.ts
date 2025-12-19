@@ -678,6 +678,20 @@ Resumen
       summary: "Aprendi que la IA no 'piensa' - predice palabras basandose en patrones. Por eso puede equivocarse y es importante verificar.",
       prompt: "Pregunta: Explicame como funciona un modelo de lenguaje como si fuera un estudiante",
       practiceQuestion: "¿Por que crees que es importante saber que la IA predice en vez de 'pensar'?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "¿Como crees que 'piensa' un robot o una computadora?",
+        prompt: "Pregunta a tus estudiantes si creen que las computadoras piensan como nosotros. Escucha 2-3 respuestas.",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Cuentale a tu companero: ¿Que es lo mas sorprendente que aprendiste sobre como 'piensa' la IA?",
+        pairWork: true,
+        timer: 90
+      }
     }
   },
 
@@ -967,6 +981,20 @@ Ese es un excelente comienzo para una relacion productiva con tu nuevo asistente
       summary: "Conoci a Grok, el asistente de IA de xAI que usaremos en El Salvador. Tiene humor, acceso en tiempo real, y puede ayudarnos a aprender!",
       prompt: "Pregunta: Hola Grok, explicame que puedes hacer por mi como estudiante salvadoreno",
       practiceQuestion: "¿Cual es la diferencia entre usar Grok para aprender y usarlo para copiar?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "¿Has usado un chatbot o asistente virtual antes? ¿Cual?",
+        prompt: "Pregunta si han usado Siri, Alexa, ChatGPT, o cualquier asistente. Escucha sus experiencias.",
+        discussionTime: 45
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "En parejas, piensen: ¿Como podria Grok ayudarles a estudiar mejor sin hacer trampa?",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -1302,6 +1330,20 @@ Como usuario de IA, tienes la responsabilidad de:
       summary: "Aprendi lo que la IA NO puede hacer: no tiene conciencia, puede inventar cosas, no es verdaderamente creativa. ¡Importante para usarla bien!",
       prompt: "Pregunta: Cuales son las limitaciones mas importantes de la inteligencia artificial?",
       practiceQuestion: "¿Por que crees que es importante conocer los limites de la IA, no solo sus capacidades?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "¿Crees que la IA puede hacer TODO? ¿Hay algo que no pueda hacer?",
+        prompt: "Haga una lluvia de ideas sobre cosas que creen que la IA puede y no puede hacer. Escriba las respuestas en la pizarra.",
+        discussionTime: 60
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Menciona a tu companero 3 cosas que la IA NO puede hacer. ¿Por que es importante saberlo?",
+        pairWork: true,
+        timer: 90
+      }
     }
   },
 
@@ -1949,6 +1991,20 @@ En la siguiente leccion, veremos como personalizar estos planes para tu contexto
       ],
       answerKey: ["B) Tema, grado, duracion y objetivos", "C) Porque tu conoces a tus estudiantes", "B) Pedir alternativas sin tecnologia"],
       rubric: "Excelente (4): Incluye los 4 elementos y contexto salvadoreno | Bueno (3): Incluye los 4 elementos | En desarrollo (2): Faltan 1-2 elementos | Necesita mejora (1): Prompt vago o incompleto"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "¿Cuanto tiempo les toma preparar un plan de leccion? ¿Que es lo mas dificil?",
+        prompt: "Pida a los maestros que compartan sus mayores retos al planificar. Anote los mas comunes.",
+        discussionTime: 60
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "En parejas, piensen en una leccion que ensenan esta semana. ¿Que informacion le darian a la IA para crear un plan?",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2105,6 +2161,20 @@ En la siguiente leccion, aprenderemos a crear rubricas de evaluacion.`,
       ],
       answerKey: ["B) Revisarlas y verificar que son correctas", "B) De aplicacion y analisis", "B) Especificando niveles en el prompt"],
       rubric: "Excelente (4): Quiz revisado con variedad de niveles y tipos | Bueno (3): Quiz revisado con un tipo de pregunta | En desarrollo (2): Quiz sin revisar | Necesita mejora (1): Quiz copiado sin verificar"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "¿Cuanto tiempo les toma crear un examen de 10 preguntas?",
+        prompt: "Pregunte cuanto tiempo invierten en crear evaluaciones. Compare despues con el tiempo usando IA.",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "En parejas, practiquen: ¿Que prompt usarian para crear un quiz de 10 preguntas sobre un tema que ensenan?",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2270,6 +2340,20 @@ La IA es una herramienta poderosa. Usala con sabiduria.`,
       ],
       answerKey: ["B) Nombres, direcciones, datos familiares", "C) Con descripcion generica anonima", "B) Usar tu juicio profesional"],
       rubric: "Excelente (4): Demuestra comprension total de privacidad y etica | Bueno (3): Comprende lo basico de privacidad | En desarrollo (2): Necesita recordatorios frecuentes | Necesita mejora (1): Comparte informacion inapropiada"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Que informacion de tus estudiantes consideras privada?",
+        prompt: "Piensa en datos que NO deberian compartirse con herramientas externas",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "Discute con un colega: Como puedes consultar sobre un estudiante con IA sin revelar su identidad?",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2340,6 +2424,20 @@ Regla numero tres: Informa a padres y directores. Es buena practica comunicar co
 Regla numero cuatro: Conoce las politicas de tu institucion. Algunas escuelas tienen reglas especificas sobre el uso de IA. Asegurate de conocerlas y respetarlas.
 
 Proteger la privacidad no es opcional. Es nuestra responsabilidad como educadores.`,
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Has usado alguna vez herramientas digitales para hablar de estudiantes?",
+        prompt: "Piensa en chats, emails, o cualquier plataforma donde mencionas a estudiantes",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Menciona las 4 reglas de privacidad que aprendiste. Cual es la mas importante para ti?",
+        pairWork: true,
+        timer: 90
+      }
+    }
   },
 
   // ===== CURSO 3: IA PARA ESTUDIANTES =====
@@ -2405,6 +2503,20 @@ Recuerda: La IA es para ayudarte a APRENDER. Si solo copias respuestas, te estas
       summary: "Aprendi a pedir ayuda a la IA de manera efectiva! El secreto: ser especifico y pedir explicaciones, no respuestas.",
       prompt: "Prueba: 'Explicame [tu tema dificil] paso a paso como si tuviera 12 anos'",
       practiceQuestion: "Cual es la diferencia entre pedir 'la respuesta' y pedir 'los pasos para resolver'?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Cuando tienes una tarea dificil, que es lo primero que haces?",
+        prompt: "Piensa en tus estrategias actuales para pedir ayuda",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Comparte con tu companero: Cual es el tip mas util que aprendiste para pedir ayuda a la IA?",
+        pairWork: true,
+        timer: 90
+      }
     }
   },
 
@@ -2478,6 +2590,20 @@ No la uses para:
       summary: "Aprendi la diferencia entre APRENDER y COPIAR con IA. Aprender = pedir explicaciones. Copiar = entregar sin entender.",
       prompt: "Regla de oro: Pide explicaciones, no respuestas. Luego intenta tu solo.",
       practiceQuestion: "Cual es la diferencia entre aprender con IA y copiar de IA?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Has copiado alguna vez algo sin entenderlo? Como te sentiste despues?",
+        prompt: "Piensa en la diferencia entre copiar y aprender",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "Discute con tu companero: Por que es mejor aprender con IA que copiar de IA? Den un ejemplo cada uno.",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2583,6 +2709,20 @@ En la siguiente leccion, practicaras con el Ayudante de Matematicas de Salvora.`
       summary: "Aprendi a usar IA para matematicas! El secreto: pedir explicaciones paso a paso, no solo respuestas.",
       prompt: "Prueba: 'Explicame como resolver [tu problema] paso a paso. Dime que regla uso en cada paso.'",
       practiceQuestion: "Por que es mejor pedir explicaciones paso a paso que solo la respuesta?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Cual es el tema de matematicas que mas te cuesta entender?",
+        prompt: "Piensa en como has pedido ayuda con matematicas antes",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Practica con tu companero: Uno dice un problema, el otro explica como pediria ayuda a la IA sin pedir la respuesta directa.",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2658,6 +2798,20 @@ Tambien puedes usar el simplificador para:
 - Cualquier texto que te cueste trabajo
 
 En la siguiente leccion, leeremos algunas historias de El Salvador y practicaremos la comprension lectora.`,
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Has leido algun texto escolar que era muy dificil de entender?",
+        prompt: "Piensa en libros o articulos con palabras complicadas",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Explica a tu companero los 5 pasos para usar el Simplificador de Textos. Luego cambien de rol.",
+        pairWork: true,
+        timer: 90
+      }
+    }
   },
 
   "estudiantes-3-historias": {
@@ -2770,6 +2924,20 @@ La proxima vez que tomes una taza de cafe salvadoreno, piensa que quiza la IA ay
       summary: "Aprendi como la IA ayuda a la agricultura! Sensores + IA = mejores cosechas y menos desperdicio.",
       prompt: "Pregunta: Como puede la IA ayudar a los caficultores de El Salvador?",
       practiceQuestion: "Que es la agricultura de precision y como beneficia a los agricultores?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Conoces a alguien que trabaje en agricultura? Que desafios enfrenta?",
+        prompt: "Piensa en los cultivos de tu comunidad: cafe, maiz, frijoles...",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Explica a tu companero como los sensores y la IA pueden ayudar a un caficultor. Menciona al menos 3 beneficios.",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2880,6 +3048,20 @@ Esto crea oportunidades, pero tambien responsabilidades. Es importante que todos
       summary: "Aprendi como la IA se usa en finanzas! Detecta fraudes, ayuda a ahorrar, y El Salvador es pionero en esto.",
       prompt: "Pregunta: Como detectan los bancos el fraude usando inteligencia artificial?",
       practiceQuestion: "Por que El Salvador es importante en innovacion financiera mundial?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Has escuchado sobre Bitcoin o criptomonedas? Que sabes sobre ellas?",
+        prompt: "Piensa en lo que El Salvador ha hecho diferente con el dinero",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "Discute con tu companero: De las 4 formas en que la IA ayuda en finanzas, cual crees que es mas importante para El Salvador y por que?",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 
@@ -2952,6 +3134,20 @@ Los destinos turisticos pueden usar IA para:
 En El Salvador, lugares como Joya de Ceren, el Puerto de La Libertad, y las Rutas de las Flores podrian beneficiarse enormemente de estas tecnologias.
 
 El turismo con IA no reemplaza la calidez salvadorena. La complementa, haciendo mas facil para los visitantes disfrutar de todo lo que nuestro pais ofrece.`,
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Si un turista visitara tu comunidad, que le recomendarias ver o hacer?",
+        prompt: "Piensa en lugares especiales de El Salvador",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Menciona 3 formas en que la IA puede mejorar la experiencia de un turista en El Salvador. Luego tu companero menciona otras 3.",
+        pairWork: true,
+        timer: 90
+      }
+    }
   },
 
   "vida-4-planeta": {
@@ -2976,6 +3172,20 @@ Como estudiante, puedes contribuir:
 - Comparte lo que aprendes con tu comunidad
 
 El Salvador es pequeno, pero nuestras acciones importan. Con IA como aliada, podemos proteger nuestro pedacito de planeta.`,
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Que problemas ambientales has visto en tu comunidad? Contaminacion, deforestacion, inundaciones?",
+        prompt: "Piensa en como el cambio climatico afecta a El Salvador",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "discussion",
+        prompt: "De las 5 formas en que la IA ayuda al medio ambiente, cual seria mas util para tu comunidad? Explica por que a tu companero.",
+        pairWork: true,
+        timer: 120
+      }
+    }
   },
 
   "vida-5-futbol": {
@@ -3042,6 +3252,20 @@ El futbol + IA = el futuro del deporte rey.`,
       summary: "Aprendi como la IA revoluciona el futbol! Analiza jugadores, previene lesiones y descubre talentos.",
       prompt: "Pregunta: Como usan los equipos profesionales la IA para mejorar su rendimiento?",
       practiceQuestion: "Como puede la IA ayudar a prevenir lesiones en futbolistas?"
+    },
+    videoInteractivity: {
+      preVideoHook: {
+        type: "question",
+        content: "Cual es tu equipo de futbol favorito? Alguna vez has visto estadisticas de jugadores?",
+        prompt: "Piensa en como los equipos profesionales analizan a sus jugadores",
+        discussionTime: 30
+      },
+      postVideoActivity: {
+        type: "recap",
+        prompt: "Con tu companero, expliquen como la IA podria ayudar a un equipo de futbol salvadoreno. Mencionen analisis, lesiones y busqueda de talentos.",
+        pairWork: true,
+        timer: 120
+      }
     }
   },
 };

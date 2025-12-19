@@ -98,3 +98,31 @@ export interface LessonNavInfo {
   lessonId: string;
   title: string;
 }
+
+// Video Interactivity types for low-literacy accessibility
+export interface PreVideoHook {
+  type: "question" | "image" | "object";
+  content: string; // The question text, image URL, or object description
+  prompt: string; // Teacher prompt or instruction
+  discussionTime: number; // Seconds for discussion
+}
+
+export interface PausePoint {
+  timestamp: number; // Seconds into video
+  prompt: string; // Discussion question
+  type: "discussion" | "prediction" | "reflection";
+}
+
+export interface PostVideoActivity {
+  type: "recap" | "drawing" | "roleplay" | "discussion";
+  prompt: string;
+  pairWork: boolean;
+  timer: number; // Seconds
+  roles?: string[]; // For roleplay activities
+}
+
+export interface VideoInteractivity {
+  preVideoHook?: PreVideoHook;
+  pausePoints?: PausePoint[];
+  postVideoActivity?: PostVideoActivity;
+}

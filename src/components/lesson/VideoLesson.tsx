@@ -1,6 +1,7 @@
 // Video Lesson Component
 // Displays video content with optional transcript for Lite Mode
 // Includes Text-to-Speech (Guía Oral) for accessibility
+// Supports interactive video phases: PreVideoHook → Video → PostVideoActivity
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,9 @@ import { Play, CheckCircle, FileText, Volume2, ExternalLink, Eye } from "lucide-
 import { useLiteMode } from "@/contexts/SettingsContext";
 import { getLessonContent } from "@/data/lesson-content";
 import { OralGuideButton, OralGuideBanner } from "@/components/ui/OralGuideButton";
-import type { Lesson } from "@/types/courses";
+import { PreVideoHook } from "./PreVideoHook";
+import { PostVideoActivity } from "./PostVideoActivity";
+import type { Lesson, VideoInteractivity } from "@/types/courses";
 
 interface VideoLessonProps {
   lesson: Lesson;
@@ -26,12 +29,45 @@ const isPlaceholderVideo = (videoId: string | undefined): boolean => {
   return false;
 };
 
+type VideoPhase = "preVideo" | "watching" | "postVideo" | "complete";
+
 export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }: VideoLessonProps) {
   const [showTranscript, setShowTranscript] = useState(false);
   const [videoWatched, setVideoWatched] = useState(false);
   const isLiteMode = useLiteMode();
   const content = getLessonContent(lesson.id);
   const contentEndRef = useRef<HTMLDivElement>(null);
+
+  // Interactive video phases
+  const interactivity: VideoInteractivity | undefined = content?.videoInteractivity;
+  const hasPreVideoHook = !!interactivity?.preVideoHook;
+  const hasPostVideoActivity = !!interactivity?.postVideoActivity;
+
+  // Determine initial phase
+  const getInitialPhase = (): VideoPhase => {
+    if (hasPreVideoHook) return "preVideo";
+    return "watching";
+  };
+
+  const [phase, setPhase] = useState<VideoPhase>(getInitialPhase);
+
+  const handlePreVideoComplete = () => {
+    setPhase("watching");
+  };
+
+  const handleVideoComplete = () => {
+    setVideoWatched(true);
+    onVideoWatched?.();
+    if (hasPostVideoActivity) {
+      setPhase("postVideo");
+    } else {
+      setPhase("complete");
+    }
+  };
+
+  const handlePostVideoComplete = () => {
+    setPhase("complete");
+  };
 
   // Intersection Observer for Lite Mode scroll tracking
   useEffect(() => {
@@ -55,6 +91,50 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
     setVideoWatched(true);
     onVideoWatched?.();
   };
+
+  // Pre-Video Hook Phase
+  if (phase === "preVideo" && interactivity?.preVideoHook) {
+    return (
+      <div className="space-y-6">
+        <PreVideoHook
+          hook={interactivity.preVideoHook}
+          onComplete={handlePreVideoComplete}
+        />
+      </div>
+    );
+  }
+
+  // Post-Video Activity Phase
+  if (phase === "postVideo" && interactivity?.postVideoActivity) {
+    return (
+      <div className="space-y-6">
+        <PostVideoActivity
+          activity={interactivity.postVideoActivity}
+          onComplete={handlePostVideoComplete}
+        />
+        {/* Complete Button */}
+        <div className="flex justify-end">
+          <Button
+            onClick={onComplete}
+            disabled={isCompleted}
+            variant={isCompleted ? "outline" : "hero"}
+          >
+            {isCompleted ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Completado
+              </>
+            ) : (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Marcar como completado
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // In lite mode, show transcript instead of video
   if (isLiteMode) {

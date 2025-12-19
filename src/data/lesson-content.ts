@@ -9,7 +9,8 @@ import type {
   PracticeQuestionEnhanced,
   ResponsibleAIReminder,
   WhatsAppPayload,
-  ClassroomPack
+  ClassroomPack,
+  VideoInteractivity
 } from "@/types/courses";
 
 export interface LessonContent {
@@ -28,6 +29,9 @@ export interface LessonContent {
   responsibleAIReminder?: ResponsibleAIReminder;
   whatsAppPayload?: WhatsAppPayload;
   classroomPack?: ClassroomPack;
+
+  // Video interactivity for low-literacy accessibility
+  videoInteractivity?: VideoInteractivity;
 }
 
 export const lessonContent: Record<string, LessonContent> = {

@@ -1,10 +1,12 @@
 // Enhanced Practice Component
 // 3+ questions with feedback and progressive hints
+// Includes Text-to-Speech (Guía Oral) for accessibility
 
 import { useState } from "react";
 import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useReadiness } from "@/contexts/ReadinessContext";
+import { OralGuideIconButton } from "@/components/ui/OralGuideButton";
 import type { PracticeQuestionEnhanced } from "@/types/courses";
 
 interface EnhancedPracticeProps {
@@ -162,9 +164,15 @@ export function EnhancedPractice({ questions, lessonId, onComplete }: EnhancedPr
 
       {/* Question */}
       <div className="p-4">
-        <h4 className="text-lg font-medium text-foreground mb-4">
-          {question.question}
-        </h4>
+        <div className="flex items-start gap-2 mb-4">
+          <h4 className="text-lg font-medium text-foreground flex-1">
+            {question.question}
+          </h4>
+          <OralGuideIconButton
+            text={`${question.question}. Las opciones son: ${question.options.map((opt, i) => `${String.fromCharCode(65 + i)}, ${opt}`).join('. ')}`}
+            className="text-muted-foreground hover:text-primary flex-shrink-0"
+          />
+        </div>
 
         {/* Hints */}
         {!state.answered && question.hints.length > 0 && (
@@ -257,10 +265,16 @@ export function EnhancedPractice({ questions, lessonId, onComplete }: EnhancedPr
                 : "bg-amber-500/10 border border-amber-500/20"
             }`}
           >
-            <p className="text-sm text-foreground">
-              <strong>{state.correct ? "Correcto!" : "Incorrecto."}</strong>{" "}
-              {question.feedback || question.explanation}
-            </p>
+            <div className="flex items-start gap-2">
+              <p className="text-sm text-foreground flex-1">
+                <strong>{state.correct ? "Correcto!" : "Incorrecto."}</strong>{" "}
+                {question.feedback || question.explanation}
+              </p>
+              <OralGuideIconButton
+                text={`${state.correct ? "Correcto!" : "Incorrecto."} ${question.feedback || question.explanation}`}
+                className="text-muted-foreground hover:text-primary flex-shrink-0"
+              />
+            </div>
           </div>
         )}
 

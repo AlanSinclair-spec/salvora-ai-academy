@@ -1,11 +1,13 @@
 // Video Lesson Component
 // Displays video content with optional transcript for Lite Mode
+// Includes Text-to-Speech (Guía Oral) for accessibility
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, CheckCircle, FileText, Volume2, ExternalLink, Eye } from "lucide-react";
 import { useLiteMode } from "@/contexts/SettingsContext";
 import { getLessonContent } from "@/data/lesson-content";
+import { OralGuideButton, OralGuideBanner } from "@/components/ui/OralGuideButton";
 import type { Lesson } from "@/types/courses";
 
 interface VideoLessonProps {
@@ -78,20 +80,29 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
         </div>
 
         {content?.transcript && (
-          <div className="bg-card rounded-xl border border-border p-6">
-            <h4 className="font-semibold mb-4 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-primary" />
-              Transcripcion del video
-            </h4>
-            <div className="prose prose-sm max-w-none">
-              {content.transcript.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="text-muted-foreground mb-4">
-                  {paragraph}
-                </p>
-              ))}
+          <div className="space-y-4">
+            {/* Guía Oral - Text-to-Speech */}
+            <OralGuideBanner
+              text={content.transcript}
+              title="Guía Oral"
+              description="Escucha la transcripción en voz alta"
+            />
+
+            <div className="bg-card rounded-xl border border-border p-6">
+              <h4 className="font-semibold mb-4 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-primary" />
+                Transcripcion del video
+              </h4>
+              <div className="prose prose-sm max-w-none">
+                {content.transcript.split("\n\n").map((paragraph, index) => (
+                  <p key={index} className="text-muted-foreground mb-4">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              {/* Sentinel for scroll tracking */}
+              <div ref={contentEndRef} className="h-1" />
             </div>
-            {/* Sentinel for scroll tracking */}
-            <div ref={contentEndRef} className="h-1" />
           </div>
         )}
 
@@ -166,17 +177,26 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
         )}
       </div>
 
-      {/* Transcript Toggle */}
+      {/* Transcript Toggle & Guía Oral */}
       {content?.transcript && (
         <div>
-          <Button
-            variant="ghost"
-            onClick={() => setShowTranscript(!showTranscript)}
-            className="text-primary"
-          >
-            <FileText className="w-4 h-4 mr-2" />
-            {showTranscript ? "Ocultar transcripcion" : "Ver transcripcion"}
-          </Button>
+          <div className="flex items-center gap-2 flex-wrap">
+            <Button
+              variant="ghost"
+              onClick={() => setShowTranscript(!showTranscript)}
+              className="text-primary"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              {showTranscript ? "Ocultar transcripcion" : "Ver transcripcion"}
+            </Button>
+
+            <OralGuideButton
+              text={content.transcript}
+              label="Escuchar"
+              variant="outline"
+              size="sm"
+            />
+          </div>
 
           {showTranscript && (
             <div className="mt-4 bg-muted/50 rounded-xl p-6">

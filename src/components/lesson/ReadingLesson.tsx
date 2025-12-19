@@ -1,9 +1,11 @@
 // Reading Lesson Component
 // Displays markdown-style reading content with safe rendering
+// Includes Text-to-Speech (Guía Oral) for accessibility
 
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Clock, BookOpen } from "lucide-react";
 import { getLessonContent } from "@/data/lesson-content";
+import { OralGuideBanner } from "@/components/ui/OralGuideButton";
 import type { Lesson } from "@/types/courses";
 import { Fragment, ReactNode } from "react";
 
@@ -162,6 +164,15 @@ export function ReadingLesson({ lesson, onComplete, isCompleted }: ReadingLesson
           </div>
         </div>
       </div>
+
+      {/* Guía Oral - Text-to-Speech */}
+      {readingContent && (
+        <OralGuideBanner
+          text={readingContent}
+          title="Guía Oral"
+          description="Escucha esta lectura en voz alta"
+        />
+      )}
 
       {/* Content */}
       <div className="bg-card rounded-xl border border-border p-6 md:p-8">

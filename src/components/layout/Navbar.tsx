@@ -116,9 +116,10 @@ export function Navbar() {
               </div>
             )}
             <button
-              className="p-2 rounded-md text-muted-foreground hover:text-foreground transition-colors"
+              className="min-h-11 min-w-11 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
+              aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>

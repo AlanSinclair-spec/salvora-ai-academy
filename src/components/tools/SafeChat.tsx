@@ -1,46 +1,61 @@
 // Safe Chat Tool Component
 // Chat interface with cheating prevention and learning focus
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Send, Lightbulb, User, Bot } from "lucide-react";
+import { MessageSquare, Send, Lightbulb, User, Bot, RefreshCw, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSafeChat } from "@/hooks/useAITools";
 import { TypingIndicator } from "@/components/ui/TypingIndicator";
 import type { ChatMessage } from "@/types/ai-tools";
 
+// Move outside component to avoid recreation on each render
+const SUGGESTED_QUESTIONS = [
+  "Explícame qué es una ecuación",
+  "¿Cómo puedo mejorar mi comprensión lectora?",
+  "Dame un ejemplo de fotosíntesis",
+  "Ayúdame a entender las fracciones",
+] as const;
+
+interface ErrorState {
+  hasError: boolean;
+  message: string;
+  canRetry: boolean;
+  lastInput?: string;
+}
+
 export function SafeChat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [errorState, setErrorState] = useState<ErrorState>({
+    hasError: false,
+    message: "",
+    canRetry: false,
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { mutate, isPending } = useSafeChat();
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isPending]);
+  }, [messages, isPending, scrollToBottom]);
 
-  const handleSend = () => {
-    if (!input.trim() || isPending) return;
+  const clearError = useCallback(() => {
+    setErrorState({ hasError: false, message: "", canRetry: false });
+  }, []);
 
-    const userMessage: ChatMessage = {
-      role: "user",
-      content: input.trim(),
-      timestamp: Date.now(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+  const sendMessage = useCallback((messageText: string, currentMessages: ChatMessage[]) => {
+    clearError();
 
     mutate(
       {
-        message: input.trim(),
+        message: messageText,
         context: "homework",
-        previousMessages: messages,
+        previousMessages: currentMessages,
       },
       {
         onSuccess: (response) => {
@@ -51,31 +66,61 @@ export function SafeChat() {
           };
           setMessages((prev) => [...prev, assistantMessage]);
         },
-        onError: () => {
-          const errorMessage: ChatMessage = {
-            role: "assistant",
-            content: "Lo siento, ocurrió un error. Intenta de nuevo.",
-            timestamp: Date.now(),
-          };
-          setMessages((prev) => [...prev, errorMessage]);
+        onError: (error) => {
+          // Determine error type and message
+          let errorMessage = "Ocurrió un error inesperado.";
+          let canRetry = true;
+
+          if (error instanceof Error) {
+            if (error.message.includes("network") || error.message.includes("fetch")) {
+              errorMessage = "Error de conexión. Verifica tu internet e intenta de nuevo.";
+            } else if (error.message.includes("timeout")) {
+              errorMessage = "La solicitud tardó demasiado. Intenta de nuevo.";
+            } else if (error.message.includes("rate limit") || error.message.includes("429")) {
+              errorMessage = "Demasiadas solicitudes. Espera un momento antes de intentar de nuevo.";
+              canRetry = false;
+            }
+          }
+
+          setErrorState({
+            hasError: true,
+            message: errorMessage,
+            canRetry,
+            lastInput: messageText,
+          });
         },
       }
     );
-  };
+  }, [mutate, clearError]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleSend = useCallback(() => {
+    if (!input.trim() || isPending) return;
+
+    const userMessage: ChatMessage = {
+      role: "user",
+      content: input.trim(),
+      timestamp: Date.now(),
+    };
+
+    const messageText = input.trim();
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+
+    sendMessage(messageText, [...messages, userMessage]);
+  }, [input, isPending, messages, sendMessage]);
+
+  const handleRetry = useCallback(() => {
+    if (errorState.lastInput) {
+      sendMessage(errorState.lastInput, messages);
+    }
+  }, [errorState.lastInput, messages, sendMessage]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
-  };
-
-  const suggestedQuestions = [
-    "Explicame que es una ecuacion",
-    "Como puedo mejorar mi comprension lectora?",
-    "Dame un ejemplo de fotosintesis",
-    "Ayudame a entender las fracciones",
-  ];
+  }, [handleSend]);
 
   return (
     <div className="bg-card rounded-xl border border-border overflow-hidden flex flex-col h-[600px] max-h-[70vh] min-h-[400px]">
@@ -105,7 +150,7 @@ export function SafeChat() {
             {/* Suggested Questions */}
             <div className="space-y-2 w-full max-w-sm">
               <p className="text-xs text-muted-foreground">Prueba preguntar:</p>
-              {suggestedQuestions.map((question, index) => (
+              {SUGGESTED_QUESTIONS.map((question, index) => (
                 <button
                   key={question}
                   onClick={() => setInput(question)}
@@ -159,6 +204,39 @@ export function SafeChat() {
                 </div>
                 <div className="bg-muted rounded-xl p-4">
                   <TypingIndicator />
+                </div>
+              </div>
+            )}
+            {/* Error Display with Retry */}
+            {errorState.hasError && (
+              <div className="flex gap-3 justify-start animate-message-in">
+                <div className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
+                  <AlertCircle className="w-4 h-4 text-destructive" />
+                </div>
+                <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-4 max-w-[80%]">
+                  <p className="text-sm text-destructive mb-3">{errorState.message}</p>
+                  <div className="flex gap-2">
+                    {errorState.canRetry && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleRetry}
+                        disabled={isPending}
+                        className="gap-1.5 text-xs"
+                      >
+                        <RefreshCw className="w-3 h-3" />
+                        Reintentar
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={clearError}
+                      className="text-xs"
+                    >
+                      Cerrar
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}

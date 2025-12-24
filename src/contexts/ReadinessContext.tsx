@@ -1,17 +1,20 @@
 // Readiness Context for Salvora AI Academy
 // Tracks AI Readiness Score with 4 pillars
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react";
 import { z } from "zod";
 import type {
   ReadinessState,
   ReadinessScore,
   ReadinessPillar,
   ReadinessPillarId,
-  ReadinessCheckpoint
 } from "@/types/readiness";
 import { DEFAULT_PILLARS, PILLAR_LESSONS, getReadinessRecommendation } from "@/types/readiness";
 import { useProgress } from "./ProgressContext";
+import { courses } from "@/data/courses";
+
+// Get course IDs dynamically from course data
+const COURSE_IDS = courses.map(course => course.id);
 
 const STORAGE_KEY = "salvora-readiness";
 
@@ -110,18 +113,15 @@ export function ReadinessProvider({ children }: { children: ReactNode }) {
   const [readiness, setReadiness] = useState<ReadinessState>(loadReadiness);
   const { getOverallProgress, isLessonComplete } = useProgress();
 
+  // Track if initial calculation has been done
+  const hasInitialized = useRef(false);
+
   // Save to localStorage whenever readiness changes
   useEffect(() => {
     saveReadiness(readiness);
   }, [readiness]);
 
-  // Recalculate scores when dependencies change
-  useEffect(() => {
-    recalculateScores();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const recalculateScores = () => {
+  const recalculateScores = useCallback(() => {
     setReadiness((prev) => {
       // Calculate practice accuracy
       let totalCorrect = 0;
@@ -139,9 +139,8 @@ export function ReadinessProvider({ children }: { children: ReactNode }) {
 
         // Check each lesson in the pillar across all courses
         pillarLessons.forEach((lessonId) => {
-          // Check against all possible course IDs
-          const courseIds = ['introduccion-ia', 'ia-maestros', 'ia-estudiantes', 'ia-vida-real'];
-          for (const courseId of courseIds) {
+          // Check against dynamically loaded course IDs
+          for (const courseId of COURSE_IDS) {
             if (isLessonComplete(courseId, lessonId)) {
               completedCount++;
               break;
@@ -181,9 +180,17 @@ export function ReadinessProvider({ children }: { children: ReactNode }) {
         practiceAccuracy,
       };
     });
-  };
+  }, [isLessonComplete, getOverallProgress]);
 
-  const recordPracticeResult = (lessonId: string, correct: number, total: number) => {
+  // Recalculate scores on initial mount
+  useEffect(() => {
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      recalculateScores();
+    }
+  }, [recalculateScores]);
+
+  const recordPracticeResult = useCallback((lessonId: string, correct: number, total: number) => {
     setReadiness((prev) => {
       const newPracticeResults = {
         ...prev.practiceResults,
@@ -210,11 +217,11 @@ export function ReadinessProvider({ children }: { children: ReactNode }) {
       };
     });
 
-    // Trigger full recalculation
-    setTimeout(recalculateScores, 100);
-  };
+    // Trigger full recalculation after state update
+    recalculateScores();
+  }, [recalculateScores]);
 
-  const recordCheckpoint = (lessonId: string, pillar: ReadinessPillarId) => {
+  const recordCheckpoint = useCallback((lessonId: string, pillar: ReadinessPillarId) => {
     setReadiness((prev) => ({
       ...prev,
       checkpoints: {
@@ -232,9 +239,9 @@ export function ReadinessProvider({ children }: { children: ReactNode }) {
       },
     }));
 
-    // Trigger full recalculation
-    setTimeout(recalculateScores, 100);
-  };
+    // Trigger full recalculation after state update
+    recalculateScores();
+  }, [recalculateScores]);
 
   const clearReadiness = () => {
     setReadiness(initialState);

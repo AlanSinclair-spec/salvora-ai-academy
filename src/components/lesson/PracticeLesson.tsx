@@ -1,7 +1,7 @@
 // Practice Lesson Component
 // Interactive exercises with links to AI tools - SAFE rendering (no dangerouslySetInnerHTML)
 
-import { useState, Fragment, ReactNode } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,129 +14,14 @@ import {
   FileText
 } from "lucide-react";
 import { getLessonContent } from "@/data/lesson-content";
+import { parseInstructionContent } from "@/lib/markdown-parser";
+import { CompleteButton, CompleteButtonContainer } from "./CompleteButton";
 import type { Lesson } from "@/types/courses";
 
 interface PracticeLessonProps {
   lesson: Lesson;
   onComplete: () => void;
   isCompleted: boolean;
-}
-
-/**
- * Safely parses inline markdown formatting (bold, italic, highlights) into React elements.
- * SECURITY: This function does NOT use dangerouslySetInnerHTML - all content is escaped by React.
- */
-function parseInlineFormatting(text: string): ReactNode[] {
-  const result: ReactNode[] = [];
-  let remaining = text;
-  let key = 0;
-
-  while (remaining.length > 0) {
-    // Match bold first (** **) since it's more specific
-    const boldMatch = remaining.match(/^(.*?)\*\*(.+?)\*\*(.*)$/s);
-    if (boldMatch) {
-      const [, before, boldText, after] = boldMatch;
-      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
-      result.push(<strong key={key++}>{boldText}</strong>);
-      remaining = after;
-      continue;
-    }
-
-    // Match italic (* *)
-    const italicMatch = remaining.match(/^(.*?)\*(.+?)\*(.*)$/s);
-    if (italicMatch) {
-      const [, before, italicText, after] = italicMatch;
-      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
-      result.push(<em key={key++}>{italicText}</em>);
-      remaining = after;
-      continue;
-    }
-
-    // Match highlight brackets [text]
-    const highlightMatch = remaining.match(/^(.*?)\[(.+?)\](.*)$/s);
-    if (highlightMatch) {
-      const [, before, highlightText, after] = highlightMatch;
-      if (before) result.push(<Fragment key={key++}>{before}</Fragment>);
-      result.push(
-        <span key={key++} className="bg-primary/10 text-primary px-1 rounded">
-          {highlightText}
-        </span>
-      );
-      remaining = after;
-      continue;
-    }
-
-    // No more formatting, add remaining text
-    result.push(<Fragment key={key++}>{remaining}</Fragment>);
-    break;
-  }
-
-  return result;
-}
-
-// Simple markdown-like parser for instructions - SAFE (no dangerouslySetInnerHTML)
-function parseInstructions(content: string) {
-  const lines = content.split("\n");
-  const elements: JSX.Element[] = [];
-  let listItems: string[] = [];
-
-  const flushList = () => {
-    if (listItems.length > 0) {
-      elements.push(
-        <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-2 mb-4 text-muted-foreground ml-4">
-          {listItems.map((item, i) => (
-            <li key={i}>{parseInlineFormatting(item)}</li>
-          ))}
-        </ul>
-      );
-      listItems = [];
-    }
-  };
-
-  lines.forEach((line, index) => {
-    const trimmed = line.trim();
-
-    if (trimmed.startsWith("# ")) {
-      flushList();
-      elements.push(
-        <h2 key={index} className="text-xl font-bold text-foreground mb-4 mt-6">
-          {trimmed.slice(2)}
-        </h2>
-      );
-    } else if (trimmed.startsWith("## ")) {
-      flushList();
-      elements.push(
-        <h3 key={index} className="text-lg font-semibold text-foreground mb-3 mt-5">
-          {trimmed.slice(3)}
-        </h3>
-      );
-    } else if (trimmed.startsWith("### ")) {
-      flushList();
-      elements.push(
-        <h4 key={index} className="font-semibold text-foreground mb-2 mt-4">
-          {trimmed.slice(4)}
-        </h4>
-      );
-    } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-      listItems.push(trimmed.slice(2));
-    } else if (/^\d+\.\s/.test(trimmed)) {
-      listItems.push(trimmed.replace(/^\d+\.\s/, ""));
-    } else if (trimmed === "---") {
-      flushList();
-      elements.push(<hr key={index} className="my-6 border-border" />);
-    } else if (trimmed.length > 0) {
-      flushList();
-      // SAFE: Using React elements instead of dangerouslySetInnerHTML
-      elements.push(
-        <p key={index} className="text-muted-foreground mb-3 leading-relaxed">
-          {parseInlineFormatting(trimmed)}
-        </p>
-      );
-    }
-  });
-
-  flushList();
-  return elements;
 }
 
 export function PracticeLesson({ lesson, onComplete, isCompleted }: PracticeLessonProps) {
@@ -204,7 +89,7 @@ export function PracticeLesson({ lesson, onComplete, isCompleted }: PracticeLess
       {instructions && (
         <div className="bg-card rounded-xl border border-border p-6">
           <article className="prose prose-slate max-w-none">
-            {parseInstructions(instructions)}
+            {parseInstructionContent(instructions)}
           </article>
         </div>
       )}
@@ -287,25 +172,9 @@ export function PracticeLesson({ lesson, onComplete, isCompleted }: PracticeLess
       )}
 
       {/* Complete Button */}
-      <div className="flex justify-end">
-        <Button
-          onClick={onComplete}
-          disabled={isCompleted}
-          variant={isCompleted ? "outline" : "hero"}
-        >
-          {isCompleted ? (
-            <>
-              <CheckCircle className="w-4 h-4 mr-2" />
-              Completado
-            </>
-          ) : (
-            <>
-              <CheckCircle className="w-4 h-4 mr-2" />
-              Marcar como completado
-            </>
-          )}
-        </Button>
-      </div>
+      <CompleteButtonContainer>
+        <CompleteButton isCompleted={isCompleted} onComplete={onComplete} />
+      </CompleteButtonContainer>
     </div>
   );
 }

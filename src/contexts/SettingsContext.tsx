@@ -17,6 +17,7 @@ const AppSettingsSchema = z.object({
   preferredLanguage: z.literal("es"),
   reduceMotion: z.boolean(),
   defaultQuickView: z.boolean(),
+  darkMode: z.boolean().optional().default(true),
 });
 
 interface SettingsContextType {
@@ -25,6 +26,7 @@ interface SettingsContextType {
   resetSettings: () => void;
   isLiteMode: boolean;
   isClassroomMode: boolean;
+  isDarkMode: boolean;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -65,6 +67,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     saveSettings(settings);
   }, [settings]);
 
+  // Apply theme class to document
+  useEffect(() => {
+    const root = document.documentElement;
+    if (settings.darkMode) {
+      root.classList.remove("light");
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+      root.classList.add("light");
+    }
+  }, [settings.darkMode]);
+
   const updateSettings = (partial: Partial<AppSettings>) => {
     setSettings((prev) => ({ ...prev, ...partial }));
   };
@@ -79,6 +93,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     resetSettings,
     isLiteMode: settings.liteMode,
     isClassroomMode: settings.classroomMode,
+    isDarkMode: settings.darkMode,
   };
 
   return (

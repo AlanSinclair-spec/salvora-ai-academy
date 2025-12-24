@@ -9,6 +9,8 @@ export interface AppSettings {
   // Accessibility settings
   reduceMotion: boolean;
   defaultQuickView: boolean;
+  // Theme
+  darkMode: boolean;
 }
 
 export interface UserProgress {
@@ -35,4 +37,5 @@ export const DEFAULT_SETTINGS: AppSettings = {
   preferredLanguage: "es",
   reduceMotion: false,
   defaultQuickView: true,
+  darkMode: true, // Default to dark mode (current theme)
 };

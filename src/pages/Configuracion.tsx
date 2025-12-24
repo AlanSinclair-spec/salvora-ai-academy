@@ -246,29 +246,25 @@ const Configuracion = () => {
             </div>
           </div>
 
-          {/* Theme (placeholder) */}
+          {/* Theme */}
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-              <Sun className="w-5 h-5 text-salvora-orange" />
+              {settings.darkMode ? (
+                <Moon className="w-5 h-5 text-salvora-purple" />
+              ) : (
+                <Sun className="w-5 h-5 text-salvora-orange" />
+              )}
               Apariencia
             </h3>
 
-            <div className="p-4 bg-card rounded-xl border border-border opacity-60">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center shrink-0">
-                  <Moon className="w-5 h-5 text-muted-foreground" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-foreground">Modo Oscuro</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Próximamente: Cambia entre tema claro y oscuro.
-                  </p>
-                </div>
-                <span className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground">
-                  Próximamente
-                </span>
-              </div>
-            </div>
+            <SettingToggle
+              title={settings.darkMode ? "Modo Oscuro" : "Modo Claro"}
+              description="Cambia entre tema claro y oscuro según tu preferencia. El modo oscuro es más cómodo para los ojos en ambientes con poca luz."
+              enabled={settings.darkMode}
+              onChange={(enabled) => updateSettings({ darkMode: enabled })}
+              icon={<Sun className="w-5 h-5" />}
+              iconEnabled={<Moon className="w-5 h-5" />}
+            />
           </div>
 
           {/* AI Readiness Score */}

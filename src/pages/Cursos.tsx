@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   ChevronDown,
   ChevronRight,
@@ -9,13 +11,78 @@ import {
   CheckCircle2,
   Lock,
   Lightbulb,
-  HelpCircle
+  HelpCircle,
+  Sparkles,
+  ArrowRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { courses } from "@/data/courses";
 import { getIconByName } from "@/lib/icons";
 import { useProgress } from "@/contexts/ProgressContext";
 import type { Course, Lesson } from "@/types/courses";
+
+// Skeleton loader for course cards
+function CourseSkeleton() {
+  return (
+    <div className="rounded-xl border-2 border-muted overflow-hidden">
+      <div className="p-6 bg-background/50">
+        <div className="flex items-start gap-4">
+          <Skeleton className="w-12 h-12 rounded-xl" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-72" />
+            <Skeleton className="h-1.5 w-full mt-3" />
+          </div>
+        </div>
+      </div>
+      <div className="divide-y divide-border">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-5 h-5" />
+              <Skeleton className="h-4 w-40" />
+            </div>
+            <Skeleton className="h-4 w-20" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Welcome banner for new users
+function WelcomeBanner() {
+  const firstCourse = courses[0];
+  const firstUnit = firstCourse?.units[0];
+  const firstLesson = firstUnit?.lessons[0];
+
+  return (
+    <div className="bg-gradient-to-br from-primary/10 via-salvora-green/10 to-salvora-orange/10 rounded-2xl border border-primary/20 p-6 md:p-8">
+      <div className="flex items-start gap-4">
+        <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+          <Sparkles className="w-6 h-6 text-primary" />
+        </div>
+        <div className="flex-1">
+          <h2 className="text-xl font-bold text-foreground mb-2">
+            ¡Bienvenido a Salvora!
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            Comienza tu viaje de aprendizaje en IA. Te recomendamos empezar con
+            el primer curso para construir una base solida.
+          </p>
+          {firstLesson && firstUnit && (
+            <Link to={`/leccion/${firstCourse.id}/${firstUnit.id}/${firstLesson.id}`}>
+              <Button variant="hero" className="gap-2">
+                Comenzar primera leccion
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const colorStyles: Record<string, string> = {
   blue: "border-primary/20 bg-primary/5",
@@ -190,8 +257,10 @@ const Cursos = () => {
               Aprende a tu ritmo con nuestros cursos estructurados. Cada curso incluye videos, lecturas y ejercicios practicos alineados con la alianza xAI-El Salvador.
             </p>
 
-            {/* Overall Progress */}
-            {overallProgress.total > 0 && (
+            {/* Welcome Banner for new users OR Overall Progress */}
+            {overallProgress.completed === 0 ? (
+              <WelcomeBanner />
+            ) : (
               <div className="bg-card/50 rounded-xl p-4 border border-border">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium text-foreground">Tu progreso total</span>

@@ -3,6 +3,12 @@
 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ChevronLeft, ChevronRight, Home, Lock, CheckCircle } from "lucide-react";
 import type { Lesson } from "@/types/courses";
 
@@ -98,18 +104,29 @@ export function LessonNavigation({
                 </Button>
               </Link>
             ) : (
-              <Button
-                variant="hero"
-                className="w-full justify-end opacity-50 cursor-not-allowed"
-                disabled
-                title="Completa el video y la practica para continuar"
-              >
-                <div className="text-right truncate">
-                  <div className="text-xs opacity-80">Siguiente</div>
-                  <div className="truncate">{nextLesson.lesson.title}</div>
-                </div>
-                <Lock className="w-4 h-4 ml-2" />
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="w-full">
+                      <Button
+                        variant="hero"
+                        className="w-full justify-end opacity-50 cursor-not-allowed"
+                        disabled
+                        aria-describedby="next-lesson-tooltip"
+                      >
+                        <div className="text-right truncate">
+                          <div className="text-xs opacity-80">Siguiente</div>
+                          <div className="truncate">{nextLesson.lesson.title}</div>
+                        </div>
+                        <Lock className="w-4 h-4 ml-2" />
+                      </Button>
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent id="next-lesson-tooltip" side="top">
+                    <p>Completa el video y la practica para continuar</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             )
           ) : (
             <Link to={`/cursos`}>

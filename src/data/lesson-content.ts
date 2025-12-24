@@ -35,7 +35,7 @@ export interface LessonContent {
 }
 
 export const lessonContent: Record<string, LessonContent> = {
-  // ===== CURSO 1: INTRODUCCION A LA IA =====
+  // ===== CURSO 1: FUNDAMENTOS DE IA =====
   // 11 lessons with full National-Scale Lesson Standard content
   // Department rotation: Apopa → San Salvador → Santa Ana → La Libertad → Sonsonate → Usulután → Chalatenango → San Miguel → Ahuachapán → Apopa
 
@@ -1877,7 +1877,7 @@ Ahora te toca a ti demostrar que esa apuesta valia la pena.`,
     enhancedPractice: [
       {
         id: "eval-bonus-1",
-        question: "Completaste el curso de Introduccion a la IA. ¿Que representa esto?",
+        question: "Completaste el curso de Fundamentos de IA. ¿Que representa esto?",
         options: [
           "A) El fin de tu aprendizaje sobre IA",
           "B) El comienzo de tu viaje como ciudadano digital informado",
@@ -1897,7 +1897,7 @@ Ahora te toca a ti demostrar que esa apuesta valia la pena.`,
         "Puedes volver a intentarlo si no apruebas la primera vez"
       ],
       localExample: "Estudiantes de todo El Salvador, desde Apopa hasta Usulutan, estan tomando esta misma evaluacion. ¡Tu eres parte de esta primera generacion!",
-      safePrompt: "Ayudame a repasar los conceptos principales del curso de Introduccion a la IA antes de mi evaluacion."
+      safePrompt: "Ayudame a repasar los conceptos principales del curso de Fundamentos de IA antes de mi evaluacion."
     },
     localContext: {
       hook: "Esta evaluacion marca el final de tu primer paso en el viaje de la IA. Pero el aprendizaje continua - en los proximos cursos y en tu vida diaria.",
@@ -1908,7 +1908,7 @@ Ahora te toca a ti demostrar que esa apuesta valia la pena.`,
       teacher: "Considere revisar los resultados de las evaluaciones para identificar areas que necesitan refuerzo."
     },
     whatsAppPayload: {
-      summary: "Complete la evaluacion del curso Introduccion a la IA en Salvora. ¡Ahora tengo las bases para usar IA de manera responsable!",
+      summary: "Complete la evaluacion del curso Fundamentos de IA en Salvora. ¡Ahora tengo las bases para usar IA de manera responsable!",
       prompt: "Pregunta: Cuales son los puntos mas importantes que aprendi sobre inteligencia artificial?",
       practiceQuestion: "¿Que fue lo mas sorprendente que aprendiste en este curso?"
     }

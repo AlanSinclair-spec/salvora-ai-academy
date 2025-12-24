@@ -6,7 +6,7 @@ import type { Course, Lesson, Unit } from "@/types/courses";
 export const courses: Course[] = [
   {
     id: "introduccion-ia",
-    title: "Introduccion a la IA",
+    title: "Fundamentos de IA",
     description: "Conceptos fundamentales de la Inteligencia Artificial",
     longDescription: "Aprende que es la IA, como funciona, sus limites y como esta tecnologia esta transformando El Salvador. Curso completo desde cero hasta uso responsable.",
     icon: "Brain",
@@ -138,7 +138,7 @@ export const courses: Course[] = [
             title: "Evaluacion: Demuestra Tu Conocimiento",
             type: "quiz",
             duration: "15 min",
-            videoId: "uk8zzNIInFg", // Repaso general de Introducción a la IA
+            videoId: "uk8zzNIInFg", // Repaso general de Fundamentos de IA
             order: 1,
           },
         ],

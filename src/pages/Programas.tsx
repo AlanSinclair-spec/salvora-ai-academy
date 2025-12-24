@@ -211,6 +211,60 @@ const Programas = () => {
         </div>
       </div>
 
+      {/* Oportunidad Histórica Section with El Salvador Image */}
+      <section className="salvora-container py-12">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-bold mb-4">
+              <Globe className="w-4 h-4" />
+              Oportunidad Histórica
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              El Salvador Lidera la Educación en IA
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Por primera vez en América Latina, un país entero se prepara para la era de la
+              Inteligencia Artificial. Salvora es el puente entre la tecnología de xAI y las
+              aulas salvadoreñas.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                <span className="text-foreground">Primer programa nacional de IA en LatAm</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                <span className="text-foreground">Alianza oficial con xAI (Grok)</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-salvora-green" />
+                <span className="text-foreground">100% gratuito para escuelas públicas</span>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="/el-salvador-flag.jpg"
+                alt="Bandera de El Salvador con volcán de fondo"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to gradient if image not found
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+              <div className="hidden w-full h-full bg-gradient-to-br from-[#0047AB] via-white to-[#0047AB] flex items-center justify-center">
+                <Globe className="w-24 h-24 text-[#0047AB]/50" />
+              </div>
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-bold shadow-lg">
+              El Salvador
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Prepárate para Grok Banner */}
       <section className="salvora-container pb-8">
         <div className="relative overflow-hidden bg-gradient-to-r from-primary via-salvora-purple to-salvora-green rounded-2xl p-8 md:p-12">

@@ -58,7 +58,7 @@ Free AI literacy platform for El Salvador's public schools, aligned with the nat
 
 | Course | Lessons | Audience |
 |--------|---------|----------|
-| Introducción a la IA | 12 | Everyone |
+| Fundamentos de IA | 12 | Everyone |
 | IA para Maestros | 9 | Teachers |
 | IA para Estudiantes | 7 | Students |
 | IA en la Vida Real | 7 | Everyone |

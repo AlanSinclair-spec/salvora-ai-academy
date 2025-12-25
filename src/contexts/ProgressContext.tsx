@@ -254,8 +254,37 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   };
 
   const canProceedToNext = (courseId: string, lessonId: string): boolean => {
-    // Can proceed if both video watched and practice completed
-    return isVideoWatched(courseId, lessonId) && isPracticeCompleted(courseId, lessonId);
+    // Find the lesson to check its type
+    const course = getCourseById(courseId);
+    if (!course) return isLessonComplete(courseId, lessonId);
+
+    let lessonType: string | undefined;
+    for (const unit of course.units) {
+      const lesson = unit.lessons.find(l => l.id === lessonId);
+      if (lesson) {
+        lessonType = lesson.type;
+        break;
+      }
+    }
+
+    // Different requirements based on lesson type
+    switch (lessonType) {
+      case "video":
+        // Video lessons require watching video AND completing practice
+        return isVideoWatched(courseId, lessonId) && isPracticeCompleted(courseId, lessonId);
+      case "reading":
+        // Reading lessons just need to be marked complete
+        return isLessonComplete(courseId, lessonId);
+      case "quiz":
+        // Quiz lessons just need to be marked complete
+        return isLessonComplete(courseId, lessonId);
+      case "practice":
+        // Practice lessons require completing the practice
+        return isPracticeCompleted(courseId, lessonId);
+      default:
+        // Fallback: require lesson complete
+        return isLessonComplete(courseId, lessonId);
+    }
   };
 
   const isLessonUnlocked = (_courseId: string, _lessonId: string): boolean => {

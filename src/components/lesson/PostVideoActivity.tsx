@@ -45,9 +45,9 @@ export function PostVideoActivity({ activity, onComplete }: PostVideoActivityPro
       case "drawing":
         return "Dibuja lo que entendiste";
       case "roleplay":
-        return "Actua la situacion";
+        return "Actúa la situación";
       case "discussion":
-        return "Discusion en grupo";
+        return "Discusión en grupo";
     }
   };
 
@@ -55,17 +55,17 @@ export function PostVideoActivity({ activity, onComplete }: PostVideoActivityPro
     switch (activity.type) {
       case "recap":
         return activity.pairWork
-          ? "Cuentale a tu companero 3 cosas que aprendiste del video"
+          ? "Cuéntale a tu compañero 3 cosas que aprendiste del video"
           : "Piensa en 3 cosas importantes que aprendiste";
       case "drawing":
-        return "Dibuja en tu cuaderno lo mas importante del video";
+        return "Dibuja en tu cuaderno lo más importante del video";
       case "roleplay":
         return activity.roles
           ? `Roles: ${activity.roles.join(", ")}`
-          : "Actua la situacion con tu companero";
+          : "Actúa la situación con tu compañero";
       case "discussion":
         return activity.pairWork
-          ? "Discute con tu companero"
+          ? "Discute con tu compañero"
           : "Discute con tu grupo";
     }
   };
@@ -110,11 +110,11 @@ export function PostVideoActivity({ activity, onComplete }: PostVideoActivityPro
           Excelente trabajo!
         </h3>
         <p className="text-muted-foreground mb-6">
-          Completaste la actividad despues del video
+          Completaste la actividad después del video
         </p>
         <Button onClick={onComplete} variant="hero" size="lg">
           <Sparkles className="w-5 h-5 mr-2" />
-          Continuar con la leccion
+          Continuar con la lección
         </Button>
       </div>
     );
@@ -129,7 +129,7 @@ export function PostVideoActivity({ activity, onComplete }: PostVideoActivityPro
             {getIcon()}
           </div>
           <div>
-            <h3 className="text-lg font-bold text-foreground">Despues del Video</h3>
+            <h3 className="text-lg font-bold text-foreground">Después del Video</h3>
             <p className="text-sm text-muted-foreground">{getTitle()}</p>
           </div>
         </div>

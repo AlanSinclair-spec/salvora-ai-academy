@@ -118,7 +118,7 @@ export function EnhancedPractice({ questions, lessonId, onComplete }: EnhancedPr
         </div>
 
         <h3 className="text-xl font-bold text-foreground mb-2">
-          {passed ? "Excelente trabajo!" : "Sigue practicando"}
+          {passed ? "¡Excelente trabajo!" : "Sigue practicando"}
         </h3>
 
         <p className="text-muted-foreground mb-4">
@@ -267,11 +267,11 @@ export function EnhancedPractice({ questions, lessonId, onComplete }: EnhancedPr
           >
             <div className="flex items-start gap-2">
               <p className="text-sm text-foreground flex-1">
-                <strong>{state.correct ? "Correcto!" : "Incorrecto."}</strong>{" "}
-                {question.feedback || question.explanation}
+                <strong>{state.correct ? "¡Correcto!" : "Incorrecto."}</strong>{" "}
+                {question.feedback || question.explanation || "Revisa el material de la lección para entender mejor este tema."}
               </p>
               <OralGuideIconButton
-                text={`${state.correct ? "Correcto!" : "Incorrecto."} ${question.feedback || question.explanation}`}
+                text={`${state.correct ? "¡Correcto!" : "Incorrecto."} ${question.feedback || question.explanation || "Revisa el material de la lección para entender mejor este tema."}`}
                 className="text-muted-foreground hover:text-primary flex-shrink-0"
               />
             </div>

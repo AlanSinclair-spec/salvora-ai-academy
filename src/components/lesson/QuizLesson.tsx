@@ -117,7 +117,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
         <HelpCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
         <h3 className="text-lg font-semibold mb-2">Cuestionario en desarrollo</h3>
         <p className="text-muted-foreground">
-          Las preguntas para esta leccion estaran disponibles pronto.
+          Las preguntas para esta lección estarán disponibles pronto.
         </p>
       </div>
     );
@@ -240,7 +240,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
               {state.showExplanation && question.explanation && (
                 <div className="ml-11 mt-4 p-4 bg-muted/50 rounded-lg animate-slide-up">
                   <p className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Explicacion: </span>
+                    <span className="font-semibold text-foreground">Explicación: </span>
                     {question.explanation}
                   </p>
                 </div>
@@ -293,7 +293,7 @@ export function QuizLesson({ lesson, onComplete, isCompleted }: QuizLessonProps)
                   Obtuviste {currentScore}%
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  Necesitas 60% para aprobar. Revisa las explicaciones e intentalo de nuevo.
+                  Necesitas 60% para aprobar. Revisa las explicaciones e inténtalo de nuevo.
                 </p>
                 <Button onClick={handleRetry} variant="outline" className="animate-bounce-small">
                   <RefreshCw className="w-4 h-4 mr-2" />

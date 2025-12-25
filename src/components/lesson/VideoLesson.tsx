@@ -144,7 +144,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
           <Volume2 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-2">Modo Lite Activado</h3>
           <p className="text-muted-foreground mb-4">
-            El video no se muestra para ahorrar datos. Lee la transcripcion abajo.
+            El video no se muestra para ahorrar datos. Lee la transcripción abajo.
           </p>
           {!isPlaceholderVideo(lesson.videoId) && (
             <a
@@ -171,7 +171,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
             <div className="bg-card rounded-xl border border-border p-6">
               <h4 className="font-semibold mb-4 flex items-center gap-2">
                 <FileText className="w-5 h-5 text-primary" />
-                Transcripcion del video
+                Transcripción del video
               </h4>
               <div className="prose prose-sm max-w-none">
                 {content.transcript.split("\n\n").map((paragraph, index) => (
@@ -189,7 +189,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
         {videoWatched && (
           <div className="flex items-center justify-center gap-2 text-salvora-green">
             <Eye className="w-4 h-4" />
-            <span className="text-sm font-medium">Contenido leido</span>
+            <span className="text-sm font-medium">Contenido leído</span>
           </div>
         )}
 
@@ -232,7 +232,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
             <Play className="w-16 h-16 mb-4 opacity-50" />
             <p className="text-lg font-medium">Video en desarrollo</p>
-            <p className="text-sm opacity-70">Proximamente disponible</p>
+            <p className="text-sm opacity-70">Próximamente disponible</p>
           </div>
         )}
       </div>
@@ -267,7 +267,7 @@ export function VideoLesson({ lesson, onComplete, onVideoWatched, isCompleted }:
               className="text-primary"
             >
               <FileText className="w-4 h-4 mr-2" />
-              {showTranscript ? "Ocultar transcripcion" : "Ver transcripcion"}
+              {showTranscript ? "Ocultar transcripción" : "Ver transcripción"}
             </Button>
 
             <OralGuideButton

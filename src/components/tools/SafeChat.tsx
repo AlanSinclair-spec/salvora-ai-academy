@@ -131,7 +131,7 @@ export function SafeChat() {
           Ayudante de Tareas
         </h3>
         <p className="text-sm text-muted-foreground">
-          Preguntame sobre tus estudios. Recuerda: te ayudo a APRENDER, no a copiar.
+          Pregúntame sobre tus estudios. Recuerda: te ayudo a APRENDER, no a copiar.
         </p>
       </div>
 
@@ -142,7 +142,7 @@ export function SafeChat() {
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 animate-bounce-loop">
               <Bot className="w-8 h-8 text-primary" />
             </div>
-            <h4 className="font-semibold text-foreground mb-2">Como puedo ayudarte?</h4>
+            <h4 className="font-semibold text-foreground mb-2">¿Cómo puedo ayudarte?</h4>
             <p className="text-sm text-muted-foreground mb-6 max-w-sm">
               Soy tu asistente de estudio. Puedo explicarte conceptos, ayudarte a entender problemas y guiarte en tu aprendizaje.
             </p>

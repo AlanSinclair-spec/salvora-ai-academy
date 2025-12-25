@@ -35,7 +35,7 @@ export function TextSimplifier() {
   };
 
   const levels = [
-    { id: "easy" as const, label: "Facil", description: "Para primaria" },
+    { id: "easy" as const, label: "Fácil", description: "Para primaria" },
     { id: "medium" as const, label: "Medio", description: "Para secundaria" },
     { id: "advanced" as const, label: "Avanzado", description: "Para bachillerato" },
   ];
@@ -48,7 +48,7 @@ export function TextSimplifier() {
           Simplificador de Textos
         </h3>
         <p className="text-sm text-muted-foreground mb-6">
-          Pega un texto dificil y te lo simplificare a diferentes niveles de lectura.
+          Pega un texto difícil y te lo simplificaré a diferentes niveles de lectura.
         </p>
 
         <div className="space-y-4">
@@ -59,7 +59,7 @@ export function TextSimplifier() {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Pega aqui el parrafo o texto que quieres simplificar..."
+              placeholder="Pega aquí el párrafo o texto que quieres simplificar..."
               rows={6}
               className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
             />

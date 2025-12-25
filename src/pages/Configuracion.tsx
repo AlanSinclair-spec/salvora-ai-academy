@@ -196,13 +196,20 @@ const Configuracion = () => {
               iconEnabled={<VideoOff className="w-5 h-5" />}
             />
 
-            <SettingToggle
-              title="Guardado Sin Conexión"
-              description="Guarda el contenido de las lecciones para verlo sin internet (próximamente)."
-              enabled={settings.offlineSaving}
-              onChange={(enabled) => updateSettings({ offlineSaving: enabled })}
-              icon={<Download className="w-5 h-5" />}
-            />
+            <div className="flex items-start gap-4 p-4 bg-card rounded-xl border border-border opacity-60">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-muted text-muted-foreground">
+                <Download className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-foreground">Guardado Sin Conexión</h4>
+                <p className="text-sm text-muted-foreground">
+                  Próximamente: Guarda lecciones para ver sin internet.
+                </p>
+              </div>
+              <span className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground shrink-0">
+                Próximamente
+              </span>
+            </div>
           </div>
 
           {/* Classroom */}

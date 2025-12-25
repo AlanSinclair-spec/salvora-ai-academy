@@ -31,13 +31,13 @@ const tools = [
   {
     id: "quiz",
     title: "Cuestionarios",
-    description: "Genera preguntas de evaluacion",
+    description: "Genera preguntas de evaluación",
     icon: ClipboardList,
   },
   {
     id: "rubric",
-    title: "Rubricas",
-    description: "Crea rubricas de evaluacion",
+    title: "Rúbricas",
+    description: "Crea rúbricas de evaluación",
     icon: TableIcon,
   },
   {
@@ -51,32 +51,32 @@ const tools = [
 const promptTemplates = [
   {
     title: "Explicar un concepto",
-    prompt: "Explica el concepto de [TEMA] de manera simple para estudiantes de [GRADO]. Usa ejemplos de la vida cotidiana en El Salvador. Incluye una analogia facil de recordar.",
-    category: "Explicacion",
+    prompt: "Explica el concepto de [TEMA] de manera simple para estudiantes de [GRADO]. Usa ejemplos de la vida cotidiana en El Salvador. Incluye una analogía fácil de recordar.",
+    category: "Explicación",
   },
   {
     title: "Generar ejercicios",
-    prompt: "Crea 5 ejercicios practicos sobre [TEMA] para estudiantes de [GRADO]. Los ejercicios deben ser progresivos en dificultad. Incluye las respuestas correctas.",
-    category: "Practica",
+    prompt: "Crea 5 ejercicios prácticos sobre [TEMA] para estudiantes de [GRADO]. Los ejercicios deben ser progresivos en dificultad. Incluye las respuestas correctas.",
+    category: "Práctica",
   },
   {
-    title: "Crear evaluacion",
-    prompt: "Disena una evaluacion de 10 preguntas sobre [TEMA]. Incluye: 5 preguntas de opcion multiple, 3 de verdadero/falso, y 2 de respuesta corta. Nivel: [GRADO].",
-    category: "Evaluacion",
+    title: "Crear evaluación",
+    prompt: "Diseña una evaluación de 10 preguntas sobre [TEMA]. Incluye: 5 preguntas de opción múltiple, 3 de verdadero/falso, y 2 de respuesta corta. Nivel: [GRADO].",
+    category: "Evaluación",
   },
   {
     title: "Resumen de tema",
-    prompt: "Resume el tema de [TEMA] en maximo 200 palabras. Destaca los 3 puntos mas importantes que los estudiantes deben recordar.",
+    prompt: "Resume el tema de [TEMA] en máximo 200 palabras. Destaca los 3 puntos más importantes que los estudiantes deben recordar.",
     category: "Resumen",
   },
   {
     title: "Actividad grupal",
-    prompt: "Disena una actividad grupal de 30 minutos sobre [TEMA] para una clase de [NUMERO] estudiantes. Incluye instrucciones paso a paso y materiales necesarios.",
+    prompt: "Diseña una actividad grupal de 30 minutos sobre [TEMA] para una clase de [NUMERO] estudiantes. Incluye instrucciones paso a paso y materiales necesarios.",
     category: "Actividad",
   },
   {
     title: "Caso de estudio",
-    prompt: "Crea un caso de estudio sobre como la IA se aplica en [SECTOR] en El Salvador. Incluye preguntas de discusion para la clase.",
+    prompt: "Crea un caso de estudio sobre cómo la IA se aplica en [SECTOR] en El Salvador. Incluye preguntas de discusión para la clase.",
     category: "Caso de estudio",
   },
 ];
@@ -155,15 +155,18 @@ function LessonPlanner() {
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Tema de la leccion *
+              Tema de la lección *
             </label>
             <input
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="Ej: Introduccion a la fotosintesis"
+              placeholder="Ej: Introducción a la fotosíntesis"
               className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
             />
+            {!topic && (
+              <p className="text-xs text-muted-foreground mt-1">Escribe el tema que deseas planificar</p>
+            )}
           </div>
 
           <div>
@@ -196,11 +199,14 @@ function LessonPlanner() {
                 <option value="bachillerato">Bachillerato</option>
                 <option value="universidad">Universidad</option>
               </select>
+              {!grade && (
+                <p className="text-xs text-muted-foreground mt-1">Selecciona el nivel educativo</p>
+              )}
             </div>
 
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Duracion (min)
+                Duración (min)
               </label>
               <select
                 value={duration}
@@ -229,7 +235,7 @@ function LessonPlanner() {
             ) : (
               <>
                 <Lightbulb className="w-4 h-4 mr-2" />
-                Generar Plan de Leccion
+                Generar Plan de Lección
               </>
             )}
           </Button>
@@ -290,7 +296,7 @@ function LessonPlanResult({ data, onReset }: { data: LessonPlanResponse; onReset
 
       {/* Evaluation */}
       <div>
-        <h5 className="font-semibold text-foreground mb-2">Evaluacion</h5>
+        <h5 className="font-semibold text-foreground mb-2">Evaluación</h5>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
           {data.evaluation.map((eval_, i) => (
             <li key={i}>{eval_}</li>
@@ -340,15 +346,18 @@ function QuizGenerator() {
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Pega aqui el texto del que quieres generar preguntas, o escribe el tema..."
+              placeholder="Pega aquí el texto del que quieres generar preguntas, o escribe el tema..."
               rows={6}
               className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none"
             />
+            {!text && (
+              <p className="text-xs text-muted-foreground mt-1">Ingresa el contenido para generar el cuestionario</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Numero de preguntas
+              Número de preguntas
             </label>
             <select
               value={questionCount}
@@ -462,7 +471,7 @@ function RubricBuilder() {
       <div className="bg-card rounded-xl border border-border p-6">
         <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
           <TableIcon className="w-5 h-5 text-salvora-purple" />
-          Constructor de Rubricas
+          Constructor de Rúbricas
         </h3>
 
         <div className="space-y-4">
@@ -474,14 +483,17 @@ function RubricBuilder() {
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              placeholder="Ej: Presentacion oral sobre el ciclo del agua"
+              placeholder="Ej: Presentación oral sobre el ciclo del agua"
               className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
             />
+            {!subject && (
+              <p className="text-xs text-muted-foreground mt-1">Describe la actividad que vas a evaluar</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Criterios a evaluar
+              Criterios a evaluar *
             </label>
             <div className="space-y-2">
               {criteria.map((criterion, i) => (
@@ -495,11 +507,14 @@ function RubricBuilder() {
                 />
               ))}
             </div>
+            {criteria.filter(c => c.trim()).length === 0 && (
+              <p className="text-xs text-muted-foreground mt-1">Agrega al menos un criterio de evaluación</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-foreground mb-2">
-              Niveles de desempeno
+              Niveles de desempeño
             </label>
             <select
               value={levels}
@@ -526,7 +541,7 @@ function RubricBuilder() {
             ) : (
               <>
                 <TableIcon className="w-4 h-4 mr-2" />
-                Generar Rubrica
+                Generar Rúbrica
               </>
             )}
           </Button>
@@ -545,7 +560,7 @@ function RubricResult({ data, onReset }: { data: RubricResponse; onReset: () => 
       <div className="flex items-center justify-between">
         <h4 className="text-lg font-bold text-foreground">{data.title}</h4>
         <Button variant="ghost" size="sm" onClick={onReset}>
-          Nueva rubrica
+          Nueva rúbrica
         </Button>
       </div>
 
@@ -577,7 +592,7 @@ function RubricResult({ data, onReset }: { data: RubricResponse; onReset: () => 
       </div>
 
       <p className="text-sm text-muted-foreground">
-        Puntaje maximo: {data.maxPoints} puntos
+        Puntaje máximo: {data.maxPoints} puntos
       </p>
     </div>
   );
@@ -597,7 +612,7 @@ const Maestro = () => {
                 Herramientas para Maestros
               </h1>
               <p className="text-lg text-muted-foreground">
-                Recursos y herramientas de IA disenadas para apoyar tu labor educativa. Genera planes de leccion, cuestionarios y mas.
+                Recursos y herramientas de IA diseñadas para apoyar tu labor educativa. Genera planes de lección, cuestionarios y más.
               </p>
             </div>
 
@@ -608,7 +623,7 @@ const Maestro = () => {
                 settings.classroomMode ? "text-salvora-green" : "text-muted-foreground"
               )} />
               <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">Modo Salon</p>
+                <p className="text-sm font-medium text-foreground">Modo Salón</p>
                 <p className="text-xs text-muted-foreground">Filtros adicionales activos</p>
               </div>
               <Switch
@@ -653,7 +668,7 @@ const Maestro = () => {
               {/* Additional Prompt Templates */}
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-6">
-                  Mas Plantillas de Prompts
+                  Más Plantillas de Prompts
                 </h2>
                 <p className="text-muted-foreground mb-8">
                   Copia estos prompts y personalízalos reemplazando los valores entre corchetes [].

@@ -36,10 +36,10 @@ export function MathHelper() {
       <div className="bg-card rounded-xl border border-border p-6">
         <h3 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
           <Calculator className="w-5 h-5 text-salvora-green" />
-          Ayudante de Matematicas
+          Ayudante de Matemáticas
         </h3>
         <p className="text-sm text-muted-foreground mb-6">
-          Escribe un problema de matematicas y te mostrare como resolverlo paso a paso.
+          Escribe un problema de matemáticas y te mostraré cómo resolverlo paso a paso.
         </p>
 
         <div className="space-y-4">
@@ -102,7 +102,7 @@ export function MathHelper() {
       {data && (
         <div className="bg-card rounded-xl border border-salvora-green/50 p-6 space-y-6">
           <div className="flex items-center justify-between">
-            <h4 className="text-lg font-bold text-foreground">Solucion</h4>
+            <h4 className="text-lg font-bold text-foreground">Solución</h4>
             <Button variant="ghost" size="sm" onClick={reset}>
               Nuevo problema
             </Button>

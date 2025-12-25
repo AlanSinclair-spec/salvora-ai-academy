@@ -50,10 +50,10 @@ const Leccion = () => {
           <div className="max-w-xl mx-auto text-center">
             <Lock className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-foreground mb-2">
-              Leccion bloqueada
+              Lección bloqueada
             </h1>
             <p className="text-muted-foreground mb-6">
-              Completa la leccion anterior para desbloquear esta.
+              Completa la lección anterior para desbloquear esta.
             </p>
             <Link
               to="/cursos"
@@ -76,10 +76,10 @@ const Leccion = () => {
           <div className="max-w-xl mx-auto text-center">
             <AlertCircle className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-foreground mb-2">
-              Leccion no encontrada
+              Lección no encontrada
             </h1>
             <p className="text-muted-foreground mb-6">
-              La leccion que buscas no existe o ha sido movida.
+              La lección que buscas no existe o ha sido movida.
             </p>
             <Link
               to="/cursos"
@@ -171,7 +171,7 @@ const Leccion = () => {
           return (
             <div className="bg-muted/50 rounded-xl p-8 text-center">
               <p className="text-muted-foreground">
-                Tipo de leccion no reconocido
+                Tipo de lección no reconocido
               </p>
             </div>
           );

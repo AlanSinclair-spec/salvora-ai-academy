@@ -35,7 +35,7 @@ export function LessonNavigation({
       {isCompleted && (
         <div className="flex items-center justify-center gap-2 text-salvora-green mb-4">
           <CheckCircle className="w-5 h-5" />
-          <span className="font-medium">Leccion completada</span>
+          <span className="font-medium">Lección completada</span>
         </div>
       )}
 
@@ -123,7 +123,7 @@ export function LessonNavigation({
                     </span>
                   </TooltipTrigger>
                   <TooltipContent id="next-lesson-tooltip" side="top">
-                    <p>Completa el video y la practica para continuar</p>
+                    <p>Completa el video y la práctica para continuar</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -133,7 +133,7 @@ export function LessonNavigation({
               <Button variant="hero" className="w-full justify-end">
                 <div className="text-right">
                   <div className="text-xs opacity-80">Curso completado</div>
-                  <div>Ver mas cursos</div>
+                  <div>Ver más cursos</div>
                 </div>
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
